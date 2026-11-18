@@ -1,0 +1,333 @@
+floorplan,platform,group,arm,variant,objective,engine,seed,hpwl_dpl_um,vs_gpl,hpwl_final_um,grt_wl_um,wns_ns,t_place_s,mem_peak_mb,routing,cut_nets,balance_sweeps,balance_offcenter,direction_choices,direction_flips,engine_failures,balance_violations
+aes_u70_r2_nangate45,nangate45,krow,ref,gpl,gpl (RePlAce),-,1,1660576.5,1.0,1635041.1,2360515,-28.0387,4.97,1669.9,ok,,,,,,,
+aes_u70_r2_nangate45,nangate45,krow,ref,gpl,gpl (RePlAce),-,2,1660576.5,1.0,1635611.5,2363439,-28.1648,5.01,1663.9,ok,,,,,,,
+aes_u70_r2_nangate45,nangate45,krow,ref,gpl,gpl (RePlAce),-,3,1660576.5,1.0,1634969.4,2363935,-27.177,4.54,1671.1,ok,,,,,,,
+aes_u70_r2_nangate45,nangate45,krow,0,cutnet_tp,cutnet (control),tp,1,1749732.5,1.0537,1742439.7,2303771,-11.3317,61.18,1689.7,ok,53114,0,0,0,0,0,0
+aes_u70_r2_nangate45,nangate45,krow,0,cutnet_tp,cutnet (control),tp,2,1605640.1,0.9669,1600563.3,2334457,-17.8565,63.61,1687.8,ok,53325,0,0,0,0,0,1
+aes_u70_r2_nangate45,nangate45,krow,0,cutnet_tp,cutnet (control),tp,3,1594864.5,0.9604,1588040.1,2300859,-8.7588,60.92,1682.4,ok,52843,0,0,0,0,0,0
+aes_u70_r2_nangate45,nangate45,krow,0,cutnet_hm,cutnet (control),hm,1,1597461.6,0.962,1591114.5,2307243,-18.8033,25.91,1670.8,ok,51422,0,0,0,0,0,575
+aes_u70_r2_nangate45,nangate45,krow,0,cutnet_hm,cutnet (control),hm,2,1656013.9,0.9973,1651218.6,2372867,-26.4174,24.52,1663.6,ok,51621,0,0,0,0,0,470
+aes_u70_r2_nangate45,nangate45,krow,0,cutnet_hm,cutnet (control),hm,3,1611926.4,0.9707,1604625.4,2317138,-22.3335,25.26,1665.1,ok,51608,0,0,0,0,0,546
+aes_u70_r2_nangate45,nangate45,krow,0,cutnet_mk,cutnet (control),mk,1,1764418.3,1.0625,1755892.3,2323217,-25.1806,83.76,1671.3,ok,54373,0,0,0,0,0,143
+aes_u70_r2_nangate45,nangate45,krow,0,cutnet_mk,cutnet (control),mk,2,1737842.4,1.0465,1729063.9,2466960,-40.867,85.81,1674.1,ok,54358,0,0,0,0,0,128
+aes_u70_r2_nangate45,nangate45,krow,0,cutnet_mk,cutnet (control),mk,3,1645085.5,0.9907,1635422.6,2372499,-48.4385,85.21,1665.5,ok,54661,0,0,0,0,0,143
+aes_u70_r2_nangate45,nangate45,krow,0,cutnet_fp,cutnet (control),fp,1,1565553.0,0.9428,1558444.1,2289883,-23.9948,70.16,1663.5,ok,52830,0,0,0,0,0,172
+aes_u70_r2_nangate45,nangate45,krow,0,cutnet_fp,cutnet (control),fp,2,1561010.7,0.94,1554289.6,2273784,-41.833,70.67,1665.0,ok,52818,0,0,0,0,0,160
+aes_u70_r2_nangate45,nangate45,krow,0,cutnet_fp,cutnet (control),fp,3,1543237.3,0.9293,1537600.6,2259816,-41.0731,68.38,1663.6,ok,52533,0,0,0,0,0,153
+aes_u70_r2_nangate45,nangate45,krow,1,exphpwl_tp,net weight exphpwl,tp,1,1654911.3,0.9966,1646537.5,2377116,-18.7554,62.76,1690.1,ok,52455,0,0,0,0,0,0
+aes_u70_r2_nangate45,nangate45,krow,1,exphpwl_tp,net weight exphpwl,tp,2,1625743.4,0.979,1617405.2,2344581,-25.0461,63.23,1688.8,ok,51848,0,0,0,0,0,0
+aes_u70_r2_nangate45,nangate45,krow,1,exphpwl_tp,net weight exphpwl,tp,3,1600703.3,0.9639,1592638.4,2322484,-32.8018,65.97,1684.1,ok,52037,0,0,0,0,0,0
+aes_u70_r2_nangate45,nangate45,krow,1,exphpwl_hm,net weight exphpwl,hm,1,1662367.8,1.0011,1655939.2,2371641,-43.1548,27.4,1669.2,ok,50924,0,0,0,0,0,902
+aes_u70_r2_nangate45,nangate45,krow,1,exphpwl_hm,net weight exphpwl,hm,2,1699528.3,1.0235,1692203.9,2410282,-24.599,26.87,1672.4,ok,50653,0,0,0,0,0,934
+aes_u70_r2_nangate45,nangate45,krow,1,exphpwl_hm,net weight exphpwl,hm,3,1699838.7,1.0236,1693212.6,2420943,-23.0779,35.89,1668.6,ok,50147,0,0,0,0,0,893
+aes_u70_r2_nangate45,nangate45,krow,1,exphpwl_mk,net weight exphpwl,mk,1,1937180.5,1.1666,1927358.2,2513432,-20.8323,92.9,1684.6,ok,53992,0,0,0,0,0,330
+aes_u70_r2_nangate45,nangate45,krow,1,exphpwl_mk,net weight exphpwl,mk,2,1922890.9,1.158,1911034.4,2503950,-37.6341,91.72,1679.8,ok,53882,0,0,0,0,0,371
+aes_u70_r2_nangate45,nangate45,krow,1,exphpwl_mk,net weight exphpwl,mk,3,1919678.6,1.156,1909030.2,2505201,-28.963,92.01,1682.0,ok,54160,0,0,0,0,0,340
+aes_u70_r2_nangate45,nangate45,krow,1,exphpwl_fp,net weight exphpwl,fp,1,1596376.5,0.9613,1587935.1,2319905,-22.8064,75.69,1661.6,ok,52530,0,0,0,0,0,393
+aes_u70_r2_nangate45,nangate45,krow,1,exphpwl_fp,net weight exphpwl,fp,2,1573871.2,0.9478,1565348.8,2298878,-23.0399,79.25,1663.7,ok,52064,0,0,0,0,0,358
+aes_u70_r2_nangate45,nangate45,krow,1,exphpwl_fp,net weight exphpwl,fp,3,1607348.9,0.9679,1599752.1,2322256,-18.0089,78.12,1664.2,ok,52602,0,0,0,0,0,370
+aes_u70_r2_nangate45,nangate45,krow,1,invdeg_tp,net weight 1/(d-1),tp,1,2074574.7,1.2493,2023357.1,2642767,-18.9712,55.0,1707.0,ok,57935,0,0,0,0,0,1
+aes_u70_r2_nangate45,nangate45,krow,1,invdeg_tp,net weight 1/(d-1),tp,2,2013082.8,1.2123,1956685.7,2565342,-12.7434,56.78,1712.2,ok,58526,0,0,0,0,0,0
+aes_u70_r2_nangate45,nangate45,krow,1,invdeg_tp,net weight 1/(d-1),tp,3,2038798.8,1.2278,1992330.5,2599117,-25.8802,55.04,1706.3,ok,57769,0,0,0,0,0,0
+aes_u70_r2_nangate45,nangate45,krow,1,invdeg_hm,net weight 1/(d-1),hm,1,1900467.9,1.1445,1835381.2,2604629,-27.7408,25.96,1682.7,ok,56566,0,0,0,0,0,689
+aes_u70_r2_nangate45,nangate45,krow,1,invdeg_hm,net weight 1/(d-1),hm,2,1945525.5,1.1716,1884076.1,2497292,-30.8497,26.08,1679.7,ok,56690,0,0,0,0,0,652
+aes_u70_r2_nangate45,nangate45,krow,1,invdeg_hm,net weight 1/(d-1),hm,3,1984818.3,1.1953,1919163.0,2529705,-23.7205,28.44,1680.7,ok,56485,0,0,0,0,0,695
+aes_u70_r2_nangate45,nangate45,krow,1,invdeg_mk,net weight 1/(d-1),mk,1,2002612.0,1.206,1953677.3,2565835,-25.4701,99.51,1685.5,ok,58601,0,0,0,0,2,260
+aes_u70_r2_nangate45,nangate45,krow,1,invdeg_mk,net weight 1/(d-1),mk,2,1987287.4,1.1967,1922397.6,2542228,-14.571,97.01,1685.9,ok,58933,0,0,0,0,3,262
+aes_u70_r2_nangate45,nangate45,krow,1,invdeg_mk,net weight 1/(d-1),mk,3,2004100.1,1.2069,1953339.5,2570808,-15.2503,96.89,1685.4,ok,58854,0,0,0,0,4,273
+aes_u70_r2_nangate45,nangate45,krow,1,invdeg_fp,net weight 1/(d-1),fp,1,1914450.2,1.1529,1845962.0,2441817,-19.4517,71.89,1677.1,ok,57784,0,0,0,0,0,307
+aes_u70_r2_nangate45,nangate45,krow,1,invdeg_fp,net weight 1/(d-1),fp,2,1924429.4,1.1589,1863471.5,2464962,-26.0737,72.43,1680.0,ok,58201,0,0,0,0,0,302
+aes_u70_r2_nangate45,nangate45,krow,1,invdeg_fp,net weight 1/(d-1),fp,3,1891991.3,1.1394,1828912.9,2590091,-27.8393,70.68,1682.1,ok,57507,0,0,0,0,0,353
+aes_u70_r2_nangate45,nangate45,krow,3,hpwl_l2_tp,hpwl vectors above level 2,tp,1,1827042.7,1.1002,1818882.7,2384700,-21.4021,86.36,1686.5,ok,52412,0,0,0,0,0,0
+aes_u70_r2_nangate45,nangate45,krow,3,hpwl_l2_tp,hpwl vectors above level 2,tp,2,1776759.8,1.07,1769512.5,2341537,-34.5785,85.48,1687.7,ok,52625,0,0,0,0,0,0
+aes_u70_r2_nangate45,nangate45,krow,3,hpwl_l2_tp,hpwl vectors above level 2,tp,3,1970356.4,1.1865,1962541.5,2547310,-22.0111,90.54,1697.5,ok,52498,0,0,0,0,0,0
+aes_u70_r2_nangate45,nangate45,krow,3,hpwl_l4_tp,hpwl vectors above level 4,tp,1,1875123.7,1.1292,1865841.6,2435262,-17.0753,90.25,1697.9,ok,51164,0,0,0,0,0,0
+aes_u70_r2_nangate45,nangate45,krow,3,hpwl_l4_tp,hpwl vectors above level 4,tp,2,1834720.2,1.1049,1826229.7,2393412,-43.1518,88.58,1703.9,ok,51166,0,0,0,0,0,0
+aes_u70_r2_nangate45,nangate45,krow,3,hpwl_l4_tp,hpwl vectors above level 4,tp,3,2070462.4,1.2468,2062397.9,2659608,-15.5189,90.22,1710.2,ok,51170,0,0,0,0,0,0
+aes_u70_r2_nangate45,nangate45,krow,2,phpwl_tp,probabilistic HPWL vectors,tp,1,2269545.0,1.3667,2241344.0,2871756,-16.3282,98.81,1738.3,ok,24915,0,0,0,0,0,0
+aes_u70_r2_nangate45,nangate45,krow,2,phpwl_tp,probabilistic HPWL vectors,tp,2,1967166.1,1.1846,1923866.1,2539139,-39.6347,100.58,1722.2,ok,24989,0,0,0,0,0,2
+aes_u70_r2_nangate45,nangate45,krow,2,phpwl_tp,probabilistic HPWL vectors,tp,3,2013838.8,1.2127,1975409.5,2591969,-29.7113,98.18,1717.9,ok,24988,0,0,0,0,0,0
+aes_u70_r2_nangate45,nangate45,krow,4,ratio_tp,ratio cut (balance sweep),tp,1,1688537.6,1.0168,1680986.4,2233619,-25.2081,268.43,1693.5,ok,50630,1559,935,0,0,0,21
+aes_u70_r2_nangate45,nangate45,krow,4,ratio_tp,ratio cut (balance sweep),tp,2,1589304.2,0.9571,1582531.1,2315123,-24.1532,267.87,1691.5,ok,50720,1568,931,0,0,0,35
+aes_u70_r2_nangate45,nangate45,krow,4,ratio_tp,ratio cut (balance sweep),tp,3,1601784.5,0.9646,1591980.5,2303321,-30.0561,249.58,1697.6,ok,50659,1554,917,0,0,0,15
+aes_u70_r2_nangate45,nangate45,krow,4,ncut_tp,normalized cut (balance sweep),tp,1,1691078.1,1.0184,1685299.1,2241268,-32.1131,246.43,1690.9,ok,50787,1535,919,0,0,0,19
+aes_u70_r2_nangate45,nangate45,krow,4,ncut_tp,normalized cut (balance sweep),tp,2,1587315.3,0.9559,1579333.1,2316847,-18.4358,259.43,1686.7,ok,51075,1526,936,0,0,0,21
+aes_u70_r2_nangate45,nangate45,krow,4,ncut_tp,normalized cut (balance sweep),tp,3,1594616.0,0.9603,1585891.3,2298784,-33.125,239.15,1694.5,ok,51233,1547,932,0,0,0,19
+aes_u70_r2_nangate45,nangate45,krow,5,sparsest_tp,geometric sparsest cut,tp,1,1749732.5,1.0537,1742439.7,2303771,-11.3317,69.2,1685.5,ok,53114,0,0,0,0,0,0
+aes_u70_r2_nangate45,nangate45,krow,5,sparsest_tp,geometric sparsest cut,tp,2,1605640.1,0.9669,1600563.3,2334457,-17.8565,73.89,1690.7,ok,53325,0,0,0,0,0,1
+aes_u70_r2_nangate45,nangate45,krow,5,sparsest_tp,geometric sparsest cut,tp,3,1594864.5,0.9604,1588040.1,2300859,-8.7588,68.67,1675.1,ok,52843,0,0,0,0,0,0
+aes_u70_r2_nangate45,nangate45,krow,6,timing_tp,timing net weights,tp,1,1789165.2,1.0774,1781191.4,2337977,-27.3341,67.08,1706.7,ok,52043,0,0,0,0,0,0
+aes_u70_r2_nangate45,nangate45,krow,6,timing_tp,timing net weights,tp,2,1761222.9,1.0606,1754262.2,2314314,-17.335,72.21,1706.6,ok,52463,0,0,0,0,0,2
+aes_u70_r2_nangate45,nangate45,krow,6,timing_tp,timing net weights,tp,3,1746750.2,1.0519,1739116.3,2290225,-13.1432,70.61,1704.4,ok,52038,0,0,0,0,0,4
+ibex_u70_r6_nangate45,nangate45,krow,ref,gpl,gpl (RePlAce),-,1,999170.7,1.0,978499.4,1459889,-7.8378,3.76,729.9,ok,,,,,,,
+ibex_u70_r6_nangate45,nangate45,krow,ref,gpl,gpl (RePlAce),-,2,999170.7,1.0,978244.1,1461212,-5.8103,3.89,730.7,ok,,,,,,,
+ibex_u70_r6_nangate45,nangate45,krow,ref,gpl,gpl (RePlAce),-,3,999170.7,1.0,978699.2,1461480,-7.2036,5.64,727.0,ok,,,,,,,
+ibex_u70_r6_nangate45,nangate45,krow,0,cutnet_tp,cutnet (control),tp,1,932261.6,0.933,928686.4,1387377,-6.979,61.69,740.1,ok,50571,0,0,0,0,0,2
+ibex_u70_r6_nangate45,nangate45,krow,0,cutnet_tp,cutnet (control),tp,2,930856.6,0.9316,927209.7,1389551,-6.6137,59.12,749.0,ok,50256,0,0,0,0,0,5
+ibex_u70_r6_nangate45,nangate45,krow,0,cutnet_tp,cutnet (control),tp,3,932076.1,0.9328,928687.6,1394316,-6.0095,60.13,740.1,ok,50689,0,0,0,0,0,4
+ibex_u70_r6_nangate45,nangate45,krow,0,cutnet_hm,cutnet (control),hm,1,1042121.3,1.043,1038327.0,1520705,-11.6941,26.86,728.7,ok,48740,0,0,0,0,0,531
+ibex_u70_r6_nangate45,nangate45,krow,0,cutnet_hm,cutnet (control),hm,2,1068162.0,1.069,1064552.9,1553945,-8.8186,24.63,734.3,ok,49833,0,0,0,0,0,522
+ibex_u70_r6_nangate45,nangate45,krow,0,cutnet_hm,cutnet (control),hm,3,1149279.0,1.1502,1145682.4,1639616,-14.0058,23.53,737.8,ok,49635,0,0,0,0,0,484
+ibex_u70_r6_nangate45,nangate45,krow,0,cutnet_mk,cutnet (control),mk,1,968662.8,0.9695,963828.9,1445631,-10.6541,80.59,726.9,ok,51504,0,0,0,0,0,130
+ibex_u70_r6_nangate45,nangate45,krow,0,cutnet_mk,cutnet (control),mk,2,1103041.4,1.104,1099335.9,1632670,-19.8961,78.8,740.6,ok,51136,0,0,0,0,0,144
+ibex_u70_r6_nangate45,nangate45,krow,0,cutnet_mk,cutnet (control),mk,3,958596.4,0.9594,953720.2,1425624,-6.1798,79.72,730.2,ok,51369,0,0,0,0,0,144
+ibex_u70_r6_nangate45,nangate45,krow,0,cutnet_fp,cutnet (control),fp,1,914482.6,0.9152,910878.8,1370941,-6.8344,72.08,729.1,ok,48900,0,0,0,0,0,156
+ibex_u70_r6_nangate45,nangate45,krow,0,cutnet_fp,cutnet (control),fp,2,913342.1,0.9141,909740.7,1370362,-7.1676,73.63,724.4,ok,49333,0,0,0,0,0,147
+ibex_u70_r6_nangate45,nangate45,krow,0,cutnet_fp,cutnet (control),fp,3,913316.7,0.9141,909287.0,1369821,-6.9393,70.7,727.3,ok,48800,0,0,0,0,0,136
+ibex_u70_r6_nangate45,nangate45,krow,1,exphpwl_tp,net weight exphpwl,tp,1,939775.8,0.9406,935836.6,1398663,-9.1678,61.08,742.0,ok,49688,0,0,0,0,0,0
+ibex_u70_r6_nangate45,nangate45,krow,1,exphpwl_tp,net weight exphpwl,tp,2,914530.6,0.9153,910570.1,1371696,-7.5371,57.38,740.4,ok,49893,0,0,0,0,0,10
+ibex_u70_r6_nangate45,nangate45,krow,1,exphpwl_tp,net weight exphpwl,tp,3,932247.1,0.933,928295.3,1385940,-6.0642,56.04,745.4,ok,49958,0,0,0,0,0,14
+ibex_u70_r6_nangate45,nangate45,krow,1,exphpwl_hm,net weight exphpwl,hm,1,1035307.0,1.0362,1031048.5,1513620,-8.3969,30.11,734.1,ok,49073,0,0,0,0,0,818
+ibex_u70_r6_nangate45,nangate45,krow,1,exphpwl_hm,net weight exphpwl,hm,2,1037046.8,1.0379,1032598.6,1511329,-8.9989,26.97,729.4,ok,48889,0,0,0,0,0,803
+ibex_u70_r6_nangate45,nangate45,krow,1,exphpwl_hm,net weight exphpwl,hm,3,1038370.5,1.0392,1034176.0,1511705,-10.343,24.79,729.1,ok,48969,0,0,0,0,0,768
+ibex_u70_r6_nangate45,nangate45,krow,1,exphpwl_mk,net weight exphpwl,mk,1,1201454.7,1.2025,1196464.2,1758455,-8.1857,77.61,741.9,ok,52228,0,0,0,0,0,267
+ibex_u70_r6_nangate45,nangate45,krow,1,exphpwl_mk,net weight exphpwl,mk,2,1052557.9,1.0534,1047680.5,1556775,-6.8124,90.76,733.5,ok,52147,0,0,0,0,0,297
+ibex_u70_r6_nangate45,nangate45,krow,1,exphpwl_mk,net weight exphpwl,mk,3,1053144.0,1.054,1047877.6,1562840,-11.2623,78.31,731.5,ok,52164,0,0,0,0,0,276
+ibex_u70_r6_nangate45,nangate45,krow,1,exphpwl_fp,net weight exphpwl,fp,1,924857.0,0.9256,920357.8,1380916,-9.3243,80.06,727.2,ok,49217,0,0,0,0,0,292
+ibex_u70_r6_nangate45,nangate45,krow,1,exphpwl_fp,net weight exphpwl,fp,2,930656.9,0.9314,926095.1,1392427,-10.4626,79.49,727.9,ok,49260,0,0,0,0,0,303
+ibex_u70_r6_nangate45,nangate45,krow,1,exphpwl_fp,net weight exphpwl,fp,3,926807.1,0.9276,922989.0,1384022,-12.6676,75.8,724.9,ok,49145,0,0,0,0,0,275
+ibex_u70_r6_nangate45,nangate45,krow,1,invdeg_tp,net weight 1/(d-1),tp,1,1154902.2,1.1559,1135048.6,1637401,-8.1432,54.02,764.3,ok,57860,0,0,0,0,0,42
+ibex_u70_r6_nangate45,nangate45,krow,1,invdeg_tp,net weight 1/(d-1),tp,2,1159231.5,1.1602,1141953.0,1652333,-7.3699,56.3,756.4,ok,57193,0,0,0,0,0,34
+ibex_u70_r6_nangate45,nangate45,krow,1,invdeg_tp,net weight 1/(d-1),tp,3,1155914.4,1.1569,1133351.7,1634429,-6.8473,56.93,764.0,ok,57484,0,0,0,0,0,38
+ibex_u70_r6_nangate45,nangate45,krow,1,invdeg_hm,net weight 1/(d-1),hm,1,1303020.0,1.3041,1281192.7,1816863,-9.8295,23.61,750.1,ok,57103,0,0,0,0,0,731
+ibex_u70_r6_nangate45,nangate45,krow,1,invdeg_hm,net weight 1/(d-1),hm,2,1316303.1,1.3174,1298633.8,1851072,-10.9047,22.79,754.3,ok,56150,0,0,0,0,0,768
+ibex_u70_r6_nangate45,nangate45,krow,1,invdeg_hm,net weight 1/(d-1),hm,3,1302990.8,1.3041,1282174.6,1833684,-11.7879,23.39,750.0,ok,56025,0,0,0,0,0,734
+ibex_u70_r6_nangate45,nangate45,krow,1,invdeg_mk,net weight 1/(d-1),mk,1,1181265.7,1.1822,1156507.6,1662670,-7.5076,82.08,743.1,ok,58036,0,0,0,0,0,259
+ibex_u70_r6_nangate45,nangate45,krow,1,invdeg_mk,net weight 1/(d-1),mk,2,1204137.6,1.2051,1182725.1,1702356,-6.7624,80.48,742.8,ok,59372,0,0,0,0,0,301
+ibex_u70_r6_nangate45,nangate45,krow,1,invdeg_mk,net weight 1/(d-1),mk,3,1208720.5,1.2097,1187963.4,1692894,-5.9268,80.68,742.4,ok,57996,0,0,0,0,0,281
+ibex_u70_r6_nangate45,nangate45,krow,1,invdeg_fp,net weight 1/(d-1),fp,1,1150550.3,1.1515,1131497.4,1632770,-7.5164,76.57,736.6,ok,56195,0,0,0,0,0,264
+ibex_u70_r6_nangate45,nangate45,krow,1,invdeg_fp,net weight 1/(d-1),fp,2,1158344.1,1.1593,1139817.8,1639585,-6.915,81.51,738.4,ok,56016,0,0,0,0,0,282
+ibex_u70_r6_nangate45,nangate45,krow,1,invdeg_fp,net weight 1/(d-1),fp,3,1128903.3,1.1298,1110308.8,1614442,-8.172,74.85,731.9,ok,56591,0,0,0,0,0,257
+ibex_u70_r6_nangate45,nangate45,krow,3,hpwl_l2_tp,hpwl vectors above level 2,tp,1,939401.1,0.9402,933561.5,1401496,-5.5715,79.16,752.3,ok,50227,0,0,0,0,0,2
+ibex_u70_r6_nangate45,nangate45,krow,3,hpwl_l2_tp,hpwl vectors above level 2,tp,2,938700.3,0.9395,935188.7,1397982,-5.7947,84.91,749.4,ok,50611,0,0,0,0,0,8
+ibex_u70_r6_nangate45,nangate45,krow,3,hpwl_l2_tp,hpwl vectors above level 2,tp,3,926753.9,0.9275,923286.1,1388691,-5.7194,87.27,749.9,ok,50240,0,0,0,0,0,4
+ibex_u70_r6_nangate45,nangate45,krow,3,hpwl_l4_tp,hpwl vectors above level 4,tp,1,946871.0,0.9477,941829.6,1412405,-5.6462,95.01,759.9,ok,49768,0,0,0,0,0,4
+ibex_u70_r6_nangate45,nangate45,krow,3,hpwl_l4_tp,hpwl vectors above level 4,tp,2,947150.7,0.9479,943524.1,1411294,-6.6573,91.08,756.6,ok,49178,0,0,0,0,0,0
+ibex_u70_r6_nangate45,nangate45,krow,3,hpwl_l4_tp,hpwl vectors above level 4,tp,3,951405.8,0.9522,947114.8,1407341,-6.6399,89.61,756.0,ok,48920,0,0,0,0,0,4
+ibex_u70_r6_nangate45,nangate45,krow,2,phpwl_tp,probabilistic HPWL vectors,tp,1,1067721.9,1.0686,1028539.6,1539629,-12.526,113.91,775.5,ok,22049,0,0,0,0,0,6
+ibex_u70_r6_nangate45,nangate45,krow,2,phpwl_tp,probabilistic HPWL vectors,tp,2,1032370.1,1.0332,1016306.3,1518217,-11.3208,138.28,766.0,ok,21955,0,0,0,0,0,10
+ibex_u70_r6_nangate45,nangate45,krow,2,phpwl_tp,probabilistic HPWL vectors,tp,3,1082947.7,1.0838,1025186.8,1538971,-9.7695,114.71,769.6,ok,21929,0,0,0,0,0,16
+ibex_u70_r6_nangate45,nangate45,krow,4,ratio_tp,ratio cut (balance sweep),tp,1,905419.0,0.9062,901244.6,1351974,-8.885,247.88,752.8,ok,50915,1739,930,0,0,0,43
+ibex_u70_r6_nangate45,nangate45,krow,4,ratio_tp,ratio cut (balance sweep),tp,2,921329.1,0.9221,917332.7,1371240,-6.6279,257.22,755.9,ok,51134,1714,921,0,0,0,43
+ibex_u70_r6_nangate45,nangate45,krow,4,ratio_tp,ratio cut (balance sweep),tp,3,925197.1,0.926,920840.2,1383606,-6.3428,251.95,753.9,ok,51351,1714,912,0,0,0,34
+ibex_u70_r6_nangate45,nangate45,krow,4,ncut_tp,normalized cut (balance sweep),tp,1,909583.9,0.9103,905637.4,1499484,-8.14,242.38,763.5,ok,49604,1608,820,0,0,0,34
+ibex_u70_r6_nangate45,nangate45,krow,4,ncut_tp,normalized cut (balance sweep),tp,2,923453.5,0.9242,919882.8,1384079,-5.6749,256.77,759.2,ok,49615,1615,863,0,0,0,24
+ibex_u70_r6_nangate45,nangate45,krow,4,ncut_tp,normalized cut (balance sweep),tp,3,925561.7,0.9263,921887.2,1382312,-7.4413,251.98,749.5,ok,49778,1615,860,0,0,0,22
+ibex_u70_r6_nangate45,nangate45,krow,5,sparsest_tp,geometric sparsest cut,tp,1,1531969.9,1.5332,1521061.7,2117045,-19.3224,70.05,787.1,ok,51137,0,0,1,1,0,8
+ibex_u70_r6_nangate45,nangate45,krow,5,sparsest_tp,geometric sparsest cut,tp,2,1537809.5,1.5391,1531086.8,2116335,-14.2394,69.75,784.9,ok,51633,0,0,1,1,0,4
+ibex_u70_r6_nangate45,nangate45,krow,5,sparsest_tp,geometric sparsest cut,tp,3,1525307.4,1.5266,1519412.2,2103855,-17.2386,71.16,784.0,ok,51484,0,0,1,1,0,6
+ibex_u70_r6_nangate45,nangate45,krow,6,timing_tp,timing net weights,tp,1,1019051.6,1.0199,1009526.6,1490854,-7.3676,59.1,772.3,ok,51578,0,0,0,0,0,18
+ibex_u70_r6_nangate45,nangate45,krow,6,timing_tp,timing net weights,tp,2,1034374.9,1.0352,1022271.3,1507826,-6.2659,57.13,776.2,ok,52047,0,0,0,0,0,6
+ibex_u70_r6_nangate45,nangate45,krow,6,timing_tp,timing net weights,tp,3,1020161.5,1.021,1012387.9,1493682,-9.1226,55.84,771.8,ok,51856,0,0,0,0,0,18
+jpeg_u70_r8_asap7,asap7,krow,ref,gpl,gpl (RePlAce),-,1,1889859.7,1.0,1675669.3,,,14.72,,not run,,,,,,,
+jpeg_u70_r8_asap7,asap7,krow,0,cutnet_tp,cutnet (control),tp,1,766637.8,0.4057,761495.0,8583595,-858995.2961,132.67,5904.3,ok,115615,0,0,0,0,0,2
+jpeg_u70_r8_asap7,asap7,krow,0,cutnet_hm,cutnet (control),hm,1,754584.8,0.3993,749565.9,8434711,-1261609.1049,73.95,5846.4,ok,111136,0,0,0,0,0,1041
+jpeg_u70_r8_asap7,asap7,krow,0,cutnet_mk,cutnet (control),mk,1,877824.5,0.4645,872766.8,9694839,-1401959.1446,209.71,5850.2,ok,113361,0,0,0,0,0,327
+jpeg_u70_r8_asap7,asap7,krow,0,cutnet_fp,cutnet (control),fp,1,845287.5,0.4473,840670.0,9358647,-1323612.2011,188.81,5848.8,ok,112083,0,0,0,0,0,315
+jpeg_u70_r8_asap7,asap7,krow,1,exphpwl_tp,net weight exphpwl,tp,1,751357.1,0.3976,745930.9,8390707,-1177082.486,122.88,5903.2,ok,111192,0,0,0,0,0,0
+jpeg_u70_r8_asap7,asap7,krow,1,exphpwl_hm,net weight exphpwl,hm,1,740259.2,0.3917,735398.6,8271332,-1233836.0925,74.02,5847.5,ok,109183,0,0,0,0,0,1799
+jpeg_u70_r8_asap7,asap7,krow,1,exphpwl_mk,net weight exphpwl,mk,1,1106223.6,0.5853,1101430.7,12020747,-1157722.9817,198.93,5854.2,ok,112368,0,0,0,0,0,499
+jpeg_u70_r8_asap7,asap7,krow,1,exphpwl_fp,net weight exphpwl,fp,1,861433.0,0.4558,856852.3,9499625,-1207291.8074,210.47,5849.2,ok,108749,0,0,0,0,0,548
+jpeg_u70_r8_asap7,asap7,krow,1,invdeg_tp,net weight 1/(d-1),tp,1,1005220.0,0.5319,995572.3,11021913,-1465672.6593,136.19,5898.7,ok,121599,0,0,0,0,0,16
+jpeg_u70_r8_asap7,asap7,krow,1,invdeg_hm,net weight 1/(d-1),hm,1,4206626.1,2.2259,4102881.0,42481917,-1115883.7241,834.87,6461.0,ok,186838,0,0,0,0,3,2716
+jpeg_u70_r8_asap7,asap7,krow,1,invdeg_mk,net weight 1/(d-1),mk,1,1048919.4,0.555,1035972.2,11427491,-1481893.1563,195.17,5852.5,ok,123345,0,0,0,0,0,555
+jpeg_u70_r8_asap7,asap7,krow,1,invdeg_fp,net weight 1/(d-1),fp,1,926632.8,0.4903,917330.8,10202834,-1293676.524,216.89,5852.2,ok,119365,0,0,0,0,0,544
+jpeg_u70_r8_asap7,asap7,krow,3,hpwl_l2_tp,hpwl vectors above level 2,tp,1,781135.7,0.4133,776008.1,8720395,-1080939.8007,391.24,5895.1,ok,115116,0,0,0,0,0,4
+jpeg_u70_r8_asap7,asap7,krow,3,hpwl_l4_tp,hpwl vectors above level 4,tp,1,803603.6,0.4252,798337.2,8940318,-869883.9372,414.18,5916.2,ok,114136,0,0,0,0,0,6
+jpeg_u70_r8_asap7,asap7,krow,2,phpwl_tp,probabilistic HPWL vectors,tp,1,953169.2,0.5044,944785.0,10489179,-401008.5791,492.77,5960.7,ok,56799,0,0,0,0,0,2
+jpeg_u70_r8_asap7,asap7,krow,4,ratio_tp,ratio cut (balance sweep),tp,1,790529.5,0.4183,785327.6,8794780,-1228685.6239,540.32,5906.7,ok,117175,5690,3149,0,0,0,92
+jpeg_u70_r8_asap7,asap7,krow,4,ncut_tp,normalized cut (balance sweep),tp,1,790424.6,0.4182,785324.8,8797397,-1202864.6145,551.52,5905.6,ok,116024,5499,2978,0,0,0,87
+jpeg_u70_r8_asap7,asap7,krow,5,sparsest_tp,geometric sparsest cut,tp,1,1258872.8,0.6661,1251358.3,13585944,-1074484.662,187.79,5898.8,ok,114387,0,0,3,3,0,0
+jpeg_u70_r8_asap7,asap7,krow,6,timing_tp,timing net weights,tp,1,845286.7,0.4473,838735.6,9378848,-941156.0351,146.46,5998.1,ok,119610,0,0,0,0,0,12
+swerv_no_macro_u60_r1_nangate45,nangate45,krow,ref,gpl,gpl (RePlAce),-,1,115748283.6,1.0,115748283.6,,,86.48,415.7,skipped (MCP_NO_ROUTE),,,,,,,
+swerv_no_macro_u60_r1_nangate45,nangate45,krow,0,cutnet_tp,cutnet (control),tp,1,125934157.1,1.088,125934157.1,,,751.89,536.9,skipped (MCP_NO_ROUTE),428862,0,0,0,0,0,38
+swerv_no_macro_u60_r1_nangate45,nangate45,krow,0,cutnet_hm,cutnet (control),hm,1,119401709.6,1.0316,119401709.6,,,585.36,417.5,skipped (MCP_NO_ROUTE),412467,0,0,0,0,0,1913
+swerv_no_macro_u60_r1_nangate45,nangate45,krow,0,cutnet_mk,cutnet (control),mk,1,131080299.5,1.1325,131080299.5,,,793.39,419.0,skipped (MCP_NO_ROUTE),429932,0,0,0,0,0,615
+swerv_no_macro_u60_r1_nangate45,nangate45,krow,0,cutnet_fp,cutnet (control),fp,1,1141168041.4,9.859,1141168041.4,,,2449.42,443.3,skipped (MCP_NO_ROUTE),1019343,0,0,0,0,7197,11
+swerv_no_macro_u60_r1_nangate45,nangate45,krow,1,exphpwl_tp,net weight exphpwl,tp,1,124638636.3,1.0768,124638636.3,,,822.24,531.2,skipped (MCP_NO_ROUTE),421860,0,0,0,0,0,22
+swerv_no_macro_u60_r1_nangate45,nangate45,krow,1,exphpwl_hm,net weight exphpwl,hm,1,121010147.3,1.0455,121010147.3,,,599.77,418.4,skipped (MCP_NO_ROUTE),412093,0,0,0,0,0,3705
+swerv_no_macro_u60_r1_nangate45,nangate45,krow,1,exphpwl_mk,net weight exphpwl,mk,1,151396605.4,1.308,151396605.4,,,808.77,419.1,skipped (MCP_NO_ROUTE),426239,0,0,0,0,0,1454
+swerv_no_macro_u60_r1_nangate45,nangate45,krow,1,exphpwl_fp,net weight exphpwl,fp,1,1026259972.3,8.8663,1026259972.3,,,2299.98,439.1,skipped (MCP_NO_ROUTE),953355,0,0,0,0,7302,4
+swerv_no_macro_u60_r1_nangate45,nangate45,krow,1,invdeg_tp,net weight 1/(d-1),tp,1,167666615.9,1.4485,167666615.9,,,710.85,539.7,skipped (MCP_NO_ROUTE),481624,0,0,0,0,0,32
+swerv_no_macro_u60_r1_nangate45,nangate45,krow,1,invdeg_hm,net weight 1/(d-1),hm,1,1111473026.1,9.6025,1111473026.1,,,1303.06,422.2,skipped (MCP_NO_ROUTE),982923,0,0,0,0,9,5963
+swerv_no_macro_u60_r1_nangate45,nangate45,krow,1,invdeg_mk,net weight 1/(d-1),mk,1,264997469.1,2.2894,264997469.1,,,749.07,421.1,skipped (MCP_NO_ROUTE),505976,0,0,0,0,0,1265
+swerv_no_macro_u60_r1_nangate45,nangate45,krow,1,invdeg_fp,net weight 1/(d-1),fp,1,1830835806.5,15.8174,1830835806.5,,,2337.51,433.3,skipped (MCP_NO_ROUTE),1244599,0,0,0,0,7251,1
+swerv_no_macro_u60_r1_nangate45,nangate45,krow,3,hpwl_l2_tp,hpwl vectors above level 2,tp,1,133263321.1,1.1513,133263321.1,,,1116.8,516.9,skipped (MCP_NO_ROUTE),427156,0,0,0,0,0,18
+swerv_no_macro_u60_r1_nangate45,nangate45,krow,3,hpwl_l4_tp,hpwl vectors above level 4,tp,1,134818918.8,1.1648,134818918.8,,,1265.89,602.3,skipped (MCP_NO_ROUTE),425613,0,0,0,0,0,29
+swerv_no_macro_u60_r1_nangate45,nangate45,krow,2,phpwl_tp,probabilistic HPWL vectors,tp,1,150865023.8,1.3034,150865023.8,,,1517.63,615.2,skipped (MCP_NO_ROUTE),150677,0,0,0,0,0,45
+swerv_no_macro_u60_r1_nangate45,nangate45,krow,4,ratio_tp,ratio cut (balance sweep),tp,1,121632535.3,1.0508,121632535.3,,,1632.34,570.1,skipped (MCP_NO_ROUTE),432875,9706,4519,0,0,0,142
+swerv_no_macro_u60_r1_nangate45,nangate45,krow,4,ncut_tp,normalized cut (balance sweep),tp,1,122125774.6,1.0551,122125774.6,,,1610.31,557.1,skipped (MCP_NO_ROUTE),426344,9410,5236,0,0,0,118
+swerv_no_macro_u60_r1_nangate45,nangate45,krow,5,sparsest_tp,geometric sparsest cut,tp,1,125934157.1,1.088,125934157.1,,,742.65,531.7,skipped (MCP_NO_ROUTE),428862,0,0,0,0,0,38
+swerv_no_macro_u60_r1_nangate45,nangate45,krow,6,timing_tp,timing net weights,tp,1,132282423.4,1.1428,132282423.4,,,758.57,791.9,skipped (MCP_NO_ROUTE),422291,0,0,0,0,0,29
+cva6_no_macro_u70_r2_nangate45,nangate45,krow,ref,gpl,gpl (RePlAce),-,1,44807944.4,1.0,44807944.4,,,51.51,417.6,skipped (MCP_NO_ROUTE),,,,,,,
+cva6_no_macro_u70_r2_nangate45,nangate45,krow,0,cutnet_tp,cutnet (control),tp,1,40807421.7,0.9107,40807421.7,,,404.65,517.2,skipped (MCP_NO_ROUTE),391860,0,0,0,0,0,25
+cva6_no_macro_u70_r2_nangate45,nangate45,krow,0,cutnet_hm,cutnet (control),hm,1,38802705.8,0.866,38802705.8,,,200.15,417.0,skipped (MCP_NO_ROUTE),382686,0,0,0,0,0,2565
+cva6_no_macro_u70_r2_nangate45,nangate45,krow,0,cutnet_mk,cutnet (control),mk,1,42978440.0,0.9592,42978440.0,,,379.16,421.2,skipped (MCP_NO_ROUTE),390388,0,0,0,0,0,830
+cva6_no_macro_u70_r2_nangate45,nangate45,krow,0,cutnet_fp,cutnet (control),fp,1,547431320.2,12.2173,547431320.2,,,2724.81,432.5,skipped (MCP_NO_ROUTE),997800,0,0,0,0,7401,17
+cva6_no_macro_u70_r2_nangate45,nangate45,krow,1,exphpwl_tp,net weight exphpwl,tp,1,41742470.1,0.9316,41742470.1,,,390.07,522.7,skipped (MCP_NO_ROUTE),388459,0,0,0,0,0,64
+cva6_no_macro_u70_r2_nangate45,nangate45,krow,1,exphpwl_hm,net weight exphpwl,hm,1,40658243.3,0.9074,40658243.3,,,226.45,419.3,skipped (MCP_NO_ROUTE),374370,0,0,0,0,0,4175
+cva6_no_macro_u70_r2_nangate45,nangate45,krow,1,exphpwl_mk,net weight exphpwl,mk,1,45976947.7,1.0261,45976947.7,,,349.05,418.3,skipped (MCP_NO_ROUTE),375473,0,0,0,0,0,1633
+cva6_no_macro_u70_r2_nangate45,nangate45,krow,1,exphpwl_fp,net weight exphpwl,fp,1,43224812.6,0.9647,43224812.6,,,438.8,420.0,skipped (MCP_NO_ROUTE),367934,0,0,0,0,0,1618
+cva6_no_macro_u70_r2_nangate45,nangate45,krow,1,invdeg_tp,net weight 1/(d-1),tp,1,50709351.8,1.1317,50709351.8,,,341.88,537.6,skipped (MCP_NO_ROUTE),444411,0,0,0,0,0,40
+cva6_no_macro_u70_r2_nangate45,nangate45,krow,1,invdeg_hm,net weight 1/(d-1),hm,1,452265613.6,10.0934,452265613.6,,,1152.84,418.2,skipped (MCP_NO_ROUTE),903100,0,0,0,0,6,6441
+cva6_no_macro_u70_r2_nangate45,nangate45,krow,1,invdeg_mk,net weight 1/(d-1),mk,1,57265885.0,1.278,57265885.0,,,423.24,418.2,skipped (MCP_NO_ROUTE),455259,0,0,0,0,1,1524
+cva6_no_macro_u70_r2_nangate45,nangate45,krow,1,invdeg_fp,net weight 1/(d-1),fp,1,49585947.8,1.1066,49585947.8,,,422.76,418.2,skipped (MCP_NO_ROUTE),435365,0,0,0,0,0,1553
+cva6_no_macro_u70_r2_nangate45,nangate45,krow,3,hpwl_l2_tp,hpwl vectors above level 2,tp,1,40747378.8,0.9094,40747378.8,,,676.16,508.1,skipped (MCP_NO_ROUTE),389270,0,0,0,0,0,43
+cva6_no_macro_u70_r2_nangate45,nangate45,krow,3,hpwl_l4_tp,hpwl vectors above level 4,tp,1,41940407.3,0.936,41940407.3,,,767.12,601.0,skipped (MCP_NO_ROUTE),388327,0,0,0,0,0,45
+cva6_no_macro_u70_r2_nangate45,nangate45,krow,2,phpwl_tp,probabilistic HPWL vectors,tp,1,44914253.9,1.0024,44914253.9,,,883.82,599.5,skipped (MCP_NO_ROUTE),141787,0,0,0,0,0,55
+cva6_no_macro_u70_r2_nangate45,nangate45,krow,4,ratio_tp,ratio cut (balance sweep),tp,1,37852851.9,0.8448,37852851.9,,,1172.03,585.2,skipped (MCP_NO_ROUTE),391340,10049,4864,0,0,0,164
+cva6_no_macro_u70_r2_nangate45,nangate45,krow,4,ncut_tp,normalized cut (balance sweep),tp,1,37595040.1,0.839,37595040.1,,,1166.72,554.3,skipped (MCP_NO_ROUTE),388328,9848,5359,0,0,0,216
+cva6_no_macro_u70_r2_nangate45,nangate45,krow,5,sparsest_tp,geometric sparsest cut,tp,1,40807421.7,0.9107,40807421.7,,,378.61,520.2,skipped (MCP_NO_ROUTE),391860,0,0,0,0,0,25
+cva6_no_macro_u70_r2_nangate45,nangate45,krow,6,timing_tp,timing net weights,tp,1,44144725.9,0.9852,44144725.9,,,388.08,782.2,skipped (MCP_NO_ROUTE),394599,0,0,0,0,0,89
+aes_ar1_nangate45,nangate45,base,ref,gpl,gpl (RePlAce),-,1,132787.3,1.0,123506.0,272460,7.0622,4.55,408.3,ok,,,,,,,
+aes_ar1_nangate45,nangate45,base,ref,gpl,gpl (RePlAce),-,2,132787.3,1.0,123654.8,271881,7.0052,4.55,405.7,ok,,,,,,,
+aes_ar1_nangate45,nangate45,base,ref,gpl,gpl (RePlAce),-,3,132787.3,1.0,123403.6,271633,6.9988,3.31,406.4,ok,,,,,,,
+aes_ar1_nangate45,nangate45,base,0,cutnet_tp,cutnet (control),tp,1,148558.3,1.1188,142175.4,297206,6.9832,54.68,424.5,ok,50876,0,0,0,0,0,10
+aes_ar1_nangate45,nangate45,base,0,cutnet_tp,cutnet (control),tp,2,153503.6,1.156,146926.7,304362,7.0089,54.74,428.9,ok,51607,0,0,0,0,0,5
+aes_ar1_nangate45,nangate45,base,0,cutnet_tp,cutnet (control),tp,3,149948.5,1.1292,143013.5,300193,6.8563,54.85,429.5,ok,51947,0,0,0,0,0,3
+aes_ar1_nangate45,nangate45,base,0,cutnet_hm,cutnet (control),hm,1,149613.7,1.1267,143617.1,300164,6.8273,21.33,408.4,ok,50467,0,0,0,0,0,756
+aes_ar1_nangate45,nangate45,base,0,cutnet_hm,cutnet (control),hm,2,148632.2,1.1193,142128.7,298283,6.7606,19.91,408.7,ok,50891,0,0,0,0,0,744
+aes_ar1_nangate45,nangate45,base,0,cutnet_hm,cutnet (control),hm,3,149332.6,1.1246,142569.0,297029,7.087,20.67,409.6,ok,50355,0,0,0,0,0,744
+aes_ar1_nangate45,nangate45,base,0,cutnet_mk,cutnet (control),mk,1,154345.6,1.1624,147154.2,304000,7.0172,78.06,408.9,ok,52053,0,0,0,0,0,221
+aes_ar1_nangate45,nangate45,base,0,cutnet_mk,cutnet (control),mk,2,152233.3,1.1464,144886.8,303191,6.9508,77.93,410.6,ok,52053,0,0,0,0,1,271
+aes_ar1_nangate45,nangate45,base,0,cutnet_mk,cutnet (control),mk,3,152681.3,1.1498,145875.6,306181,7.0938,78.51,410.0,ok,51694,0,0,0,0,0,263
+aes_ar1_nangate45,nangate45,base,0,cutnet_fp,cutnet (control),fp,1,148504.8,1.1184,142028.3,299383,7.1028,63.41,409.9,ok,51366,0,0,0,0,0,204
+aes_ar1_nangate45,nangate45,base,0,cutnet_fp,cutnet (control),fp,2,148896.5,1.1213,143667.1,299634,7.0131,65.74,410.4,ok,51107,0,0,0,0,0,228
+aes_ar1_nangate45,nangate45,base,0,cutnet_fp,cutnet (control),fp,3,149712.3,1.1275,143006.5,300019,7.0688,60.8,409.6,ok,51767,0,0,0,0,0,233
+aes_ar1_nangate45,nangate45,base,1,exphpwl_tp,net weight exphpwl,tp,1,151599.7,1.1417,144688.7,299965,6.8841,58.23,430.2,ok,50451,0,0,0,0,0,8
+aes_ar1_nangate45,nangate45,base,1,exphpwl_tp,net weight exphpwl,tp,2,153414.7,1.1553,146220.3,305311,6.8971,59.94,432.4,ok,51026,0,0,0,0,0,4
+aes_ar1_nangate45,nangate45,base,1,exphpwl_tp,net weight exphpwl,tp,3,151222.7,1.1388,144055.2,298890,6.959,56.23,432.3,ok,50850,0,0,0,0,0,7
+aes_ar1_nangate45,nangate45,base,1,exphpwl_hm,net weight exphpwl,hm,1,149927.8,1.1291,142756.9,297688,7.0786,22.69,408.7,ok,50037,0,0,0,0,0,1024
+aes_ar1_nangate45,nangate45,base,1,exphpwl_hm,net weight exphpwl,hm,2,152490.2,1.1484,145773.4,300435,7.0961,28.3,409.1,ok,49954,0,0,0,0,0,1084
+aes_ar1_nangate45,nangate45,base,1,exphpwl_hm,net weight exphpwl,hm,3,151885.1,1.1438,144610.1,300358,7.0898,25.2,410.2,ok,50387,0,0,0,0,0,1020
+aes_ar1_nangate45,nangate45,base,1,exphpwl_mk,net weight exphpwl,mk,1,164782.4,1.241,155536.0,319339,6.8285,82.19,410.5,ok,51698,0,0,0,0,0,483
+aes_ar1_nangate45,nangate45,base,1,exphpwl_mk,net weight exphpwl,mk,2,163685.6,1.2327,154394.9,314383,6.9215,80.95,409.0,ok,52401,0,0,0,0,0,436
+aes_ar1_nangate45,nangate45,base,1,exphpwl_mk,net weight exphpwl,mk,3,163336.4,1.2301,155116.5,316521,7.0416,81.88,411.4,ok,51913,0,0,0,0,0,429
+aes_ar1_nangate45,nangate45,base,1,exphpwl_fp,net weight exphpwl,fp,1,149495.3,1.1258,141832.6,297232,6.996,66.91,411.1,ok,49840,0,0,0,0,0,337
+aes_ar1_nangate45,nangate45,base,1,exphpwl_fp,net weight exphpwl,fp,2,149947.9,1.1292,142215.9,300595,7.0165,65.41,411.3,ok,50864,0,0,0,0,0,359
+aes_ar1_nangate45,nangate45,base,1,exphpwl_fp,net weight exphpwl,fp,3,152076.7,1.1453,143851.0,301470,7.082,67.71,411.5,ok,50593,0,0,0,0,0,351
+aes_ar1_nangate45,nangate45,base,1,invdeg_tp,net weight 1/(d-1),tp,1,172464.3,1.2988,155356.1,329098,6.7859,49.72,436.9,ok,58149,0,0,0,0,0,5
+aes_ar1_nangate45,nangate45,base,1,invdeg_tp,net weight 1/(d-1),tp,2,168009.3,1.2653,151403.7,326256,6.7598,53.34,433.1,ok,57279,0,0,0,0,0,4
+aes_ar1_nangate45,nangate45,base,1,invdeg_tp,net weight 1/(d-1),tp,3,171960.3,1.295,155932.8,335085,6.8294,51.05,438.7,ok,57328,0,0,0,0,0,9
+aes_ar1_nangate45,nangate45,base,1,invdeg_hm,net weight 1/(d-1),hm,1,170110.0,1.2811,153500.7,328180,6.9964,19.36,410.5,ok,57046,0,0,0,0,0,816
+aes_ar1_nangate45,nangate45,base,1,invdeg_hm,net weight 1/(d-1),hm,2,170371.2,1.283,153241.1,323606,6.8354,19.9,411.7,ok,56446,0,0,0,0,0,804
+aes_ar1_nangate45,nangate45,base,1,invdeg_hm,net weight 1/(d-1),hm,3,171193.5,1.2892,153261.4,324196,6.5961,19.08,410.2,ok,57048,0,0,0,0,0,850
+aes_ar1_nangate45,nangate45,base,1,invdeg_mk,net weight 1/(d-1),mk,1,174340.7,1.3129,155023.8,333316,6.9075,74.85,412.1,ok,57911,0,0,0,0,0,367
+aes_ar1_nangate45,nangate45,base,1,invdeg_mk,net weight 1/(d-1),mk,2,174998.1,1.3179,154893.3,333341,7.0335,76.07,413.2,ok,58572,0,0,0,0,1,358
+aes_ar1_nangate45,nangate45,base,1,invdeg_mk,net weight 1/(d-1),mk,3,171409.6,1.2909,153457.3,327764,7.1227,74.54,411.1,ok,57946,0,0,0,0,1,349
+aes_ar1_nangate45,nangate45,base,1,invdeg_fp,net weight 1/(d-1),fp,1,170120.2,1.2811,151576.5,325726,7.0239,63.96,410.5,ok,57117,0,0,0,0,0,285
+aes_ar1_nangate45,nangate45,base,1,invdeg_fp,net weight 1/(d-1),fp,2,169564.8,1.277,152492.3,328063,6.8242,64.15,411.6,ok,57187,0,0,0,0,0,276
+aes_ar1_nangate45,nangate45,base,1,invdeg_fp,net weight 1/(d-1),fp,3,169421.0,1.2759,152230.6,326401,7.0596,62.74,482.3,ok,58164,0,0,0,0,0,310
+aes_ar1_nangate45,nangate45,base,3,hpwl_l2_tp,hpwl vectors above level 2,tp,1,154670.9,1.1648,148068.9,303128,6.9268,75.5,425.1,ok,51071,0,0,0,0,0,5
+aes_ar1_nangate45,nangate45,base,3,hpwl_l2_tp,hpwl vectors above level 2,tp,2,158466.8,1.1934,151254.7,309299,6.8934,73.42,429.8,ok,50809,0,0,0,0,0,4
+aes_ar1_nangate45,nangate45,base,3,hpwl_l2_tp,hpwl vectors above level 2,tp,3,157258.2,1.1843,150497.5,306759,7.0745,78.9,428.6,ok,51047,0,0,0,0,0,5
+aes_ar1_nangate45,nangate45,base,3,hpwl_l4_tp,hpwl vectors above level 4,tp,1,159557.4,1.2016,153933.0,309319,6.7703,86.67,436.9,ok,49599,0,0,0,0,0,4
+aes_ar1_nangate45,nangate45,base,3,hpwl_l4_tp,hpwl vectors above level 4,tp,2,160194.5,1.2064,153397.4,308347,6.8479,75.24,445.6,ok,49938,0,0,0,0,0,6
+aes_ar1_nangate45,nangate45,base,3,hpwl_l4_tp,hpwl vectors above level 4,tp,3,158939.0,1.1969,152672.8,308013,7.0247,87.03,435.9,ok,50204,0,0,0,0,0,11
+aes_ar1_nangate45,nangate45,base,2,phpwl_tp,probabilistic HPWL vectors,tp,1,166718.9,1.2555,154272.0,310174,7.1557,111.26,434.6,ok,24305,0,0,0,0,0,0
+aes_ar1_nangate45,nangate45,base,2,phpwl_tp,probabilistic HPWL vectors,tp,2,168954.7,1.2724,155993.9,319504,7.0177,112.64,438.8,ok,24541,0,0,0,0,0,1
+aes_ar1_nangate45,nangate45,base,2,phpwl_tp,probabilistic HPWL vectors,tp,3,167251.5,1.2595,154520.3,315047,7.0715,108.6,437.9,ok,24575,0,0,0,0,0,2
+aes_ar1_nangate45,nangate45,base,4,ratio_tp,ratio cut (balance sweep),tp,1,151357.6,1.1398,143871.9,299458,6.92,230.12,432.0,ok,51502,1596,1053,0,0,0,58
+aes_ar1_nangate45,nangate45,base,4,ratio_tp,ratio cut (balance sweep),tp,2,151560.1,1.1414,144264.8,301986,6.9976,244.24,427.1,ok,51834,1605,1057,0,0,0,46
+aes_ar1_nangate45,nangate45,base,4,ratio_tp,ratio cut (balance sweep),tp,3,148183.0,1.1159,140637.2,295830,6.6959,237.27,430.0,ok,51109,1586,1041,0,0,0,40
+aes_ar1_nangate45,nangate45,base,4,ncut_tp,normalized cut (balance sweep),tp,1,151571.8,1.1415,144280.1,299680,6.976,225.77,430.0,ok,51390,1552,1000,0,0,0,37
+aes_ar1_nangate45,nangate45,base,4,ncut_tp,normalized cut (balance sweep),tp,2,149499.1,1.1259,142255.5,299603,6.9501,235.1,429.5,ok,50836,1527,989,0,0,0,36
+aes_ar1_nangate45,nangate45,base,4,ncut_tp,normalized cut (balance sweep),tp,3,148062.0,1.115,140950.3,297921,6.9104,228.52,429.4,ok,51470,1560,982,0,0,0,28
+aes_ar1_nangate45,nangate45,base,5,sparsest_tp,geometric sparsest cut,tp,1,284101.1,2.1395,277834.1,545207,6.1503,97.45,443.0,ok,53332,0,0,50,50,0,0
+aes_ar1_nangate45,nangate45,base,5,sparsest_tp,geometric sparsest cut,tp,2,288051.1,2.1693,281066.7,552347,5.6476,103.4,448.8,ok,53606,0,0,50,50,0,1
+aes_ar1_nangate45,nangate45,base,5,sparsest_tp,geometric sparsest cut,tp,3,290451.9,2.1873,284391.9,557847,6.1349,100.58,446.4,ok,53132,0,0,51,51,0,1
+ibex_ar1_asap7,asap7,base,ref,gpl,gpl (RePlAce),-,1,52249.1,1.0,49567.4,101168,-6859.711,4.71,518.2,ok,,,,,,,
+ibex_ar1_asap7,asap7,base,ref,gpl,gpl (RePlAce),-,2,52249.1,1.0,49574.8,101235,-6950.9465,6.13,517.4,ok,,,,,,,
+ibex_ar1_asap7,asap7,base,ref,gpl,gpl (RePlAce),-,3,52249.1,1.0,49589.2,101281,-7702.7824,5.88,517.9,ok,,,,,,,
+ibex_ar1_asap7,asap7,base,0,cutnet_tp,cutnet (control),tp,1,61210.0,1.1715,59022.1,115843,-6737.3494,67.35,540.5,ok,69026,0,0,0,0,0,6
+ibex_ar1_asap7,asap7,base,0,cutnet_tp,cutnet (control),tp,2,62470.0,1.1956,60079.1,116539,-8859.1632,60.73,541.6,ok,69257,0,0,0,0,0,2
+ibex_ar1_asap7,asap7,base,0,cutnet_tp,cutnet (control),tp,3,61627.1,1.1795,59458.9,116098,-6297.7916,65.78,546.0,ok,69321,0,0,0,0,0,2
+ibex_ar1_asap7,asap7,base,0,cutnet_hm,cutnet (control),hm,1,63265.9,1.2109,60991.0,118308,-7782.5542,27.0,519.5,ok,66808,0,0,0,0,0,972
+ibex_ar1_asap7,asap7,base,0,cutnet_hm,cutnet (control),hm,2,61663.7,1.1802,59572.2,116238,-7618.9126,32.07,517.2,ok,67738,0,0,0,0,0,907
+ibex_ar1_asap7,asap7,base,0,cutnet_hm,cutnet (control),hm,3,62967.5,1.2051,60862.6,116534,-6524.3415,27.86,600.8,ok,66477,0,0,0,0,0,847
+ibex_ar1_asap7,asap7,base,0,cutnet_mk,cutnet (control),mk,1,65020.0,1.2444,62788.2,118508,-6962.5523,120.42,603.5,ok,68227,0,0,0,0,0,164
+ibex_ar1_asap7,asap7,base,0,cutnet_mk,cutnet (control),mk,2,64159.2,1.2279,61730.7,118324,-7721.7841,104.77,517.8,ok,68572,0,0,0,0,0,203
+ibex_ar1_asap7,asap7,base,0,cutnet_mk,cutnet (control),mk,3,64816.0,1.2405,62380.5,118528,-6171.8075,103.06,519.3,ok,68451,0,0,0,0,0,177
+ibex_ar1_asap7,asap7,base,0,cutnet_fp,cutnet (control),fp,1,60518.5,1.1583,58296.2,114340,-8369.5202,88.33,604.8,ok,67361,0,0,0,0,0,167
+ibex_ar1_asap7,asap7,base,0,cutnet_fp,cutnet (control),fp,2,60689.2,1.1615,58410.0,114006,-7354.66,87.08,518.5,ok,67304,0,0,0,0,0,162
+ibex_ar1_asap7,asap7,base,0,cutnet_fp,cutnet (control),fp,3,61000.7,1.1675,58756.3,115065,-6836.53,82.12,603.2,ok,67229,0,0,0,0,0,124
+ibex_ar1_asap7,asap7,base,1,exphpwl_tp,net weight exphpwl,tp,1,62905.2,1.2039,60598.9,117612,-8174.6796,69.45,622.8,ok,68336,0,0,0,0,0,5
+ibex_ar1_asap7,asap7,base,1,exphpwl_tp,net weight exphpwl,tp,2,64268.1,1.23,61679.0,118139,-8193.2026,65.8,626.6,ok,69053,0,0,0,0,0,7
+ibex_ar1_asap7,asap7,base,1,exphpwl_tp,net weight exphpwl,tp,3,63883.8,1.2227,61579.8,118223,-8251.6074,70.46,536.9,ok,67874,0,0,0,0,0,6
+ibex_ar1_asap7,asap7,base,1,exphpwl_hm,net weight exphpwl,hm,1,63463.7,1.2146,60969.0,116720,-8325.3325,29.32,603.0,ok,66896,0,0,0,0,0,1077
+ibex_ar1_asap7,asap7,base,1,exphpwl_hm,net weight exphpwl,hm,2,63334.9,1.2122,60809.7,117246,-9336.4659,29.96,601.3,ok,66826,0,0,0,0,0,1091
+ibex_ar1_asap7,asap7,base,1,exphpwl_hm,net weight exphpwl,hm,3,68542.8,1.3118,65958.6,123056,-7295.3208,34.72,519.6,ok,67927,0,0,0,0,0,1147
+ibex_ar1_asap7,asap7,base,1,exphpwl_mk,net weight exphpwl,mk,1,71641.0,1.3711,67914.8,122367,-7769.7991,109.72,520.0,ok,70417,0,0,0,0,0,262
+ibex_ar1_asap7,asap7,base,1,exphpwl_mk,net weight exphpwl,mk,2,68330.8,1.3078,65291.7,119983,-6083.9032,109.78,518.5,ok,67298,0,0,0,0,0,270
+ibex_ar1_asap7,asap7,base,1,exphpwl_mk,net weight exphpwl,mk,3,70823.8,1.3555,68141.3,122208,-6339.8997,109.85,521.5,ok,69909,0,0,0,0,0,263
+ibex_ar1_asap7,asap7,base,1,exphpwl_fp,net weight exphpwl,fp,1,65042.2,1.2448,62481.7,118040,-6152.3995,90.16,603.5,ok,66887,0,0,0,0,0,231
+ibex_ar1_asap7,asap7,base,1,exphpwl_fp,net weight exphpwl,fp,2,65741.8,1.2582,62653.5,117767,-6422.7433,92.95,520.3,ok,66274,0,0,0,0,0,229
+ibex_ar1_asap7,asap7,base,1,exphpwl_fp,net weight exphpwl,fp,3,62063.7,1.1878,59541.6,113728,-7529.0601,87.08,518.7,ok,66165,0,0,0,0,0,205
+ibex_ar1_asap7,asap7,base,1,invdeg_tp,net weight 1/(d-1),tp,1,71944.4,1.377,66941.0,128499,-8670.6749,61.92,546.3,ok,77636,0,0,0,0,0,8
+ibex_ar1_asap7,asap7,base,1,invdeg_tp,net weight 1/(d-1),tp,2,72098.1,1.3799,67507.5,130059,-8003.6973,60.36,543.1,ok,77929,0,0,0,0,0,7
+ibex_ar1_asap7,asap7,base,1,invdeg_tp,net weight 1/(d-1),tp,3,71328.4,1.3652,66734.4,127437,-6506.2427,62.9,552.8,ok,76872,0,0,0,0,0,5
+ibex_ar1_asap7,asap7,base,1,invdeg_hm,net weight 1/(d-1),hm,1,161439.6,3.0898,143632.9,304002,-8387.0049,525.64,577.4,ok,114053,0,0,0,0,1,1424
+ibex_ar1_asap7,asap7,base,1,invdeg_hm,net weight 1/(d-1),hm,2,151118.4,2.8923,135923.2,275107,-14193.9687,522.6,570.1,ok,112698,0,0,0,0,1,1332
+ibex_ar1_asap7,asap7,base,1,invdeg_hm,net weight 1/(d-1),hm,3,157852.5,3.0212,141828.7,307420,-9915.0262,523.57,581.6,ok,113313,0,0,0,0,1,1342
+ibex_ar1_asap7,asap7,base,1,invdeg_mk,net weight 1/(d-1),mk,1,74155.2,1.4193,68600.4,131107,-7590.1792,95.53,524.8,ok,78691,0,0,0,0,1,261
+ibex_ar1_asap7,asap7,base,1,invdeg_mk,net weight 1/(d-1),mk,2,74050.9,1.4173,69184.7,130595,-6797.5599,95.78,519.8,ok,78244,0,0,0,0,0,285
+ibex_ar1_asap7,asap7,base,1,invdeg_mk,net weight 1/(d-1),mk,3,76195.4,1.4583,70989.8,132548,-7651.2663,92.21,520.4,ok,79173,0,0,0,0,0,340
+ibex_ar1_asap7,asap7,base,1,invdeg_fp,net weight 1/(d-1),fp,1,70546.4,1.3502,65849.5,126286,-6720.744,85.99,519.1,ok,75660,0,0,0,0,0,185
+ibex_ar1_asap7,asap7,base,1,invdeg_fp,net weight 1/(d-1),fp,2,72575.1,1.389,67630.2,128857,-6396.0744,91.51,603.1,ok,75776,0,0,0,0,0,212
+ibex_ar1_asap7,asap7,base,1,invdeg_fp,net weight 1/(d-1),fp,3,72013.4,1.3783,67236.4,127259,-7094.2461,87.78,520.9,ok,76119,0,0,0,0,0,209
+ibex_ar1_asap7,asap7,base,3,hpwl_l2_tp,hpwl vectors above level 2,tp,1,63681.7,1.2188,61477.6,118689,-10182.6654,95.64,539.7,ok,69671,0,0,0,0,0,2
+ibex_ar1_asap7,asap7,base,3,hpwl_l2_tp,hpwl vectors above level 2,tp,2,62347.5,1.1933,60107.2,116839,-6764.402,115.77,533.5,ok,69654,0,0,0,0,0,1
+ibex_ar1_asap7,asap7,base,3,hpwl_l2_tp,hpwl vectors above level 2,tp,3,64573.3,1.2359,62397.9,119178,-7391.2046,120.9,545.1,ok,69015,0,0,0,0,0,5
+ibex_ar1_asap7,asap7,base,3,hpwl_l4_tp,hpwl vectors above level 4,tp,1,64179.0,1.2283,61970.8,119022,-9492.3154,115.82,555.3,ok,67845,0,0,0,0,0,2
+ibex_ar1_asap7,asap7,base,3,hpwl_l4_tp,hpwl vectors above level 4,tp,2,61597.2,1.1789,59610.4,116097,-6873.1812,129.36,545.1,ok,67159,0,0,0,0,0,2
+ibex_ar1_asap7,asap7,base,3,hpwl_l4_tp,hpwl vectors above level 4,tp,3,64137.7,1.2275,62069.6,117590,-7379.2177,140.57,545.5,ok,65674,0,0,0,0,0,3
+ibex_ar1_asap7,asap7,base,2,phpwl_tp,probabilistic HPWL vectors,tp,1,68170.6,1.3047,64164.0,117439,-6702.8188,181.59,550.6,ok,28243,0,0,0,0,0,3
+ibex_ar1_asap7,asap7,base,2,phpwl_tp,probabilistic HPWL vectors,tp,2,64586.8,1.2361,60503.9,114185,-5443.6846,171.65,552.2,ok,28291,0,0,0,0,0,2
+ibex_ar1_asap7,asap7,base,2,phpwl_tp,probabilistic HPWL vectors,tp,3,66510.6,1.273,62478.2,115475,-6662.1491,186.61,562.6,ok,28362,0,0,0,0,0,1
+ibex_ar1_asap7,asap7,base,4,ratio_tp,ratio cut (balance sweep),tp,1,62012.7,1.1869,59086.0,115853,-7286.5976,271.8,543.5,ok,67919,2049,1162,0,0,0,21
+ibex_ar1_asap7,asap7,base,4,ratio_tp,ratio cut (balance sweep),tp,2,61799.0,1.1828,59377.1,116883,-7930.3675,271.05,545.6,ok,69364,2085,1217,0,0,0,37
+ibex_ar1_asap7,asap7,base,4,ratio_tp,ratio cut (balance sweep),tp,3,62778.1,1.2015,60465.3,117454,-6914.0085,288.9,550.4,ok,68182,2075,1145,0,0,0,23
+ibex_ar1_asap7,asap7,base,4,ncut_tp,normalized cut (balance sweep),tp,1,63191.8,1.2094,60774.7,117107,-7452.5666,279.17,551.1,ok,68116,2038,1175,0,0,0,23
+ibex_ar1_asap7,asap7,base,4,ncut_tp,normalized cut (balance sweep),tp,2,62001.1,1.1866,59097.7,117124,-8912.1431,277.42,633.2,ok,68215,2038,1152,0,0,0,32
+ibex_ar1_asap7,asap7,base,4,ncut_tp,normalized cut (balance sweep),tp,3,62999.4,1.2058,60705.3,118161,-7600.8071,279.08,611.2,ok,67340,2028,1155,0,0,0,22
+ibex_ar1_asap7,asap7,base,5,sparsest_tp,geometric sparsest cut,tp,1,83568.9,1.5994,78164.2,140703,-7127.9058,116.86,622.0,ok,68978,0,0,144,129,0,4
+ibex_ar1_asap7,asap7,base,5,sparsest_tp,geometric sparsest cut,tp,2,83706.0,1.6021,79817.0,144471,-7510.3977,108.98,567.5,ok,69786,0,0,149,142,0,0
+ibex_ar1_asap7,asap7,base,5,sparsest_tp,geometric sparsest cut,tp,3,83507.6,1.5983,79761.0,145514,-6495.8146,121.96,549.0,ok,68861,0,0,134,126,0,6
+cva6_ar1_asap7,asap7,base,ref,gpl,gpl (RePlAce),-,1,411915.5,1.0,390068.3,765229,-5918.5865,39.7,1655.0,ok,,,,,,,
+cva6_ar1_asap7,asap7,base,0,cutnet_tp,cutnet (control),tp,1,511144.4,1.2409,498398.9,931914,-10594.5368,396.65,1670.2,ok,502094,0,0,0,0,0,33
+cva6_ar1_asap7,asap7,base,0,cutnet_hm,cutnet (control),hm,1,496404.2,1.2051,483666.5,911041,-12838.4646,231.45,1688.3,ok,485187,0,0,0,0,0,4813
+cva6_ar1_asap7,asap7,base,0,cutnet_mk,cutnet (control),mk,1,519892.6,1.2621,505510.8,908479,-8286.17,501.83,1683.9,ok,481136,0,0,0,0,0,993
+cva6_ar1_asap7,asap7,base,0,cutnet_fp,cutnet (control),fp,1,532529.3,1.2928,517563.6,903445,-12250.0623,448.82,1757.8,ok,458016,0,0,0,0,0,926
+cva6_ar1_asap7,asap7,base,1,exphpwl_tp,net weight exphpwl,tp,1,491936.4,1.1943,478272.8,907693,-9041.4503,365.0,1694.9,ok,499177,0,0,0,0,0,54
+cva6_ar1_asap7,asap7,base,1,exphpwl_hm,net weight exphpwl,hm,1,494727.0,1.201,480717.6,894584,-6189.9615,223.04,1754.7,ok,478958,0,0,0,0,0,6256
+cva6_ar1_asap7,asap7,base,1,exphpwl_mk,net weight exphpwl,mk,1,604319.6,1.4671,581562.2,973369,-7640.57,529.49,1771.3,ok,474628,0,0,0,0,2,1647
+cva6_ar1_asap7,asap7,base,1,exphpwl_fp,net weight exphpwl,fp,1,556384.6,1.3507,536169.4,915079,-14266.4219,491.49,1762.4,ok,459718,0,0,0,0,0,1287
+cva6_ar1_asap7,asap7,base,1,invdeg_tp,net weight 1/(d-1),tp,1,577877.8,1.4029,550413.2,1069899,-10662.5171,364.32,1861.4,ok,567738,0,0,0,0,0,49
+cva6_ar1_asap7,asap7,base,1,invdeg_hm,net weight 1/(d-1),hm,1,2210150.9,5.3655,1861583.5,3471496,-21945.3825,1103.53,2448.8,ok,1101951,0,0,0,0,4,7181
+cva6_ar1_asap7,asap7,base,1,invdeg_mk,net weight 1/(d-1),mk,1,612129.0,1.4861,582297.6,1099040,-7168.4459,470.94,1797.3,ok,577432,0,0,0,0,1,1399
+cva6_ar1_asap7,asap7,base,1,invdeg_fp,net weight 1/(d-1),fp,1,589584.4,1.4313,561160.7,1073490,-13416.5284,457.04,1792.9,ok,559039,0,0,0,0,0,1091
+cva6_ar1_asap7,asap7,base,3,hpwl_l2_tp,hpwl vectors above level 2,tp,1,505523.2,1.2272,492693.8,922957,-9297.8132,783.9,1850.0,ok,501003,0,0,0,0,0,40
+cva6_ar1_asap7,asap7,base,3,hpwl_l4_tp,hpwl vectors above level 4,tp,1,509340.1,1.2365,496774.5,935745,-8108.164,935.5,1850.5,ok,501362,0,0,0,0,0,43
+cva6_ar1_asap7,asap7,base,2,phpwl_tp,probabilistic HPWL vectors,tp,1,568924.1,1.3812,539205.1,907374,-7869.7387,1176.03,1938.9,ok,172209,0,0,0,0,0,34
+cva6_ar1_asap7,asap7,base,4,ratio_tp,ratio cut (balance sweep),tp,1,502220.6,1.2192,487172.1,909405,-8910.5328,1234.89,1860.4,ok,498902,11666,7008,0,0,0,245
+cva6_ar1_asap7,asap7,base,4,ncut_tp,normalized cut (balance sweep),tp,1,499672.5,1.213,484942.0,919801,-7544.6414,1209.63,1815.7,ok,496441,11507,6985,0,0,0,237
+cva6_ar1_asap7,asap7,base,5,sparsest_tp,geometric sparsest cut,tp,1,909717.1,2.2085,891601.0,1957700,-34156.6279,593.98,2136.7,ok,477776,0,0,1391,1344,0,30
+mempool_tile_ar1_nangate45,nangate45,base,ref,gpl,gpl (RePlAce),-,1,2124133.7,1.0,1986246.6,4096969,0.0,42.55,1884.4,ok,,,,,,,
+mempool_tile_ar1_nangate45,nangate45,base,0,cutnet_tp,cutnet (control),tp,1,2400015.5,1.1299,2357312.5,4737150,-0.2444,429.53,2057.4,ok,509200,0,0,0,0,0,57
+mempool_tile_ar1_nangate45,nangate45,base,0,cutnet_hm,cutnet (control),hm,1,2319180.7,1.0918,2276710.5,4595340,-0.6434,248.8,1980.9,ok,485243,0,0,0,0,0,7203
+mempool_tile_ar1_nangate45,nangate45,base,0,cutnet_mk,cutnet (control),mk,1,2904298.6,1.3673,2858018.8,5906129,-0.5206,597.2,2075.3,ok,510979,0,0,0,0,0,2180
+mempool_tile_ar1_nangate45,nangate45,base,0,cutnet_fp,cutnet (control),fp,1,2505086.2,1.1793,2459241.4,4826514,-0.7224,551.03,2003.6,ok,486641,0,0,0,0,0,1868
+mempool_tile_ar1_nangate45,nangate45,base,1,exphpwl_tp,net weight exphpwl,tp,1,2394346.4,1.1272,2345819.2,4635601,0.0,425.95,2143.0,ok,497357,0,0,0,0,0,73
+mempool_tile_ar1_nangate45,nangate45,base,1,exphpwl_hm,net weight exphpwl,hm,1,2353784.1,1.1081,2307744.1,4398390,0.0,246.88,1888.5,ok,475770,0,0,0,0,0,9100
+mempool_tile_ar1_nangate45,nangate45,base,1,exphpwl_mk,net weight exphpwl,mk,1,3093750.5,1.4565,3029686.1,6352005,-1.3731,598.52,2106.4,ok,499948,0,0,0,0,0,3282
+mempool_tile_ar1_nangate45,nangate45,base,1,exphpwl_fp,net weight exphpwl,fp,1,2773355.4,1.3056,2705505.0,5763848,-1.5187,566.75,1987.1,ok,485274,0,0,0,0,0,2804
+mempool_tile_ar1_nangate45,nangate45,base,1,invdeg_tp,net weight 1/(d-1),tp,1,2908596.5,1.3693,2823573.3,6216602,-0.2893,371.82,2168.9,ok,610383,0,0,0,0,0,109
+mempool_tile_ar1_nangate45,nangate45,base,1,invdeg_hm,net weight 1/(d-1),hm,1,10071491.7,4.7415,8583371.0,12480851,-1.9646,1007.33,2401.9,ok,1137229,0,0,0,0,4,10404
+mempool_tile_ar1_nangate45,nangate45,base,1,invdeg_mk,net weight 1/(d-1),mk,1,3127522.4,1.4724,3027404.4,6513233,-0.4469,595.67,2033.0,ok,620903,0,0,0,0,0,2795
+mempool_tile_ar1_nangate45,nangate45,base,1,invdeg_fp,net weight 1/(d-1),fp,1,2834894.8,1.3346,2746704.3,6140290,-1.0448,545.47,2009.6,ok,591736,0,0,0,0,0,2438
+mempool_tile_ar1_nangate45,nangate45,base,3,hpwl_l2_tp,hpwl vectors above level 2,tp,1,2579443.1,1.2144,2536667.3,5435542,-1.8508,814.44,2208.8,ok,516804,0,0,0,0,0,67
+mempool_tile_ar1_nangate45,nangate45,base,3,hpwl_l4_tp,hpwl vectors above level 4,tp,1,2628946.3,1.2377,2584075.2,5282349,-0.0037,983.35,2253.3,ok,508182,0,0,0,0,0,65
+mempool_tile_ar1_nangate45,nangate45,base,2,phpwl_tp,probabilistic HPWL vectors,tp,1,3252751.6,1.5313,3109285.4,6221689,-0.369,1338.48,2256.5,ok,186414,0,0,0,0,0,39
+mempool_tile_ar1_nangate45,nangate45,base,4,ratio_tp,ratio cut (balance sweep),tp,1,2495965.8,1.1751,2444745.9,5182972,-1.1068,1516.12,2175.4,ok,520077,15389,9299,0,0,0,318
+mempool_tile_ar1_nangate45,nangate45,base,4,ncut_tp,normalized cut (balance sweep),tp,1,2482392.9,1.1687,2432103.2,5160349,-1.1512,1564.78,2208.2,ok,518483,15150,9380,0,0,0,289
+mempool_tile_ar1_nangate45,nangate45,base,5,sparsest_tp,geometric sparsest cut,tp,1,4416894.9,2.0794,4362609.0,8085997,-2.4013,663.82,2241.5,ok,519600,0,0,230,227,0,22

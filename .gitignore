@@ -1,0 +1,10 @@
+# build and run artifacts
+openroad/
+OpenROAD/build*/
+bench/designs/*/floorplan.db
+results/*/*.log
+results/*/*.stdout
+results/*/*.lock/
+scratch/
+__pycache__/
+*.pyc

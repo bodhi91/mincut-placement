@@ -1,0 +1,42 @@
+[INFO ODB-0227] LEF file: Nangate45/Nangate45.lef, created 22 layers, 27 vias, 135 library cells
+[INFO ODB-0128] Design: gcd
+[INFO ODB-0130]     Created 54 pins.
+[INFO ODB-0131]     Created 294 components and 1656 component-terminals.
+[INFO ODB-0133]     Created 364 nets and 1068 connections.
+[INFO MCP-0010] Netlist: 294 movable instances, 0 fixed instances, 54 I/O pins, 330 nets
+[INFO MCP-0011] Skipped nets: 0 special/supply, 34 degree<2, 0 fanout>0, 0 without movable pins
+[INFO MCP-0012] Movable area 569.8 um^2, core area 953.9 um^2, utilization 59.7%
+[INFO MCP-0013] Core 30.97 x 30.8 um, 22 rows, site width 0.19 um, usable area 953.9 um^2, root utilization 59.7%
+[INFO MCP-0014] Engine tritonpart, objective hpwl, k = 4, terminals propagate, end case <= 12 cells, tolerance 0.050, reserve minlocal at density utilization, seed 1, threads 1
+[INFO MCP-0037] End game: exact partitioning <= 16 cells, optimal end case <= 12 cells, row ironing window 7 x 2 passes
+[INFO MCP-0015] Level  0:      1 regions      294 cells      330 nets      40 cut ( 12.1%)     0 end cases
+[INFO MCP-0015] Level  1:      4 regions      294 cells      396 nets     137 cut ( 34.6%)     0 end cases
+[INFO MCP-0015] Level  2:     15 regions      282 cells      541 nets     151 cut ( 27.9%)     1 end cases
+[INFO MCP-0016] Placed 294 cells in 55 end-case regions (0 overflow cells, 0 overfull regions), 75 regions total
+[INFO MCP-0035] Exact partitioning: 7 regions, 5 improved, 3 incomplete; optimal end case: 54 leaves, 54 improved, 1 incomplete, HPWL -568 um
+[INFO MCP-0038] End-case feedback: 1 passes, 55 leaves revisited, 20 rewritten, HPWL -14 um
+[INFO MCP-0036] Row ironing: 2 passes, 156 windows, 102 improved, 0 incomplete, HPWL -259 um
+[INFO MCP-0017] HPWL 3267 um
+[INFO DPL-0006] Core area: 953.88 um^2
+[INFO DPL-0007] Movable instances area: 569.77 um^2
+[INFO DPL-0008] Fixed instances area within core: 0.00 um^2
+[INFO DPL-0009] Utilization: 59.7%
+[INFO DPL-0005] Diamond search max displacement: +/- 500 sites horizontally, +/- 100 rows vertically.
+[INFO DPL-1102] Legalizing using negotiation legalizer.
+[INFO DPL-1103] Negotiation base search window: +/-20 sites horizontally, +/-5 rows vertically 
+	Automatic search window extension enabled.
+	Search window extendable up to the max displacement cap of +/-500 sites, +/-100 rows near walls.
+[INFO DPL-1104] NegotiationLegalizer DRC penalty: 5.
+[INFO DPL-0392] Negotiation cell height distribution (1 unique row-count(s)):
+[INFO DPL-0393]   height 1 row(s): 294 cells
+Detailed Placement Analysis
+---------------------------------
+legalizer            negotiation
+total moves                   0
+total displacement          0.0 u
+average displacement        0.0 u
+max displacement            0.0 u
+original HPWL            3267.1 u
+legalized HPWL           3267.1 u
+delta HPWL                    0 %
+

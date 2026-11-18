@@ -1,0 +1,159 @@
+[INFO ODB-0227] LEF file: Nangate45/Nangate45.lef, created 22 layers, 27 vias, 135 library cells
+[INFO ODB-0128] Design: gcd
+[INFO ODB-0130]     Created 54 pins.
+[INFO ODB-0131]     Created 294 components and 1656 component-terminals.
+[INFO ODB-0133]     Created 364 nets and 1068 connections.
+[INFO MCP-0010] Netlist: 294 movable instances, 0 fixed instances, 54 I/O pins, 330 nets
+[INFO MCP-0011] Skipped nets: 0 special/supply, 34 degree<2, 0 fanout>0, 0 without movable pins
+[INFO MCP-0012] Movable area 726.2 um^2 (padding 1+1 sites), core area 953.9 um^2, utilization 76.1%
+[INFO MCP-0013] Core 30.97 x 30.8 um, 22 rows, site width 0.19 um, usable area 953.9 um^2, root utilization 76.1%
+[INFO MCP-0014] Engine tritonpart, objective cutnet, k = 2, terminals propagate, end case <= 12 cells, tolerance 0.050, reserve minlocal at density utilization, seed 1, threads 1
+[INFO MCP-0037] End game: exact partitioning <= 16 cells, optimal end case <= 12 cells, row ironing window 7 x 2 passes
+[INFO MCP-0015] Level  0:      1 regions      294 cells      330 nets      43 cut ( 13.0%)     0 end cases
+[INFO MCP-0015] Level  1:      2 regions      294 cells      341 nets      71 cut ( 19.8%)     0 end cases
+[INFO MCP-0015] Level  2:      4 regions      294 cells      353 nets     122 cut ( 30.4%)     0 end cases
+[INFO MCP-0015] Level  3:      8 regions      294 cells      384 nets     163 cut ( 35.1%)     0 end cases
+[INFO MCP-0015] Level  4:     14 regions      273 cells      362 nets     245 cut ( 47.7%)     2 end cases
+[INFO MCP-0015] Level  5:      5 regions       68 cells       92 nets      75 cut ( 54.3%)    23 end cases
+[INFO MCP-0016] Placed 294 cells in 35 end-case regions (0 overflow cells, 0 overfull regions), 69 regions total
+[INFO MCP-0035] Exact partitioning: 8 regions, 0 improved, 0 incomplete; optimal end case: 35 leaves, 35 improved, 0 incomplete, HPWL -631 um
+[INFO MCP-0038] End-case feedback: 1 passes, 35 leaves revisited, 15 rewritten, HPWL -22 um
+[INFO MCP-0036] Row ironing: 2 passes, 158 windows, 33 improved, 0 incomplete, HPWL -45 um
+[INFO MCP-0017] HPWL 3079 um
+[INFO MCP-0018] Wrote report mincut_place06.json
+even: leaf_positions even
+[INFO DPL-0006] Core area: 953.88 um^2
+[INFO DPL-0007] Movable instances area: 569.77 um^2
+[INFO DPL-0008] Fixed instances area within core: 0.00 um^2
+[INFO DPL-0009] Utilization: 59.7%
+[INFO DPL-0005] Diamond search max displacement: +/- 500 sites horizontally, +/- 100 rows vertically.
+[INFO DPL-1102] Legalizing using negotiation legalizer.
+[INFO DPL-1103] Negotiation base search window: +/-20 sites horizontally, +/-5 rows vertically 
+	Automatic search window extension enabled.
+	Search window extendable up to the max displacement cap of +/-500 sites, +/-100 rows near walls.
+[INFO DPL-1104] NegotiationLegalizer DRC penalty: 5.
+[INFO DPL-0392] Negotiation cell height distribution (1 unique row-count(s)):
+[INFO DPL-0393]   height 1 row(s): 294 cells
+          |      Total |  Illegal |  Illegal
+Iteration | Violations |    Cells |    Sites
+---------------------------------------------
+        0 |        151 |       151 |         0
+        1 |         81 |        69 |        12
+        2 |         34 |        14 |        20
+        3 |         16 |        10 |         6
+        4 |         20 |         4 |        16
+        5 |          0 |         0 |         0
+Negotiation phase 1 converged at iteration 5.
+Detailed Placement Analysis
+---------------------------------
+legalizer            negotiation
+total moves                 506
+total displacement        183.8 u
+average displacement        0.6 u
+max displacement            6.5 u
+original HPWL            3078.5 u
+legalized HPWL           3322.4 u
+delta HPWL                    8 %
+
+[INFO MCP-0010] Netlist: 294 movable instances, 0 fixed instances, 54 I/O pins, 330 nets
+[INFO MCP-0011] Skipped nets: 0 special/supply, 34 degree<2, 0 fanout>0, 0 without movable pins
+[INFO MCP-0012] Movable area 726.2 um^2 (padding 1+1 sites), core area 953.9 um^2, utilization 76.1%
+[INFO MCP-0013] Core 30.97 x 30.8 um, 22 rows, site width 0.19 um, usable area 953.9 um^2, root utilization 76.1%
+[INFO MCP-0014] Engine tritonpart, objective cutnet, k = 2, terminals propagate, end case <= 12 cells, tolerance 0.050, reserve minlocal at density utilization, seed 1, threads 1
+[INFO MCP-0037] End game: exact partitioning <= 16 cells, optimal end case <= 12 cells, row ironing window 7 x 2 passes
+[INFO MCP-0015] Level  0:      1 regions      294 cells      330 nets      43 cut ( 13.0%)     0 end cases
+[INFO MCP-0015] Level  1:      2 regions      294 cells      341 nets      71 cut ( 19.8%)     0 end cases
+[INFO MCP-0015] Level  2:      4 regions      294 cells      353 nets     122 cut ( 30.4%)     0 end cases
+[INFO MCP-0015] Level  3:      8 regions      294 cells      384 nets     163 cut ( 35.1%)     0 end cases
+[INFO MCP-0015] Level  4:     14 regions      273 cells      362 nets     245 cut ( 47.7%)     2 end cases
+[INFO MCP-0015] Level  5:      5 regions       68 cells       92 nets      75 cut ( 54.3%)    23 end cases
+[INFO MCP-0016] Placed 294 cells in 35 end-case regions (0 overflow cells, 0 overfull regions), 69 regions total
+[INFO MCP-0035] Exact partitioning: 8 regions, 0 improved, 0 incomplete; optimal end case: 35 leaves, 35 improved, 1 incomplete, HPWL -610 um
+[INFO MCP-0038] End-case feedback: 1 passes, 35 leaves revisited, 24 rewritten, HPWL -26 um
+[INFO MCP-0036] Row ironing: 2 passes, 160 windows, 83 improved, 0 incomplete, HPWL -86 um
+[INFO MCP-0017] HPWL 3051 um
+[INFO MCP-0018] Wrote report mincut_place06.json
+optimal: leaf_positions optimal
+[INFO DPL-0006] Core area: 953.88 um^2
+[INFO DPL-0007] Movable instances area: 569.77 um^2
+[INFO DPL-0008] Fixed instances area within core: 0.00 um^2
+[INFO DPL-0009] Utilization: 59.7%
+[INFO DPL-0005] Diamond search max displacement: +/- 500 sites horizontally, +/- 100 rows vertically.
+[INFO DPL-1102] Legalizing using negotiation legalizer.
+[INFO DPL-1103] Negotiation base search window: +/-20 sites horizontally, +/-5 rows vertically 
+	Automatic search window extension enabled.
+	Search window extendable up to the max displacement cap of +/-500 sites, +/-100 rows near walls.
+[INFO DPL-1104] NegotiationLegalizer DRC penalty: 5.
+[INFO DPL-0392] Negotiation cell height distribution (1 unique row-count(s)):
+[INFO DPL-0393]   height 1 row(s): 294 cells
+          |      Total |  Illegal |  Illegal
+Iteration | Violations |    Cells |    Sites
+---------------------------------------------
+        0 |         37 |        37 |         0
+        1 |         27 |        27 |         0
+        2 |          6 |         6 |         0
+        3 |          0 |         0 |         0
+Negotiation phase 1 converged at iteration 3.
+Detailed Placement Analysis
+---------------------------------
+legalizer            negotiation
+total moves                 342
+total displacement         58.0 u
+average displacement        0.2 u
+max displacement            4.5 u
+original HPWL            3051.2 u
+legalized HPWL           3121.7 u
+delta HPWL                    2 %
+
+[INFO MCP-0010] Netlist: 294 movable instances, 0 fixed instances, 54 I/O pins, 330 nets
+[INFO MCP-0011] Skipped nets: 0 special/supply, 34 degree<2, 0 fanout>0, 0 without movable pins
+[INFO MCP-0012] Movable area 726.2 um^2 (padding 1+1 sites), core area 953.9 um^2, utilization 76.1%
+[INFO MCP-0013] Core 30.97 x 30.8 um, 22 rows, site width 0.19 um, usable area 953.9 um^2, root utilization 76.1%
+[INFO MCP-0014] Engine tritonpart, objective cutnet, k = 2, terminals propagate, end case <= 12 cells, tolerance 0.050, reserve minlocal at density utilization, seed 1, threads 1
+[INFO MCP-0037] End game: exact partitioning <= 16 cells, optimal end case <= 12 cells, row ironing window 7 x 2 passes
+[INFO MCP-0015] Level  0:      1 regions      294 cells      330 nets      43 cut ( 13.0%)     0 end cases
+[INFO MCP-0015] Level  1:      2 regions      294 cells      341 nets      71 cut ( 19.8%)     0 end cases
+[INFO MCP-0015] Level  2:      4 regions      294 cells      353 nets     122 cut ( 30.4%)     0 end cases
+[INFO MCP-0015] Level  3:      8 regions      294 cells      384 nets     163 cut ( 35.1%)     0 end cases
+[INFO MCP-0015] Level  4:     14 regions      273 cells      362 nets     245 cut ( 47.7%)     2 end cases
+[INFO MCP-0015] Level  5:      5 regions       68 cells       92 nets      75 cut ( 54.3%)    23 end cases
+[INFO MCP-0016] Placed 294 cells in 35 end-case regions (0 overflow cells, 0 overfull regions), 69 regions total
+[INFO MCP-0035] Exact partitioning: 8 regions, 0 improved, 0 incomplete; optimal end case: 35 leaves, 35 improved, 1 incomplete, HPWL -614 um
+[INFO MCP-0038] End-case feedback: 1 passes, 35 leaves revisited, 22 rewritten, HPWL -21 um
+[INFO MCP-0036] Row ironing: 2 passes, 160 windows, 82 improved, 0 incomplete, HPWL -82 um
+[INFO MCP-0017] HPWL 3058 um
+[INFO MCP-0018] Wrote report mincut_place06.json
+joint: leaf_positions joint
+[INFO DPL-0006] Core area: 953.88 um^2
+[INFO DPL-0007] Movable instances area: 569.77 um^2
+[INFO DPL-0008] Fixed instances area within core: 0.00 um^2
+[INFO DPL-0009] Utilization: 59.7%
+[INFO DPL-0005] Diamond search max displacement: +/- 500 sites horizontally, +/- 100 rows vertically.
+[INFO DPL-1102] Legalizing using negotiation legalizer.
+[INFO DPL-1103] Negotiation base search window: +/-20 sites horizontally, +/-5 rows vertically 
+	Automatic search window extension enabled.
+	Search window extendable up to the max displacement cap of +/-500 sites, +/-100 rows near walls.
+[INFO DPL-1104] NegotiationLegalizer DRC penalty: 5.
+[INFO DPL-0392] Negotiation cell height distribution (1 unique row-count(s)):
+[INFO DPL-0393]   height 1 row(s): 294 cells
+          |      Total |  Illegal |  Illegal
+Iteration | Violations |    Cells |    Sites
+---------------------------------------------
+        0 |         28 |        28 |         0
+        1 |         10 |        10 |         0
+        2 |          2 |         2 |         0
+        3 |          0 |         0 |         0
+Negotiation phase 1 converged at iteration 3.
+Detailed Placement Analysis
+---------------------------------
+legalizer            negotiation
+total moves                 320
+total displacement         38.5 u
+average displacement        0.1 u
+max displacement            5.6 u
+original HPWL            3057.7 u
+legalized HPWL           3121.8 u
+delta HPWL                    2 %
+
+optimal <= even: 1
+joint <= even: 1

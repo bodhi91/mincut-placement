@@ -1,0 +1,36 @@
+Mt-KaHyPar c95e871f: get_node_with_minimum_weighted_degree (the processor
+of the seed block in the greedy one-to-one mapping) filters the free
+processors by the individual block weights and indexes the candidate
+list with a random integer in [0, size - 1].  From the second V-cycle of
+mt_kahypar_improve_mapping on, a block can outweigh every processor still
+free (the previous cycle's mapping and refinement may leave a block above
+its processor's capacity, and the processors of fixed blocks are taken),
+the list is empty and uniform_int_distribution(0, -1) recurses until the
+stack overflows (SIGSEGV; X5 ethernet_ar1_nangate45, level 4).  Fall back
+to the free processors regardless of their capacity, as the main loop of
+compute_greedy_mapping already does for the other blocks.
+
+--- a/mt-kahypar/partition/mapping/greedy_mapping.cpp
++++ b/mt-kahypar/partition/mapping/greedy_mapping.cpp
+@@ -67,9 +67,12 @@
+                                                   HypernodeWeight required_weight) {
+   vec<HypernodeID> min_nodes;
+   HyperedgeWeight min_weighted_degree = std::numeric_limits<HypernodeWeight>::max();
++  // Second pass without the capacity filter if no free processor can
++  // take the block (possible from the second V-cycle on).
++  for ( int pass = 0; pass < 2 && min_nodes.empty(); ++pass ) {
+   for ( const HypernodeID& hn : graph.nodes() ) {
+     if (!unassigned_processors.isSet(hn)) continue;
+-    if (context.partition.use_individual_part_weights &&
++    if (pass == 0 && context.partition.use_individual_part_weights &&
+         context.partition.max_part_weights[hn] < required_weight) continue;
+ 
+     HyperedgeWeight weighted_degree = 0;
+@@ -84,6 +87,7 @@
+       min_nodes.push_back(hn);
+     }
+   }
++  }
+   ASSERT(min_nodes.size() > 0);
+   return (deterministic || min_nodes.size() == 1) ? min_nodes[0] :
+     min_nodes[utils::Randomize::instance().getRandomInt(

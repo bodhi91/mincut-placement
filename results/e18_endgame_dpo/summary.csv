@@ -1,0 +1,7 @@
+design,platform,variant,n,cells,hpwl_mean,hpwl_halfrange,hpwl_dpl_mean,hpwl_dpl_halfrange,hpwl_global_mean,hpwl_global_halfrange,grt_wl_mean,grt_wl_halfrange,t_place_mean,t_place_halfrange,t_grt_mean,t_grt_halfrange,mem_peak_mb_mean,mem_peak_mb_halfrange
+aes_nangate45,nangate45,gpl,3,,399378,388,461832,0,457376,0,663783,482,17.0467,0.695,6.20667,0.71,735.033,7.05
+aes_nangate45,nangate45,gpl_tonly_st,3,14850,385317,385,437696,0,436693,0,642704,1.09e+03,71.5233,1.64,6.22,1.38,740,7.25
+gcd_nangate45,nangate45,gpl,3,,3907.87,3.05,4070.6,0,3904.2,0,7025.67,11.5,0.41,0.07,0.203333,0.115,270.933,0.55
+gcd_nangate45,nangate45,gpl_tonly_st,3,347,3932.67,13.2,4158.9,0,4150.9,0,7041,21.5,1.61,0.245,0.15,0.065,273.1,1.2
+ibex_sky130hd,sky130hd,gpl,3,,573561,158,595423,0,560052,0,1.14746e+06,704,11.49,2.68,5.51,0.285,437.233,1.55
+ibex_sky130hd,sky130hd,gpl_tonly_st,3,14394,578486,183,612200,0,601254,0,1.1592e+06,390,25.68,2.51,6.55,0.335,439.533,1

@@ -1,0 +1,69 @@
+MCP 0001 MinCutPlacer.cpp:58       No chip exists. ERROR https://github.com/The-OpenROAD-Project/OpenROAD/tree/master/src/mcp/src/MinCutPlacer.cpp#L58
+MCP 0002 MinCutPlacer.cpp:62       No block exists. ERROR https://github.com/The-OpenROAD-Project/OpenROAD/tree/master/src/mcp/src/MinCutPlacer.cpp#L62
+MCP 0003 MinCutPlacer.cpp:72       No rows found; run initialize_floorplan. ERROR https://github.com/The-OpenROAD-Project/OpenROAD/tree/master/src/mcp/src/MinCutPlacer.cpp#L72
+MCP 0004 MinCutPlacer.cpp:265      {} non-core instances (macros, pads) are not placed;  ERROR https://github.com/The-OpenROAD-Project/OpenROAD/tree/master/src/mcp/src/MinCutPlacer.cpp#L265
+MCP 0005 MinCutPlacer.cpp:272      No movable instances. ERROR https://github.com/The-OpenROAD-Project/OpenROAD/tree/master/src/mcp/src/MinCutPlacer.cpp#L272
+MCP 0006 MinCutPlacer.cpp:368      No free placement area in the rows. ERROR https://github.com/The-OpenROAD-Project/OpenROAD/tree/master/src/mcp/src/MinCutPlacer.cpp#L368
+MCP 0007 Engine.cpp:581            -hmetis_path is required for -engine hmetis. ERROR https://github.com/The-OpenROAD-Project/OpenROAD/tree/master/src/mcp/src/Engine.cpp#L581
+MCP 0008 Engine.cpp:588            -mtkahypar_path is required for -engine mtkahypar. ERROR https://github.com/The-OpenROAD-Project/OpenROAD/tree/master/src/mcp/src/Engine.cpp#L588
+MCP 0009 Engine.cpp:595            -fastpart_path is required for -engine fastpart. ERROR https://github.com/The-OpenROAD-Project/OpenROAD/tree/master/src/mcp/src/Engine.cpp#L595
+MCP 0010 MinCutPlacer.cpp:283      Netlist: {} movable instances, {} fixed instances, {} I/O  INFO https://github.com/The-OpenROAD-Project/OpenROAD/tree/master/src/mcp/src/MinCutPlacer.cpp#L283
+MCP 0011 MinCutPlacer.cpp:291      Skipped nets: {} special/supply, {} degree<2, {} fanout>{},  INFO https://github.com/The-OpenROAD-Project/OpenROAD/tree/master/src/mcp/src/MinCutPlacer.cpp#L291
+MCP 0012 MinCutPlacer.cpp:300      Movable area {:.1f} um^2{}, core area {:.1f} um^2,  INFO https://github.com/The-OpenROAD-Project/OpenROAD/tree/master/src/mcp/src/MinCutPlacer.cpp#L300
+MCP 0013 MinCutPlacer.cpp:392      Core {} x {} um, {} rows, site width {} um, usable area  INFO https://github.com/The-OpenROAD-Project/OpenROAD/tree/master/src/mcp/src/MinCutPlacer.cpp#L392
+MCP 0014 MinCutPlacer.cpp:422      Engine {}{}{}, objective {}, k = {}, terminals {}, end case <= {}  INFO https://github.com/The-OpenROAD-Project/OpenROAD/tree/master/src/mcp/src/MinCutPlacer.cpp#L422
+MCP 0015 Decomposer.cpp:1081       Level {:2d}: {:6d} regions {:8d} cells {:8d} nets  INFO https://github.com/The-OpenROAD-Project/OpenROAD/tree/master/src/mcp/src/Decomposer.cpp#L1081
+MCP 0016 MinCutPlacer.cpp:475      Placed {} cells in {} end-case regions ({} overflow cells,  INFO https://github.com/The-OpenROAD-Project/OpenROAD/tree/master/src/mcp/src/MinCutPlacer.cpp#L475
+MCP 0017 MinCutPlacer.cpp:527      HPWL {:.0f} um INFO https://github.com/The-OpenROAD-Project/OpenROAD/tree/master/src/mcp/src/MinCutPlacer.cpp#L527
+MCP 0018 MinCutPlacer.cpp:933      Wrote report {} INFO https://github.com/The-OpenROAD-Project/OpenROAD/tree/master/src/mcp/src/MinCutPlacer.cpp#L933
+MCP 0020 RegionTree.cpp:169        Target density {:.3f} is below the utilization {:.3f}  WARN https://github.com/The-OpenROAD-Project/OpenROAD/tree/master/src/mcp/src/RegionTree.cpp#L169
+MCP 0022 Decomposer.cpp:1114       Level {}: {} engine failures (fallback used). WARN https://github.com/The-OpenROAD-Project/OpenROAD/tree/master/src/mcp/src/Decomposer.cpp#L1114
+MCP 0023 MinCutPlacer.cpp:651      Cannot write report file {} WARN https://github.com/The-OpenROAD-Project/OpenROAD/tree/master/src/mcp/src/MinCutPlacer.cpp#L651
+MCP 0024 MinCutPlacer.cpp:454      Objectives other than cutnet need the fm or tritonpart  WARN https://github.com/The-OpenROAD-Project/OpenROAD/tree/master/src/mcp/src/MinCutPlacer.cpp#L454
+MCP 0026 MinCutPlacer.cpp:322      -seed_placement: {} of {} movable instances have no  ERROR https://github.com/The-OpenROAD-Project/OpenROAD/tree/master/src/mcp/src/MinCutPlacer.cpp#L322
+MCP 0027 MinCutPlacer.cpp:330      Seed placement: assignment {} (net weight {:.3g}, {}  INFO https://github.com/The-OpenROAD-Project/OpenROAD/tree/master/src/mcp/src/MinCutPlacer.cpp#L330
+MCP 0028 Decomposer.cpp:970        Region {} spans its parent {}; treating it as  WARN https://github.com/The-OpenROAD-Project/OpenROAD/tree/master/src/mcp/src/Decomposer.cpp#L970
+MCP 0029 MinCutPlacer.cpp:545      Cannot write regions file {} WARN https://github.com/The-OpenROAD-Project/OpenROAD/tree/master/src/mcp/src/MinCutPlacer.cpp#L545
+MCP 0030 Engine.cpp:264            Cannot create scratch directory {}: {} WARN https://github.com/The-OpenROAD-Project/OpenROAD/tree/master/src/mcp/src/Engine.cpp#L264
+MCP 0031 Engine.cpp:289            Cannot write {} WARN https://github.com/The-OpenROAD-Project/OpenROAD/tree/master/src/mcp/src/Engine.cpp#L289
+MCP 0032 Engine.cpp:304            {} failed (status {}) on region {}; see {} WARN https://github.com/The-OpenROAD-Project/OpenROAD/tree/master/src/mcp/src/Engine.cpp#L304
+MCP 0033 Engine.cpp:327            {} produced no readable partition for region {} WARN https://github.com/The-OpenROAD-Project/OpenROAD/tree/master/src/mcp/src/Engine.cpp#L327
+MCP 0034 MinCutPlacer.cpp:576      Wrote regions {} INFO https://github.com/The-OpenROAD-Project/OpenROAD/tree/master/src/mcp/src/MinCutPlacer.cpp#L576
+MCP 0035 MinCutPlacer.cpp:493      Exact partitioning: {} regions, {} improved, {} incomplete;  INFO https://github.com/The-OpenROAD-Project/OpenROAD/tree/master/src/mcp/src/MinCutPlacer.cpp#L493
+MCP 0036 MinCutPlacer.cpp:517      Row ironing: {} passes, {} windows, {} improved, {}  INFO https://github.com/The-OpenROAD-Project/OpenROAD/tree/master/src/mcp/src/MinCutPlacer.cpp#L517
+MCP 0037 MinCutPlacer.cpp:440      End game: exact partitioning <= {} cells, optimal end case  INFO https://github.com/The-OpenROAD-Project/OpenROAD/tree/master/src/mcp/src/MinCutPlacer.cpp#L440
+MCP 0038 MinCutPlacer.cpp:507      End-case feedback: {} passes, {} leaves revisited, {}  INFO https://github.com/The-OpenROAD-Project/OpenROAD/tree/master/src/mcp/src/MinCutPlacer.cpp#L507
+MCP 0039 MinCutPlacer.cpp:103      Feedback pass {} of {}: seeded by the result of pass {}  INFO https://github.com/The-OpenROAD-Project/OpenROAD/tree/master/src/mcp/src/MinCutPlacer.cpp#L103
+MCP 0040 MinCutPlacer.cpp:123      Feedback pass {} did not improve (HPWL {:.0f} vs {:.0f}  INFO https://github.com/The-OpenROAD-Project/OpenROAD/tree/master/src/mcp/src/MinCutPlacer.cpp#L123
+MCP 0041 MinCutPlacer.cpp:135      Placement feedback: {} passes run, pass {} kept, HPWL  INFO https://github.com/The-OpenROAD-Project/OpenROAD/tree/master/src/mcp/src/MinCutPlacer.cpp#L135
+MCP 0042 Engine.cpp:500            Cannot write {} WARN https://github.com/The-OpenROAD-Project/OpenROAD/tree/master/src/mcp/src/Engine.cpp#L500
+MCP 0043 Engine.cpp:539            {} failed on region {}: {} WARN https://github.com/The-OpenROAD-Project/OpenROAD/tree/master/src/mcp/src/Engine.cpp#L539
+MCP 0044 Engine.cpp:550            {} produced no readable partition for region {} WARN https://github.com/The-OpenROAD-Project/OpenROAD/tree/master/src/mcp/src/Engine.cpp#L550
+MCP 0045 Engine.cpp:381            Scratch path too long for a Unix socket: {} WARN https://github.com/The-OpenROAD-Project/OpenROAD/tree/master/src/mcp/src/Engine.cpp#L381
+MCP 0046 Engine.cpp:396            Cannot start the FastPart server: {} WARN https://github.com/The-OpenROAD-Project/OpenROAD/tree/master/src/mcp/src/Engine.cpp#L396
+MCP 0047 Engine.cpp:404            FastPart server with {} lanes on {} (budget {} s x {}^level,  INFO https://github.com/The-OpenROAD-Project/OpenROAD/tree/master/src/mcp/src/Engine.cpp#L404
+MCP 0048 Engine.cpp:421            The FastPart server did not come up; see {} WARN https://github.com/The-OpenROAD-Project/OpenROAD/tree/master/src/mcp/src/Engine.cpp#L421
+MCP 0049 mcp.tcl:278               -soft_blockages must be ignore or block ERROR https://github.com/The-OpenROAD-Project/OpenROAD/tree/master/src/mcp/src/mcp.tcl#L278
+MCP 0050 MinCutPlacer.cpp:371      Blockages: {} hard, {} soft ({}); {} obstacles in all INFO https://github.com/The-OpenROAD-Project/OpenROAD/tree/master/src/mcp/src/MinCutPlacer.cpp#L371
+MCP 0051 MinCutPlacer.cpp:201      Cannot read the net weights file {} ERROR https://github.com/The-OpenROAD-Project/OpenROAD/tree/master/src/mcp/src/MinCutPlacer.cpp#L201
+MCP 0052 MinCutPlacer.cpp:238      Net weights: rule {}, {} nets from {}; min {:.3f} mean  INFO https://github.com/The-OpenROAD-Project/OpenROAD/tree/master/src/mcp/src/MinCutPlacer.cpp#L238
+MCP 0053 MinCutPlacer.cpp:586      Cannot write hypergraph file {} WARN https://github.com/The-OpenROAD-Project/OpenROAD/tree/master/src/mcp/src/MinCutPlacer.cpp#L586
+MCP 0054 MinCutPlacer.cpp:621      Wrote hypergraph {} INFO https://github.com/The-OpenROAD-Project/OpenROAD/tree/master/src/mcp/src/MinCutPlacer.cpp#L621
+MCP 0055 KwayRefine.cpp:271        k-way refinement: {} failed: {} WARN https://github.com/The-OpenROAD-Project/OpenROAD/tree/master/src/mcp/src/KwayRefine.cpp#L271
+MCP 0056 KwayRefine.cpp:368        k-way refinement moved {} fixed vertices; result  WARN https://github.com/The-OpenROAD-Project/OpenROAD/tree/master/src/mcp/src/KwayRefine.cpp#L368
+MCP 0057 KwayRefine.cpp:396        k-way refinement requested, but this build has no  WARN https://github.com/The-OpenROAD-Project/OpenROAD/tree/master/src/mcp/src/KwayRefine.cpp#L396
+MCP 0058 Decomposer.cpp:1349       Level {:2d}: k-way {} over {} regions moved {}  INFO https://github.com/The-OpenROAD-Project/OpenROAD/tree/master/src/mcp/src/Decomposer.cpp#L1349
+MCP 0059 mcp.tcl:382               -kway_slack must be at least 1. ERROR https://github.com/The-OpenROAD-Project/OpenROAD/tree/master/src/mcp/src/mcp.tcl#L382
+MCP 0060 BoundarySweep.cpp:180     Level {:2d}: boundary sweeps over {} regions ({} pairs): {}  INFO https://github.com/The-OpenROAD-Project/OpenROAD/tree/master/src/mcp/src/BoundarySweep.cpp#L180
+MCP 0061 BoundarySweep.cpp:145     Level {}: boundary sweep audit: incremental HPWL  WARN https://github.com/The-OpenROAD-Project/OpenROAD/tree/master/src/mcp/src/BoundarySweep.cpp#L145
+MCP 0062 mcp.tcl:405               -sweep_slack must be at least 1. ERROR https://github.com/The-OpenROAD-Project/OpenROAD/tree/master/src/mcp/src/mcp.tcl#L405
+MCP 0100 mcp.tcl:122               -k must be 0 (auto), 2 or 4. ERROR https://github.com/The-OpenROAD-Project/OpenROAD/tree/master/src/mcp/src/mcp.tcl#L122
+MCP 0101 mcp.tcl:180               -top_levels requires -top_engine. ERROR https://github.com/The-OpenROAD-Project/OpenROAD/tree/master/src/mcp/src/mcp.tcl#L180
+MCP 0102 mcp.tcl:186               -density must be in (0, 1]. ERROR https://github.com/The-OpenROAD-Project/OpenROAD/tree/master/src/mcp/src/mcp.tcl#L186
+MCP 0103 mcp.tcl:494               No design block found. ERROR https://github.com/The-OpenROAD-Project/OpenROAD/tree/master/src/mcp/src/mcp.tcl#L494
+MCP 0104 mcp.tcl:137               -fine_level requires -fine_objective. ERROR https://github.com/The-OpenROAD-Project/OpenROAD/tree/master/src/mcp/src/mcp.tcl#L137
+MCP 0105 mcp.tcl:198               -reserve $keys(-reserve) moves only the whitespace\        above -density; without -density the whitespace stays uniform. WARN https://github.com/The-OpenROAD-Project/OpenROAD/tree/master/src/mcp/src/mcp.tcl#L198
+MCP 0106 mcp.tcl:291               -assignment, -displacement_weight, -seed_spread,\      -assignment_net_weight, -assignment_rounds, -seed_levels and\      -seed_terminals have no effect without -seed_placement. WARN https://github.com/The-OpenROAD-Project/OpenROAD/tree/master/src/mcp/src/mcp.tcl#L291
+MCP 0107 mcp.tcl:310               -seed_spread must be in \[0, 1\]. ERROR https://github.com/The-OpenROAD-Project/OpenROAD/tree/master/src/mcp/src/mcp.tcl#L310
+MCP 0108 mcp.tcl:152               -balance_fractions must be numbers in (0, 1). ERROR https://github.com/The-OpenROAD-Project/OpenROAD/tree/master/src/mcp/src/mcp.tcl#L152
+MCP 0118 mcp.tcl:335               -am_commit must be mincut or transport ERROR https://github.com/The-OpenROAD-Project/OpenROAD/tree/master/src/mcp/src/mcp.tcl#L335

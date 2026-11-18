@@ -1,0 +1,1923 @@
+diff --git a/BUILD.bazel b/BUILD.bazel
+index b7b4630eab..f37db59990 100644
+--- a/BUILD.bazel
++++ b/BUILD.bazel
+@@ -120,6 +120,8 @@ OPENROAD_LIBRARY_DEPS = [
+     "//src/est:ui",
+     "//src/exa",
+     "//src/exa:ui",
++    "//src/mcp",
++    "//src/mcp:ui",
+     "//src/fin",
+     "//src/gpl",
+     "//src/gpl:ui",
+@@ -463,6 +465,7 @@ cc_binary(
+         "//src/dpl:py_wrap",
+         "//src/drt:py_wrap",
+         "//src/exa:py_wrap",
++        "//src/mcp:py_wrap",
+         "//src/fin:py_wrap",
+         "//src/gpl:py_wrap",
+         "//src/grt:py_wrap",
+@@ -491,6 +494,7 @@ py_library(
+         "//src/dpl:swig-py",
+         "//src/drt:swig-py",
+         "//src/exa:swig-py",
++        "//src/mcp:swig-py",
+         "//src/fin:swig-py",
+         "//src/gpl:swig-py",
+         "//src/grt:swig-py",
+diff --git a/CMakeLists.txt b/CMakeLists.txt
+index 194b74c5fa..a1d510952a 100644
+--- a/CMakeLists.txt
++++ b/CMakeLists.txt
+@@ -175,6 +175,13 @@ if(EXISTS "/etc/os-release")
+   if(OS_ID STREQUAL "rocky" AND OS_VERSION_ID MATCHES "^8")
+     set(LTO_UNSUPPORTED_OS TRUE)
+     message(STATUS "Detected unsupported OS (${OS_ID} ${OS_VERSION_ID}): LTO will be disabled due to known build issues")
++  endif()
++  # The static-libstdc++ workaround below targets the system gcc-toolset. It
++  # is wrong for a self-contained toolchain (e.g. conda-forge gcc) whose own
++  # libstdc++.so is available at runtime: it would put two different libstdc++
++  # copies in one process. Such setups pass -DROCKY8_STATIC_LIBSTDCXX=OFF.
++  option(ROCKY8_STATIC_LIBSTDCXX "Rocky 8: link libstdc++/libgcc statically" ON)
++  if(OS_ID STREQUAL "rocky" AND OS_VERSION_ID MATCHES "^8" AND ROCKY8_STATIC_LIBSTDCXX)
+     # Rocky 8 ships gcc 8 in /usr/lib64/libstdc++.so.6.  gcc-toolset-13's
+     # `-lstdc++` resolves through a linker script that pulls
+     # libstdc++_nonshared.a (fill-in for <filesystem> etc.).  When that
+diff --git a/docs/BUILD.bazel b/docs/BUILD.bazel
+index 2bebc28ce9..f4764d0c6c 100644
+--- a/docs/BUILD.bazel
++++ b/docs/BUILD.bazel
+@@ -26,6 +26,7 @@ man_pages(
+         "//src/dst:messages_txt",
+         "//src/est:messages_txt",
+         "//src/exa:messages_txt",
++        "//src/mcp:messages_txt",
+         "//src/fin:messages_txt",
+         "//src/gpl:messages_txt",
+         "//src/grt:messages_txt",
+@@ -59,6 +60,7 @@ man_pages(
+         "//src/drt:README.md",
+         "//src/est:README.md",
+         "//src/exa:README.md",
++        "//src/mcp:README.md",
+         "//src/fin:README.md",
+         "//src/gpl:README.md",
+         "//src/grt:README.md",
+diff --git a/include/ord/Design.h b/include/ord/Design.h
+index 0591c6631b..e7a5697780 100644
+--- a/include/ord/Design.h
++++ b/include/ord/Design.h
+@@ -54,6 +54,10 @@ namespace exa {
+ class Example;
+ }
+ 
++namespace mcp {
++class MinCutPlacer;
++}
++
+ namespace wmk {
+ class Watermark;
+ }
+@@ -173,6 +177,7 @@ class Design
+   dft::Dft* getDft();
+   dpl::Opendp* getOpendp();
+   exa::Example* getExample();
++  mcp::MinCutPlacer* getMinCutPlacer();
+   drt::TritonRoute* getTritonRoute();
+   fin::Finale* getFinale();
+   gpl::Replace* getReplace();
+diff --git a/include/ord/OpenRoad.hh b/include/ord/OpenRoad.hh
+index d02500e21e..53c964bdbe 100644
+--- a/include/ord/OpenRoad.hh
++++ b/include/ord/OpenRoad.hh
+@@ -71,6 +71,10 @@ namespace exa {
+ class Example;
+ }
+ 
++namespace mcp {
++class MinCutPlacer;
++}
++
+ namespace mpl {
+ class MacroPlacer;
+ }
+@@ -175,6 +179,7 @@ class OpenRoad
+   tap::Tapcell* getTapcell() { return tapcell_; }
+   mpl::MacroPlacer* getMacroPlacer() { return macro_placer_; }
+   exa::Example* getExample() { return example_; }
++  mcp::MinCutPlacer* getMinCutPlacer() { return mincut_placer_; }
+   rcx::Ext* getOpenRCX() { return extractor_; }
+   drt::TritonRoute* getTritonRoute() { return detailed_router_; }
+   gpl::Replace* getReplace() { return replace_; }
+@@ -282,6 +287,7 @@ class OpenRoad
+   ram::RamGen* ram_gen_ = nullptr;
+   mpl::MacroPlacer* macro_placer_ = nullptr;
+   exa::Example* example_ = nullptr;
++  mcp::MinCutPlacer* mincut_placer_ = nullptr;
+   grt::GlobalRouter* global_router_ = nullptr;
+   cgt::ClockGating* clock_gating_ = nullptr;
+   rmp::Restructure* restructure_ = nullptr;
+diff --git a/src/CMakeLists.txt b/src/CMakeLists.txt
+index 2d9d3c30a7..29424cf6c9 100755
+--- a/src/CMakeLists.txt
++++ b/src/CMakeLists.txt
+@@ -264,6 +264,7 @@ add_subdirectory(stt)
+ add_subdirectory(gpl)
+ add_subdirectory(dpl)
+ add_subdirectory(exa)
++add_subdirectory(mcp)
+ add_subdirectory(fin)
+ add_subdirectory(ram)
+ add_subdirectory(ppl)
+@@ -331,6 +332,7 @@ target_link_libraries(openroad
+   gpl
+   dpl
+   exa
++  mcp
+   fin
+   ram
+   rsz
+@@ -421,6 +423,7 @@ if (Python3_FOUND AND BUILD_PYTHON)
+       gpl_py
+       dpl_py
+       exa_py
++      mcp_py
+       ppl_py
+       tap_py
+       cgt_py
+diff --git a/src/Design.cc b/src/Design.cc
+index cb890b7bdd..a2b9a65a34 100644
+--- a/src/Design.cc
++++ b/src/Design.cc
+@@ -262,6 +262,11 @@ exa::Example* Design::getExample()
+   return getOpenRoad()->getExample();
+ }
+ 
++mcp::MinCutPlacer* Design::getMinCutPlacer()
++{
++  return getOpenRoad()->getMinCutPlacer();
++}
++
+ wmk::Watermark* Design::getWatermark()
+ {
+   return getOpenRoad()->getWatermark();
+diff --git a/src/Main.cc b/src/Main.cc
+index 13665eb868..0e239a1716 100644
+--- a/src/Main.cc
++++ b/src/Main.cc
+@@ -67,6 +67,7 @@ using std::string;
+   X(gpl)                                 \
+   X(dpl)                                 \
+   X(exa)                                 \
++  X(mcp)                                 \
+   X(web)                                 \
+   X(wmk)                                 \
+   X(ppl)                                 \
+diff --git a/src/OpenRoad.cc b/src/OpenRoad.cc
+index 87b4e7f258..d05c866e99 100644
+--- a/src/OpenRoad.cc
++++ b/src/OpenRoad.cc
+@@ -43,6 +43,8 @@
+ #include "est/MakeEstimateParasitics.h"
+ #include "exa/MakeExample.h"
+ #include "exa/example.h"
++#include "mcp/MakeMinCutPlacer.h"
++#include "mcp/MinCutPlacer.h"
+ #include "fin/Finale.h"
+ #include "fin/MakeFinale.h"
+ #include "gpl/MakeReplace.h"
+@@ -138,6 +140,7 @@ OpenRoad::~OpenRoad()
+   delete tapcell_;
+   delete macro_placer_;
+   delete example_;
++  delete mincut_placer_;
+   delete extractor_;
+   delete detailed_router_;
+   // Stop the web server first — its I/O threads access the database
+@@ -276,6 +279,7 @@ void OpenRoad::init(Tcl_Interp* tcl_interp,
+   icewall_ = new pad::ICeWall(db_, logger_);
+   dft_ = new dft::Dft(db_, sta_, logger_);
+   example_ = new exa::Example(db_, logger_);
++  mincut_placer_ = new mcp::MinCutPlacer(db_, partitionMgr_, logger_);
+   web_server_ = new web::WebServer(db_, sta_, logger_, tcl_interp);
+   watermark_
+       = new wmk::Watermark(db_, sta_, opendp_, estimate_parasitics_, logger_);
+@@ -306,6 +310,7 @@ void OpenRoad::init(Tcl_Interp* tcl_interp,
+   tap::initTapcell(tcl_interp);
+   mpl::initMacroPlacer(tcl_interp);
+   exa::initExample(tcl_interp);
++  mcp::initMinCutPlacer(tcl_interp);
+   rcx::initOpenRCX(tcl_interp);
+   pad::initICeWall(tcl_interp);
+   rmp::initRestructure(tcl_interp);
+diff --git a/src/dft/test/CMakeLists.txt b/src/dft/test/CMakeLists.txt
+index 272af19b68..8f7e0170cd 100644
+--- a/src/dft/test/CMakeLists.txt
++++ b/src/dft/test/CMakeLists.txt
+@@ -14,4 +14,6 @@ or_integration_tests(
+ 
+ 
+ find_package(Boost CONFIG)
+-add_subdirectory(cpp)
++if(ENABLE_TESTS)
++  add_subdirectory(cpp)
++endif()
+diff --git a/src/mpl/test/CMakeLists.txt b/src/mpl/test/CMakeLists.txt
+index d03bdbafe8..f05ac4794e 100644
+--- a/src/mpl/test/CMakeLists.txt
++++ b/src/mpl/test/CMakeLists.txt
+@@ -44,4 +44,6 @@ or_integration_tests(
+ )
+ 
+ 
+-add_subdirectory(cpp)
++if(ENABLE_TESTS)
++  add_subdirectory(cpp)
++endif()
+diff --git a/src/odb/test/CMakeLists.txt b/src/odb/test/CMakeLists.txt
+index fc76dc82e9..e57f47daf6 100644
+--- a/src/odb/test/CMakeLists.txt
++++ b/src/odb/test/CMakeLists.txt
+@@ -91,4 +91,6 @@ or_integration_tests(
+ )
+ 
+ 
+-add_subdirectory(cpp)
++if(ENABLE_TESTS)
++  add_subdirectory(cpp)
++endif()
+diff --git a/src/par/BUILD b/src/par/BUILD
+index 41dfa981d3..b2ee66627b 100644
+--- a/src/par/BUILD
++++ b/src/par/BUILD
+@@ -32,6 +32,8 @@ cc_library(
+         "src/KWayPMRefine.cpp",
+         "src/KWayPMRefine.h",
+         "src/Multilevel.cpp",
++        "src/NetVectorRefine.cpp",
++        "src/NetVectorRefine.h",
+         "src/Multilevel.h",
+         "src/PartitionMgr.cpp",
+         "src/Partitioner.cpp",
+@@ -46,6 +48,7 @@ cc_library(
+         "src/Utilities.h",
+     ],
+     hdrs = [
++        "include/par/NetVectors.h",
+         "include/par/PartitionMgr.h",
+     ],
+     includes = [
+@@ -118,6 +121,7 @@ tcl_wrap_cc(
+ python_wrap_cc(
+     name = "swig-py",
+     srcs = [
++        "include/par/NetVectors.h",
+         "include/par/PartitionMgr.h",
+         "src/partitionmgr-py.i",
+         "//:error_swig-py",
+diff --git a/src/par/CMakeLists.txt b/src/par/CMakeLists.txt
+index 17d621e75d..666abf70c2 100644
+--- a/src/par/CMakeLists.txt
++++ b/src/par/CMakeLists.txt
+@@ -31,6 +31,7 @@ add_library(par_lib
+   src/ILPRefine.cpp
+   src/KWayFMRefine.cpp
+   src/KWayPMRefine.cpp
++  src/NetVectorRefine.cpp
+   src/PriorityQueue.cpp
+   src/ArtNetSpec.cpp
+ )
+diff --git a/src/par/include/par/NetVectors.h b/src/par/include/par/NetVectors.h
+new file mode 100644
+index 0000000000..8355e3135d
+--- /dev/null
++++ b/src/par/include/par/NetVectors.h
+@@ -0,0 +1,30 @@
++// SPDX-License-Identifier: BSD-3-Clause
++// Copyright (c) 2022-2025, The OpenROAD Authors
++
++#pragma once
++
++#include <memory>
++#include <vector>
++
++namespace par {
++
++// Geometric cost vectors for a k-way partitioning problem.  The cost of a
++// solution is sum_e net[e][mask_e] + sum_v vertex[v][part_v], where mask_e
++// has bit q set when hyperedge e has a vertex in block q.  The vectors are
++// an optional side table of a Hypergraph; during coarsening parallel
++// hyperedges add their vectors and hyperedges that fall inside a cluster
++// fold into that cluster's vertex vector.  Used by NetVectorRefine.
++struct NetVectors
++{
++  int num_parts = 0;
++  int num_masks = 0;          // 1 << num_parts
++  std::vector<float> net;     // [e * num_masks + mask]; entry 0 is unused
++  std::vector<float> vertex;  // [v * num_parts + q]; may be empty
++
++  float NetCost(int e, int mask) const { return net[e * num_masks + mask]; }
++  bool HasVertexCost() const { return !vertex.empty(); }
++  float VertexCost(int v, int q) const { return vertex[v * num_parts + q]; }
++};
++using NetVectorsPtr = std::shared_ptr<const NetVectors>;
++
++}  // namespace par
+diff --git a/src/par/include/par/PartitionMgr.h b/src/par/include/par/PartitionMgr.h
+index 0132685729..b691f78bb8 100644
+--- a/src/par/include/par/PartitionMgr.h
++++ b/src/par/include/par/PartitionMgr.h
+@@ -11,6 +11,10 @@
+ #include <tuple>
+ #include <vector>
+ 
++#ifndef SWIG
++#include "par/NetVectors.h"
++#endif
++
+ namespace ord {
+ class dbVerilogNetwork;
+ }
+@@ -62,6 +66,51 @@ struct CompareInstancePtr
+   sta::dbNetwork* db_network_ = nullptr;
+ };
+ 
++#ifndef SWIG
++// In-memory k-way partitioning request with fixed vertices and explicit
++// per-part balance bounds.  Used by callers that partition many small
++// hypergraphs (e.g. the min-cut placer) and cannot go through files.
++struct KWayRequest
++{
++  unsigned int num_parts = 2;
++  unsigned int seed = 0;
++  // Hypergraph: hyperedges as vertex-id lists, one weight per vertex
++  // (area) and per hyperedge.
++  const std::vector<std::vector<int>>* hyperedges = nullptr;
++  const std::vector<float>* vertex_weights = nullptr;
++  const std::vector<float>* hyperedge_weights = nullptr;
++  // Optional: -1 for movable vertices, otherwise the part the vertex is
++  // fixed to.  Empty/null means no fixed vertices.
++  const std::vector<int>* fixed_attr = nullptr;
++  // Per-part bounds on the total vertex weight (same units as
++  // vertex_weights).  Both must have num_parts entries.
++  std::vector<float> upper_block_balance;
++  std::vector<float> lower_block_balance;
++  // Tuning (-1 keeps TritonPart's defaults).  max_coarsen_iters == 0
++  // gives a flat partitioner: initial partitioning followed by k-way FM
++  // on the input hypergraph.
++  int max_coarsen_iters = -1;
++  int refiner_iters = -1;
++  int max_moves = -1;
++  // Hypergraphs with at most this many vertices are also partitioned
++  // with the (time-unbounded) ILP; 0 disables the ILP.
++  int ilp_threshold = 0;
++  // Suppress the per-call report.
++  bool quiet = true;
++  // Optional geometric objective (see NetVectors.h).  When set, the k-way
++  // refinement minimizes sum_e net[e][mask_e] (+ vertex costs) instead of
++  // the cut, and solutions are compared by that cost.  net must have
++  // hyperedges->size() * (1 << num_parts) entries; vertex is empty or has
++  // vertex_weights->size() * num_parts entries.
++  std::shared_ptr<const NetVectors> net_vectors;
++  // Optional initial solution (one part per vertex, consistent with
++  // fixed_attr).  When set, the multilevel initial partitioning is
++  // skipped and the solution is only refined: V-cycles in multilevel
++  // mode, k-way FM on the input hypergraph in flat mode.
++  const std::vector<int>* initial_solution = nullptr;
++};
++#endif
++
+ class PartitionMgr
+ {
+  public:
+@@ -234,6 +283,11 @@ class PartitionMgr
+       const std::vector<float>& vertex_weights,
+       const std::vector<float>& hyperedge_weights);
+ 
++#ifndef SWIG
++  // k-way partitioning with fixed vertices and explicit balance bounds.
++  std::vector<int> PartitionKWay(const KWayRequest& request);
++#endif
++
+   void readPartitioningFile(const std::string& filename,
+                             const std::string& instance_map_file);
+   void writePartitionVerilog(const char* file_name,
+diff --git a/src/par/src/Coarsener.cpp b/src/par/src/Coarsener.cpp
+index 69b5630d0e..ca857ca6bf 100644
+--- a/src/par/src/Coarsener.cpp
++++ b/src/par/src/Coarsener.cpp
+@@ -727,6 +727,12 @@ HGraphPtr Coarsener::Contraction(
+   hyperedge_cluster_id_vec.resize(hgraph->GetNumHyperedges());
+   // -1 means the hyperedge is fully within one cluster
+   std::ranges::fill(hyperedge_cluster_id_vec, -1);
++  // For net vectors: the cluster that fully contains a (multi-vertex)
++  // hyperedge, or -1
++  std::vector<int> hyperedge_internal_cluster;
++  if (hgraph->HasNetVectors()) {
++    hyperedge_internal_cluster.assign(hgraph->GetNumHyperedges(), -1);
++  }
+   Matrix<int> hyperedges_c;  // represent each hyperedge as a set of clusters
+   Matrix<float> hyperedges_weights_c;  // each element represents the weight of
+                                        // the clustered hyperedge
+@@ -750,6 +756,9 @@ HGraphPtr Coarsener::Contraction(
+       hyperedge_c.insert(vertex_cluster_id_vec[vertex_id]);  // get cluster id
+     }
+     if (hyperedge_c.size() <= 1) {
++      if (!hyperedge_internal_cluster.empty()) {
++        hyperedge_internal_cluster[e] = *hyperedge_c.begin();
++      }
+       continue;  // ignore the single-vertex hyperedge
+     }
+     size_t hash_value = std::inner_product(hyperedge_c.begin(),
+@@ -940,6 +949,49 @@ HGraphPtr Coarsener::Contraction(
+     clustered_hgraph->AddVertexCAttr(vertex_cluster_id_vec[v], v);
+   }
+ 
++  // Step 4: propagate the net vectors.  The cost of a solution of the
++  // clustered hypergraph must equal the cost of the induced solution of
++  // hgraph (up to the large hyperedges skipped above): parallel hyperedges
++  // see the same occupancy mask, so their vectors add; a hyperedge inside
++  // one cluster costs net[1 << q] when the cluster is in block q, which
++  // becomes part of the cluster's vertex vector.
++  if (hgraph->HasNetVectors()) {
++    const NetVectors& fine = *hgraph->GetNetVectors();
++    auto coarse = std::make_shared<NetVectors>();
++    coarse->num_parts = fine.num_parts;
++    coarse->num_masks = fine.num_masks;
++    const int num_clusters = clustered_hgraph->GetNumVertices();
++    coarse->net.assign(
++        static_cast<size_t>(hyperedges_c.size()) * fine.num_masks, 0.0f);
++    coarse->vertex.assign(static_cast<size_t>(num_clusters) * fine.num_parts,
++                          0.0f);
++    for (int e = 0; e < hgraph->GetNumHyperedges(); e++) {
++      const int e_c = hyperedge_cluster_id_vec[e];
++      if (e_c >= 0) {
++        for (int mask = 1; mask < fine.num_masks; mask++) {
++          coarse->net[static_cast<size_t>(e_c) * fine.num_masks + mask]
++              += fine.NetCost(e, mask);
++        }
++      } else if (hyperedge_internal_cluster[e] >= 0) {
++        const int c = hyperedge_internal_cluster[e];
++        for (int q = 0; q < fine.num_parts; q++) {
++          coarse->vertex[static_cast<size_t>(c) * fine.num_parts + q]
++              += fine.NetCost(e, 1 << q);
++        }
++      }
++    }
++    if (fine.HasVertexCost()) {
++      for (int v = 0; v < hgraph->GetNumVertices(); v++) {
++        const int c = vertex_cluster_id_vec[v];
++        for (int q = 0; q < fine.num_parts; q++) {
++          coarse->vertex[static_cast<size_t>(c) * fine.num_parts + q]
++              += fine.VertexCost(v, q);
++        }
++      }
++    }
++    clustered_hgraph->SetNetVectors(coarse);
++  }
++
+   return clustered_hgraph;
+ }
+ 
+diff --git a/src/par/src/Evaluator.cpp b/src/par/src/Evaluator.cpp
+index 8b1a264b31..4086d5238a 100644
+--- a/src/par/src/Evaluator.cpp
++++ b/src/par/src/Evaluator.cpp
+@@ -530,6 +530,36 @@ std::map<std::pair<int, int>, float> GoldenEvaluator::GetMatchingConnectivity(
+ // calculate the statistics of a given partitioning solution
+ // PartitionToken.first is the cutsize
+ // PartitionToken.second is the balance constraint
++float GoldenEvaluator::CalculateNetVectorCost(
++    const HGraphPtr& hgraph,
++    const std::vector<int>& solution) const
++{
++  const NetVectors* vectors = hgraph->GetNetVectors();
++  if (vectors == nullptr) {
++    return 0.0f;
++  }
++  double cost = 0.0;
++  for (int e = 0; e < hgraph->GetNumHyperedges(); e++) {
++    int mask = 0;
++    for (const int v : hgraph->Vertices(e)) {
++      if (solution[v] >= 0) {
++        mask |= 1 << solution[v];
++      }
++    }
++    if (mask != 0) {
++      cost += vectors->NetCost(e, mask);
++    }
++  }
++  if (vectors->HasVertexCost()) {
++    for (int v = 0; v < hgraph->GetNumVertices(); v++) {
++      if (solution[v] >= 0) {
++        cost += vectors->VertexCost(v, solution[v]);
++      }
++    }
++  }
++  return static_cast<float>(cost);
++}
++
+ PartitionToken GoldenEvaluator::CutEvaluator(const HGraphPtr& hgraph,
+                                              const std::vector<int>& solution,
+                                              bool print_flag) const
+@@ -537,10 +567,14 @@ PartitionToken GoldenEvaluator::CutEvaluator(const HGraphPtr& hgraph,
+   Matrix<float> block_balance = GetBlockBalance(hgraph, solution);
+   float edge_cost = 0.0;
+   float path_cost = 0.0;
+-  // check the cutsize
+-  std::vector<int> cut_hyperedges = GetCutHyperedges(hgraph, solution);
+-  for (auto& e : cut_hyperedges) {
+-    edge_cost += CalculateHyperedgeCost(e, hgraph);
++  if (hgraph->HasNetVectors()) {
++    edge_cost = CalculateNetVectorCost(hgraph, solution);
++  } else {
++    // check the cutsize
++    std::vector<int> cut_hyperedges = GetCutHyperedges(hgraph, solution);
++    for (auto& e : cut_hyperedges) {
++      edge_cost += CalculateHyperedgeCost(e, hgraph);
++    }
+   }
+   // check path related cost
+   for (int path_id = 0; path_id < hgraph->GetNumTimingPaths(); path_id++) {
+diff --git a/src/par/src/Evaluator.h b/src/par/src/Evaluator.h
+index a73e6129a2..3268b81a2b 100644
+--- a/src/par/src/Evaluator.h
++++ b/src/par/src/Evaluator.h
+@@ -105,6 +105,13 @@ class GoldenEvaluator
+   // Calculate the cost of a hyperedge
+   float CalculateHyperedgeCost(int e, const HGraphPtr& hgraph) const;
+ 
++  // Cost of a solution under the hypergraph's NetVectors (0 when absent).
++  // CutEvaluator reports this instead of the cut cost when vectors are set,
++  // so that solution selection in the multilevel flow follows the same
++  // objective as NetVectorRefine.
++  float CalculateNetVectorCost(const HGraphPtr& hgraph,
++                               const std::vector<int>& solution) const;
++
+   // Calculate the summation of normalized vertex weights
+   // connecting to the same hyperedge
+   float CalculateHyperedgeVertexWtSum(int e, const HGraphPtr& hgraph) const;
+diff --git a/src/par/src/Hypergraph.h b/src/par/src/Hypergraph.h
+index 6398c7e989..e1d85f6149 100644
+--- a/src/par/src/Hypergraph.h
++++ b/src/par/src/Hypergraph.h
+@@ -19,6 +19,7 @@
+ 
+ #include "Utilities.h"
+ #include "boost/range/iterator_range_core.hpp"
++#include "par/NetVectors.h"
+ #include "utl/Logger.h"
+ 
+ // The basic function related to hypergraph should be listed here
+@@ -207,6 +208,14 @@ class Hypergraph
+   }
+ 
+   void CopyPlacement(Matrix<float>& attr) const { attr = placement_attr_; }
++
++  bool HasNetVectors() const { return net_vectors_ != nullptr; }
++  const NetVectors* GetNetVectors() const { return net_vectors_.get(); }
++  void SetNetVectors(NetVectorsPtr vectors)
++  {
++    net_vectors_ = std::move(vectors);
++  }
++
+   float PathTimingCost(const int path_id) const
+   {
+     return path_timing_cost_[path_id];
+@@ -343,6 +352,9 @@ class Hypergraph
+   // the embedding for vertices
+   std::vector<std::vector<float>> placement_attr_;
+ 
++  // Optional geometric cost vectors (see NetVectors)
++  NetVectorsPtr net_vectors_;
++
+   // Timing information
+   bool timing_flag_ = false;
+   int num_timing_paths_ = 0;
+diff --git a/src/par/src/KWayFMRefine.cpp b/src/par/src/KWayFMRefine.cpp
+index c091a43ea1..9f1f618403 100644
+--- a/src/par/src/KWayFMRefine.cpp
++++ b/src/par/src/KWayFMRefine.cpp
+@@ -117,23 +117,35 @@ float KWayFMRefine::Pass(
+     std::vector<int> neighbors
+         = FindNeighbors(hgraph, vertex, visited_vertices_flag);
+     // update the neighbors of v for all gain buckets in parallel
+-    std::vector<std::thread> threads;
+-    threads.reserve(num_parts_);
+-    for (int to_pid = 0; to_pid < num_parts_; to_pid++) {
+-      threads.emplace_back(&KWayFMRefine::UpdateSingleGainBucket,
+-                           this,
+-                           to_pid,
+-                           std::ref(buckets),
+-                           hgraph,
+-                           std::ref(neighbors),
+-                           std::ref(net_degs),
+-                           std::ref(cur_paths_cost),
+-                           std::ref(solution));
+-    }
+-    for (auto& t : threads) {
+-      t.join();  // wait for all threads to finish
++    if (!parallel_) {
++      for (int to_pid = 0; to_pid < num_parts_; to_pid++) {
++        UpdateSingleGainBucket(to_pid,
++                               buckets,
++                               hgraph,
++                               neighbors,
++                               net_degs,
++                               cur_paths_cost,
++                               solution);
++      }
++    } else {
++      std::vector<std::thread> threads;
++      threads.reserve(num_parts_);
++      for (int to_pid = 0; to_pid < num_parts_; to_pid++) {
++        threads.emplace_back(&KWayFMRefine::UpdateSingleGainBucket,
++                             this,
++                             to_pid,
++                             std::ref(buckets),
++                             hgraph,
++                             std::ref(neighbors),
++                             std::ref(net_degs),
++                             std::ref(cur_paths_cost),
++                             std::ref(solution));
++      }
++      for (auto& t : threads) {
++        t.join();  // wait for all threads to finish
++      }
++      threads.clear();
+     }
+-    threads.clear();
+     if (total_delta_gain >= best_gain) {
+       best_gain = total_delta_gain;
+       best_vertex_id = vertex;
+@@ -177,6 +189,18 @@ void KWayFMRefine::InitializeGainBucketsKWay(
+     const std::vector<float>& cur_paths_cost,
+     const Partitions& solution) const
+ {
++  if (!parallel_) {
++    for (int to_pid = 0; to_pid < num_parts_; to_pid++) {
++      InitializeSingleGainBucket(buckets,
++                                 to_pid,
++                                 hgraph,
++                                 boundary_vertices,
++                                 net_degs,
++                                 cur_paths_cost,
++                                 solution);
++    }
++    return;
++  }
+   std::vector<std::thread> threads;  // for parallel updating
+   threads.reserve(num_parts_);
+   // parallel initialize the num_parts gain_buckets
+@@ -304,6 +328,12 @@ void KWayFMRefine::AcceptKWayMove(const std::shared_ptr<VertexGain>& gain_cell,
+                    curr_block_balance,
+                    net_degs);
+   // Remove vertex from all buckets where vertex is present
++  if (!parallel_) {
++    for (int i = 0; i < num_parts_; ++i) {
++      HeapEleDeletion(vertex_id, i, gain_buckets);
++    }
++    return;
++  }
+   std::vector<std::thread> deletion_threads;
+   deletion_threads.reserve(num_parts_);
+   for (int i = 0; i < num_parts_; ++i) {
+diff --git a/src/par/src/KWayFMRefine.h b/src/par/src/KWayFMRefine.h
+index 7e54ad3773..92c365af09 100644
+--- a/src/par/src/KWayFMRefine.h
++++ b/src/par/src/KWayFMRefine.h
+@@ -35,6 +35,11 @@ class KWayFMRefine : public Refiner
+       EvaluatorPtr evaluator,
+       utl::Logger* logger);
+ 
++  // Run the per-block bucket work inline instead of spawning one thread
++  // per block for every move.  Faster for small hypergraphs / small k
++  // (e.g. the per-region calls of the min-cut placer).
++  void SetParallel(bool parallel) { parallel_ = parallel; }
++
+   // Mark these two functions as public.
+   // Because they will be called by multi-threading
+   // Initialize the single bucket
+@@ -107,6 +112,7 @@ class KWayFMRefine : public Refiner
+   // variables
+   int total_corking_passes_ = 25;  // the maximum level of traversing the
+                                    // buckets to solve the "corking effect"
++  bool parallel_ = true;
+ };
+ 
+ }  // namespace par
+diff --git a/src/par/src/KWayPMRefine.cpp b/src/par/src/KWayPMRefine.cpp
+index b39873b302..d18fa59659 100644
+--- a/src/par/src/KWayPMRefine.cpp
++++ b/src/par/src/KWayPMRefine.cpp
+@@ -249,23 +249,30 @@ float KWayPMRefine::PerformPairFM(
+     const std::vector<int> neighbors = FindNeighbors(
+         hgraph, vertex, visited_vertices_flag, solution, partition_pair);
+     // update the neighbors of v for all gain buckets in parallel
+-    std::vector<std::thread> threads;
+-    threads.reserve(blocks.size());
+-    for (auto& to_pid : blocks) {
+-      threads.emplace_back(&KWayFMRefine::UpdateSingleGainBucket,
+-                           this,
+-                           to_pid,
+-                           std::ref(buckets),
+-                           hgraph,
+-                           std::ref(neighbors),
+-                           std::ref(net_degs),
+-                           std::ref(paths_cost),
+-                           std::ref(solution));
+-    }
+-    for (auto& t : threads) {
+-      t.join();  // wait for all threads to finish
++    if (!parallel_) {
++      for (auto& to_pid : blocks) {
++        UpdateSingleGainBucket(
++            to_pid, buckets, hgraph, neighbors, net_degs, paths_cost, solution);
++      }
++    } else {
++      std::vector<std::thread> threads;
++      threads.reserve(blocks.size());
++      for (auto& to_pid : blocks) {
++        threads.emplace_back(&KWayFMRefine::UpdateSingleGainBucket,
++                             this,
++                             to_pid,
++                             std::ref(buckets),
++                             hgraph,
++                             std::ref(neighbors),
++                             std::ref(net_degs),
++                             std::ref(paths_cost),
++                             std::ref(solution));
++      }
++      for (auto& t : threads) {
++        t.join();  // wait for all threads to finish
++      }
++      threads.clear();
+     }
+-    threads.clear();
+     if (total_delta_gain >= best_gain) {
+       best_gain = total_delta_gain;
+       best_vertex_id = vertex;
+@@ -309,6 +316,18 @@ void KWayPMRefine::InitializeGainBucketsPM(
+     const std::pair<int, int>& partition_pair) const
+ {
+   std::vector<int> blocks_id{partition_pair.first, partition_pair.second};
++  if (!parallel_) {
++    for (const auto to_pid : blocks_id) {
++      InitializeSingleGainBucket(buckets,
++                                 to_pid,
++                                 hgraph,
++                                 boundary_vertices,
++                                 net_degs,
++                                 cur_paths_cost,
++                                 solution);
++    }
++    return;
++  }
+   std::vector<std::thread> threads;  // for parallel updating
+   threads.reserve(blocks_id.size());
+ 
+diff --git a/src/par/src/Multilevel.cpp b/src/par/src/Multilevel.cpp
+index bfeab81b72..97c01635f9 100644
+--- a/src/par/src/Multilevel.cpp
++++ b/src/par/src/Multilevel.cpp
+@@ -4,6 +4,7 @@
+ #include "Multilevel.h"
+ 
+ #include <algorithm>
++#include <cmath>
+ #include <functional>
+ #include <limits>
+ #include <numeric>
+@@ -552,14 +553,56 @@ void MultilevelPartitioner::CallRefiner(
+     const Matrix<float>& lower_block_balance,
+     std::vector<int>& solution) const
+ {
+-  if (num_parts_ > 1) {  // Pair-wise FM only used for multi-way partitioning
++  // With NetVectors on hgraph all three refiners optimize the vector
++  // objective (Refiner::CalculateVertexGain / CalculateHyperedgeGain).
++  // Under debug group "netvector" the cost is tracked across the three
++  // refiners; none of them may increase it.
++  const bool check
++      = hgraph->HasNetVectors() && logger_->debugCheck(PAR, "netvector", 1);
++  auto cost = [&]() {
++    return check ? evaluator_->CalculateNetVectorCost(hgraph, solution) : 0.0f;
++  };
++  auto report = [&](const char* name, float before, float after) {
++    if (!check) {
++      return;
++    }
++    if (after > before + 1e-3f * std::max(1.0f, std::abs(before))) {
++      logger_->warn(PAR,
++                    929,
++                    "{} refinement increased the net-vector cost {} -> {}",
++                    name,
++                    before,
++                    after);
++    } else {
++      debugPrint(logger_,
++                 PAR,
++                 "netvector",
++                 1,
++                 "{} refinement: cost {} -> {}",
++                 name,
++                 before,
++                 after);
++    }
++  };
++  float before = cost();
++  // Pair-wise FM only used for multi-way partitioning.  With two blocks
++  // and net vectors it would repeat the (full-pass) k-way FM below.
++  if (num_parts_ > 1 && !(num_parts_ == 2 && hgraph->HasNetVectors())) {
+     k_way_pm_refiner_->Refine(
+         hgraph, upper_block_balance, lower_block_balance, solution);
++    const float after = cost();
++    report("pair-wise FM", before, after);
++    before = after;
+   }
+   k_way_fm_refiner_->Refine(
+       hgraph, upper_block_balance, lower_block_balance, solution);
++  float after = cost();
++  report("k-way FM", before, after);
++  before = after;
+   greedy_refiner_->Refine(
+       hgraph, upper_block_balance, lower_block_balance, solution);
++  after = cost();
++  report("greedy", before, after);
+ }
+ 
+ // Perform cut-overlay clustering and ILP-based partitioning
+@@ -573,6 +616,9 @@ std::vector<int> MultilevelPartitioner::CutOverlayILPPart(
+     int best_solution_id) const
+ {
+   std::vector<int> optimal_solution = top_solutions[best_solution_id];
++  if (!cut_overlay_flag_) {
++    return optimal_solution;
++  }
+   std::vector<int> vertex_cluster_vec(hgraph->GetNumVertices(), -1);
+   // check if the hyperedge is cut by solutions
+   std::vector<bool> hyperedge_mask(hgraph->GetNumHyperedges(), false);
+diff --git a/src/par/src/Multilevel.h b/src/par/src/Multilevel.h
+index b22f9eb68e..0defe368f1 100644
+--- a/src/par/src/Multilevel.h
++++ b/src/par/src/Multilevel.h
+@@ -26,6 +26,7 @@ using MultiLevelPartitioner = std::shared_ptr<MultilevelPartitioner>;
+ class MultilevelPartitioner
+ {
+  public:
++  void SetCutOverlay(bool flag) { cut_overlay_flag_ = flag; }
+   MultilevelPartitioner(int num_parts,
+                         // user-specified parameters
+                         bool v_cycle_flag,
+@@ -108,6 +109,11 @@ class MultilevelPartitioner
+ 
+   // basic parameters
+   const int num_parts_ = 2;
++  // Cut-overlay clustering (followed by ILP or a V-cycle on the
++  // clustered hypergraph) can leave the balance constraint violated when
++  // the clusters are coarse; callers that need the bounds respected
++  // (e.g. the min-cut placer) turn it off.
++  bool cut_overlay_flag_ = true;
+   const int num_vertices_threshold_ilp_
+       = 20;  // number of vertices used for ILP partitioning
+ 
+diff --git a/src/par/src/NetVectorRefine.cpp b/src/par/src/NetVectorRefine.cpp
+new file mode 100644
+index 0000000000..49b90add18
+--- /dev/null
++++ b/src/par/src/NetVectorRefine.cpp
+@@ -0,0 +1,92 @@
++// SPDX-License-Identifier: BSD-3-Clause
++// Copyright (c) 2022-2025, The OpenROAD Authors
++
++#include "NetVectorRefine.h"
++
++#include <algorithm>
++#include <cmath>
++#include <limits>
++#include <map>
++#include <memory>
++#include <utility>
++#include <vector>
++
++#include "Evaluator.h"
++#include "Hypergraph.h"
++#include "KWayFMRefine.h"
++#include "PriorityQueue.h"
++#include "Refiner.h"
++#include "Utilities.h"
++#include "utl/Logger.h"
++
++namespace par {
++
++using utl::PAR;
++
++NetVectorRefine::NetVectorRefine(const int num_parts,
++                                 const int refiner_iters,
++                                 const int max_move,
++                                 const int total_corking_passes,
++                                 EvaluatorPtr evaluator,
++                                 utl::Logger* logger)
++    : KWayFMRefine(num_parts,
++                   refiner_iters,
++                   /* path_wt_factor */ 0.0f,
++                   /* snaking_wt_factor */ 0.0f,
++                   max_move,
++                   total_corking_passes,
++                   std::move(evaluator),
++                   logger)
++{
++}
++
++float NetVectorRefine::Cost(const HGraphPtr& hgraph,
++                            const std::vector<int>& solution) const
++{
++  return evaluator_->CalculateNetVectorCost(hgraph, solution);
++}
++
++float NetVectorRefine::Pass(const HGraphPtr& hgraph,
++                            const Matrix<float>& upper_block_balance,
++                            const Matrix<float>& lower_block_balance,
++                            Matrix<float>& block_balance,
++                            Matrix<int>& net_degs,
++                            std::vector<float>& cur_paths_cost,
++                            Partitions& solution,
++                            std::vector<bool>& visited_vertices_flag)
++{
++  const bool check = logger_->debugCheck(PAR, "netvector", 1);
++  const float before = check ? Cost(hgraph, solution) : 0.0f;
++  const float gain = KWayFMRefine::Pass(hgraph,
++                                        upper_block_balance,
++                                        lower_block_balance,
++                                        block_balance,
++                                        net_degs,
++                                        cur_paths_cost,
++                                        solution,
++                                        visited_vertices_flag);
++  if (check && gain > -std::numeric_limits<float>::max()) {
++    const float after = Cost(hgraph, solution);
++    const float tolerance = 1e-3f * std::max(1.0f, std::abs(before));
++    if (std::abs((before - after) - gain) > tolerance) {
++      logger_->warn(PAR,
++                    928,
++                    "NetVectorRefine pass: cost {} -> {} but gain {}",
++                    before,
++                    after,
++                    gain);
++    } else {
++      debugPrint(logger_,
++                 PAR,
++                 "netvector",
++                 1,
++                 "NetVectorRefine pass: cost {} -> {} (gain {})",
++                 before,
++                 after,
++                 gain);
++    }
++  }
++  return gain;
++}
++
++}  // namespace par
+diff --git a/src/par/src/NetVectorRefine.h b/src/par/src/NetVectorRefine.h
+new file mode 100644
+index 0000000000..6f4004c2eb
+--- /dev/null
++++ b/src/par/src/NetVectorRefine.h
+@@ -0,0 +1,51 @@
++// SPDX-License-Identifier: BSD-3-Clause
++// Copyright (c) 2022-2025, The OpenROAD Authors
++
++#pragma once
++
++#include <vector>
++
++#include "Evaluator.h"
++#include "Hypergraph.h"
++#include "KWayFMRefine.h"
++#include "Refiner.h"
++#include "utl/Logger.h"
++
++namespace par {
++
++// --------------------------------------------------------------------------
++// Direct k-way FM refinement under a per-net cost vector instead of the cut
++// metric.  The hypergraph must carry NetVectors: the cost of a solution is
++//   sum_e net[e][mask_e] + sum_v vertex[v][part_v].
++// The gain model and the widened candidate set live in Refiner (see
++// Refiner::CalculateVertexGain), so the pair-wise and greedy refiners
++// optimize the same objective; this class only adds, under debug group
++// "netvector", a check that the gain accumulated by a pass equals the
++// change of Cost().  The pass structure, gain buckets, corking handling
++// and the hard balance bounds are those of KWayFMRefine.
++// --------------------------------------------------------------------------
++class NetVectorRefine : public KWayFMRefine
++{
++ public:
++  NetVectorRefine(int num_parts,
++                  int refiner_iters,
++                  int max_move,
++                  int total_corking_passes,
++                  EvaluatorPtr evaluator,
++                  utl::Logger* logger);
++
++  // Cost of a solution under the net vectors of hgraph.
++  float Cost(const HGraphPtr& hgraph, const std::vector<int>& solution) const;
++
++ protected:
++  float Pass(const HGraphPtr& hgraph,
++             const Matrix<float>& upper_block_balance,
++             const Matrix<float>& lower_block_balance,
++             Matrix<float>& block_balance,
++             Matrix<int>& net_degs,
++             std::vector<float>& cur_paths_cost,
++             Partitions& solution,
++             std::vector<bool>& visited_vertices_flag) override;
++};
++
++}  // namespace par
+diff --git a/src/par/src/PartitionMgr.cpp b/src/par/src/PartitionMgr.cpp
+index c4e46d315a..e9e999eda0 100644
+--- a/src/par/src/PartitionMgr.cpp
++++ b/src/par/src/PartitionMgr.cpp
+@@ -421,6 +421,13 @@ std::vector<int> PartitionMgr::PartitionKWaySimpleMode(
+                                               hyperedge_weights);
+ }
+ 
++std::vector<int> PartitionMgr::PartitionKWay(const KWayRequest& request)
++{
++  auto triton_part
++      = std::make_unique<TritonPart>(db_network_, db_, sta_, logger_);
++  return triton_part->PartitionKWay(request);
++}
++
+ // determine the required direction of a port.
+ static PortDirection* determinePortDirection(
+     const Net* net,
+diff --git a/src/par/src/Refiner.cpp b/src/par/src/Refiner.cpp
+index ef53c3a5ac..75512e6957 100644
+--- a/src/par/src/Refiner.cpp
++++ b/src/par/src/Refiner.cpp
+@@ -197,6 +197,92 @@ float Refiner::CalculatePathCost(int path_id,
+   return cost;
+ }
+ 
++namespace {
++
++// Net-vector gain of moving v from `from_pid` to `to_pid`; `degs(e)` must
++// return the current per-block degrees of hyperedge e.  The vertex term
++// (vertex[v][from] - vertex[v][to]) is not included.
++template <typename NetDegrees>
++double NetVectorMoveGain(const NetVectors& vectors,
++                         const HGraphPtr& hgraph,
++                         int num_parts,
++                         int v,
++                         int from_pid,
++                         int to_pid,
++                         const NetDegrees& degs)
++{
++  double gain = 0.0;
++  for (const int e : hgraph->Edges(v)) {
++    const auto& deg = degs(e);
++    int mask = 0;
++    for (int q = 0; q < num_parts; q++) {
++      if (deg[q] > 0) {
++        mask |= 1 << q;
++      }
++    }
++    int new_mask = mask | (1 << to_pid);
++    if (deg[from_pid] == 1) {
++      new_mask &= ~(1 << from_pid);
++    }
++    if (new_mask != mask) {
++      gain += vectors.NetCost(e, mask) - vectors.NetCost(e, new_mask);
++    }
++  }
++  return gain;
++}
++
++// Vertices that can gain under the net vectors: those on a cut hyperedge
++// (as for the cut objective), on a hyperedge whose single-block costs
++// differ (an external pull: moving the whole net changes its cost), or
++// with a non-constant vertex vector.  Other vertices can only lose by
++// moving, exactly like interior vertices under the cut objective.
++std::vector<bool> NetVectorLiveVertices(const HGraphPtr& hgraph,
++                                        const Matrix<int>& net_degs,
++                                        int num_parts)
++{
++  const NetVectors& vectors = *hgraph->GetNetVectors();
++  std::vector<bool> live(hgraph->GetNumVertices(), false);
++  for (int e = 0; e < hgraph->GetNumHyperedges(); e++) {
++    bool hot = false;
++    int blocks = 0;
++    for (int q = 0; q < num_parts; q++) {
++      if (net_degs[e][q] > 0) {
++        blocks++;
++      }
++    }
++    if (blocks >= 2) {
++      hot = true;
++    } else {
++      const float c0 = vectors.NetCost(e, 1);
++      for (int q = 1; q < num_parts && !hot; q++) {
++        hot = vectors.NetCost(e, 1 << q) != c0;
++      }
++    }
++    if (hot) {
++      for (const int v : hgraph->Vertices(e)) {
++        live[v] = true;
++      }
++    }
++  }
++  if (vectors.HasVertexCost()) {
++    for (int v = 0; v < hgraph->GetNumVertices(); v++) {
++      if (live[v]) {
++        continue;
++      }
++      const float c0 = vectors.VertexCost(v, 0);
++      for (int q = 1; q < num_parts; q++) {
++        if (vectors.VertexCost(v, q) != c0) {
++          live[v] = true;
++          break;
++        }
++      }
++    }
++  }
++  return live;
++}
++
++}  // namespace
++
+ // Find all the boundary vertices.
+ // The boundary vertices do not include fixed vertices
+ std::vector<int> Refiner::FindBoundaryVertices(
+@@ -204,6 +290,17 @@ std::vector<int> Refiner::FindBoundaryVertices(
+     const Matrix<int>& net_degs,
+     const std::vector<bool>& visited_vertices_flag) const
+ {
++  if (hgraph->HasNetVectors()) {
++    const std::vector<bool> live
++        = NetVectorLiveVertices(hgraph, net_degs, num_parts_);
++    std::vector<int> candidates;
++    for (int v = 0; v < hgraph->GetNumVertices(); v++) {
++      if (!visited_vertices_flag[v] && live[v]) {
++        candidates.push_back(v);
++      }
++    }
++    return candidates;
++  }
+   // Step 1 : found all the boundary hyperedges
+   std::vector<bool> boundary_net_flag(hgraph->GetNumHyperedges(), false);
+   for (int e = 0; e < hgraph->GetNumHyperedges(); e++) {
+@@ -241,6 +338,19 @@ std::vector<int> Refiner::FindBoundaryVertices(
+     const std::vector<int>& solution,
+     const std::pair<int, int>& partition_pair) const
+ {
++  if (hgraph->HasNetVectors()) {
++    const std::vector<bool> live
++        = NetVectorLiveVertices(hgraph, net_degs, num_parts_);
++    std::vector<int> candidates;
++    for (int v = 0; v < hgraph->GetNumVertices(); v++) {
++      if (!visited_vertices_flag[v] && live[v]
++          && (solution[v] == partition_pair.first
++              || solution[v] == partition_pair.second)) {
++        candidates.push_back(v);
++      }
++    }
++    return candidates;
++  }
+   // Step 1 : found all the boundary hyperedges
+   std::vector<bool> boundary_net_flag(hgraph->GetNumHyperedges(), false);
+   for (int e = 0; e < hgraph->GetNumHyperedges(); e++) {
+@@ -336,6 +446,17 @@ GainCell Refiner::CalculateVertexGain(int v,
+     return std::make_shared<VertexGain>(
+         v, from_pid, to_pid, 0.0f, delta_path_cost);
+   }
++  if (const NetVectors* vectors = hgraph->GetNetVectors()) {
++    double gain = NetVectorMoveGain(
++        *vectors, hgraph, num_parts_, v, from_pid, to_pid, [&](int e) -> auto& {
++          return net_degs[e];
++        });
++    if (vectors->HasVertexCost()) {
++      gain += vectors->VertexCost(v, from_pid) - vectors->VertexCost(v, to_pid);
++    }
++    return std::make_shared<VertexGain>(
++        v, from_pid, to_pid, static_cast<float>(gain), delta_path_cost);
++  }
+   // define lambda function
+   // for checking connectivity (number of blocks connected by a hyperedge)
+   // function : check the connectivity for the hyperedge
+@@ -520,10 +641,30 @@ HyperedgeGainPtr Refiner::CalculateHyperedgeGain(
+     return connectivity;
+   };
+   // check all the vertices
+-  // Step 1: check the cut cost
++  // Step 1: check the cut cost (or the net-vector cost)
++  const NetVectors* vectors = hgraph->GetNetVectors();
+   for (const auto& vertex_pair : vertices) {
+     const int v = vertex_pair.first;
+     const int from_pid = vertex_pair.second;
++    if (vectors != nullptr) {
++      cut_score += static_cast<float>(
++          NetVectorMoveGain(*vectors,
++                            hgraph,
++                            num_parts_,
++                            v,
++                            from_pid,
++                            to_pid,
++                            [&](int e) -> auto& { return net_deg_map[e]; }));
++      if (vectors->HasVertexCost()) {
++        cut_score += vectors->VertexCost(v, from_pid)
++                     - vectors->VertexCost(v, to_pid);
++      }
++      for (const int e : hgraph->Edges(v)) {
++        net_deg_map[e][from_pid]--;
++        net_deg_map[e][to_pid]++;
++      }
++      continue;
++    }
+     // traverse all the hyperedges connected to v
+     for (const int e : hgraph->Edges(v)) {
+       const int connectivity = get_connectivity(e);
+diff --git a/src/par/src/Refiner.h b/src/par/src/Refiner.h
+index 7e554c35d9..26a763c9da 100644
+--- a/src/par/src/Refiner.h
++++ b/src/par/src/Refiner.h
+@@ -111,7 +111,11 @@ class Refiner
+                           int to_pid = -1) const;
+ 
+   // Find all the boundary vertices. The boundary vertices will not include any
+-  // fixed vertices
++  // fixed vertices.  When the hypergraph carries NetVectors the candidates
++  // are the unvisited vertices (of the pair's blocks) on a cut hyperedge,
++  // on a hyperedge with an external pull (its single-block costs differ)
++  // or with a non-constant vertex vector; any other vertex can only lose
++  // by moving.
+   std::vector<int> FindBoundaryVertices(
+       const HGraphPtr& hgraph,
+       const Matrix<int>& net_degs,
+@@ -149,6 +153,14 @@ class Refiner
+   // solution : the current solution
+   // cur_paths_cost : current path cost
+   // net_degs : current net degrees
++  // When the hypergraph carries NetVectors (see par/NetVectors.h) the cut
++  // score is replaced by the net-vector gain
++  //   sum_{e in E(v)} (net[e][mask_e] - net[e][mask_e']) + vertex[v][from]
++  //   - vertex[v][to],
++  // where mask_e' is mask_e with bit `from` cleared when v was the only
++  // vertex of e in `from`, and bit `to` set.  CalculateHyperedgeGain does
++  // the same for the sequence of moves of a hyperedge, so every refiner
++  // (k-way FM, pair-wise FM, greedy) optimizes the vector objective.
+   GainCell CalculateVertexGain(int v,
+                                int from_pid,
+                                int to_pid,
+diff --git a/src/par/src/TritonPart.cpp b/src/par/src/TritonPart.cpp
+index 0269e5f7a7..262428c90a 100644
+--- a/src/par/src/TritonPart.cpp
++++ b/src/par/src/TritonPart.cpp
+@@ -32,6 +32,7 @@
+ #include "KWayFMRefine.h"
+ #include "KWayPMRefine.h"
+ #include "Multilevel.h"
++#include "NetVectorRefine.h"
+ #include "Partitioner.h"
+ #include "Utilities.h"
+ #include "db_sta/dbNetwork.hh"
+@@ -986,6 +987,98 @@ std::vector<int> TritonPart::PartitionKWaySimpleMode(
+   return solution_;
+ }
+ 
++std::vector<int> TritonPart::PartitionKWay(const KWayRequest& request)
++{
++  num_parts_ = static_cast<int>(request.num_parts);
++  seed_ = request.seed;
++  vertex_dimensions_ = 1;
++  hyperedge_dimensions_ = 1;
++  timing_aware_flag_ = false;
++  placement_flag_ = false;
++  placement_dimensions_ = 0;
++  fence_flag_ = false;
++  hyperedges_ = *request.hyperedges;
++  vertex_weights_.clear();
++  hyperedge_weights_.clear();
++  fixed_attr_.clear();
++  community_attr_.clear();
++  group_attr_.clear();
++  placement_attr_.clear();
++
++  for (const auto& weight : *request.vertex_weights) {
++    vertex_weights_.push_back({weight});
++  }
++  for (const auto& weight : *request.hyperedge_weights) {
++    hyperedge_weights_.push_back({weight});
++  }
++  if (request.fixed_attr != nullptr && !request.fixed_attr->empty()) {
++    fixed_attr_ = *request.fixed_attr;
++  }
++
++  explicit_balance_flag_ = true;
++  explicit_upper_balance_ = request.upper_block_balance;
++  explicit_lower_balance_ = request.lower_block_balance;
++  quiet_ = request.quiet;
++  kway_request_mode_ = true;
++
++  if (request.max_coarsen_iters >= 0) {
++    max_coarsen_iters_ = request.max_coarsen_iters;
++  }
++  flat_refine_flag_ = (max_coarsen_iters_ == 0);
++  if (request.refiner_iters > 0) {
++    refiner_iters_ = request.refiner_iters;
++  }
++  if (request.max_moves > 0) {
++    max_moves_ = request.max_moves;
++  }
++  num_vertices_threshold_ilp_ = std::max(0, request.ilp_threshold);
++  initial_solution_.clear();
++  if (request.initial_solution != nullptr) {
++    if (request.initial_solution->size() != vertex_weights_.size()) {
++      logger_->error(PAR,
++                     930,
++                     "KWayRequest initial solution has {} entries for {} "
++                     "vertices.",
++                     request.initial_solution->size(),
++                     vertex_weights_.size());
++    }
++    initial_solution_ = *request.initial_solution;
++  }
++
++  original_hypergraph_ = std::make_shared<Hypergraph>(vertex_dimensions_,
++                                                      hyperedge_dimensions_,
++                                                      placement_dimensions_,
++                                                      hyperedges_,
++                                                      vertex_weights_,
++                                                      hyperedge_weights_,
++                                                      fixed_attr_,
++                                                      community_attr_,
++                                                      placement_attr_,
++                                                      logger_);
++  if (request.net_vectors != nullptr) {
++    const auto& vectors = *request.net_vectors;
++    if (vectors.num_parts != static_cast<int>(num_parts_)
++        || vectors.num_masks != (1 << num_parts_)
++        || vectors.net.size()
++               != hyperedges_.size() * static_cast<size_t>(vectors.num_masks)
++        || (!vectors.vertex.empty()
++            && vectors.vertex.size()
++                   != vertex_weights_.size()
++                          * static_cast<size_t>(vectors.num_parts))) {
++      logger_->error(PAR,
++                     927,
++                     "KWayRequest net vectors do not match the hypergraph "
++                     "({} hyperedges, {} vertices, {} parts).",
++                     hyperedges_.size(),
++                     vertex_weights_.size(),
++                     num_parts_);
++    }
++    original_hypergraph_->SetNetVectors(request.net_vectors);
++  }
++  MultiLevelPartition();
++  return solution_;
++}
++
+ // --------------------------------------------------------------------------------------
+ // Private functions
+ // --------------------------------------------------------------------------------------
+@@ -1905,6 +1998,15 @@ void TritonPart::MultiLevelPartition()
+       = original_hypergraph_->GetLowerVertexBalance(
+           num_parts_, ub_factor_, base_balance_);
+ 
++  if (explicit_balance_flag_) {
++    // Explicit per-part bounds (PartitionKWay) replace the symmetric
++    // ub_factor model.
++    for (int i = 0; i < num_parts_; i++) {
++      upper_block_balance[i] = {explicit_upper_balance_[i]};
++      lower_block_balance[i] = {explicit_lower_balance_[i]};
++    }
++  }
++
+   // Step 1 : create all the coarsening, partitionig and refinement class
+   // TODO:  This may need to modify as lower_block_balance
+   const std::vector<float> thr_cluster_weight
+@@ -1951,15 +2053,27 @@ void TritonPart::MultiLevelPartition()
+                                                  tritonpart_evaluator,
+                                                  logger_);
+ 
+-  // (3) direct k-way FM
+-  auto k_way_fm_refiner = std::make_shared<KWayFMRefine>(num_parts_,
++  // (3) direct k-way FM.  With net vectors (KWayRequest::net_vectors) the
++  // k-way refiner optimizes the vector objective instead of the cut.
++  KWayFMRefinerPtr k_way_fm_refiner;
++  if (original_hypergraph_->HasNetVectors()) {
++    k_way_fm_refiner = std::make_shared<NetVectorRefine>(num_parts_,
+                                                          refiner_iters_,
+-                                                         path_timing_factor_,
+-                                                         path_snaking_factor_,
+                                                          max_moves_,
+                                                          total_corking_passes_,
+                                                          tritonpart_evaluator,
+                                                          logger_);
++  } else {
++    k_way_fm_refiner = std::make_shared<KWayFMRefine>(num_parts_,
++                                                      refiner_iters_,
++                                                      path_timing_factor_,
++                                                      path_snaking_factor_,
++                                                      max_moves_,
++                                                      total_corking_passes_,
++                                                      tritonpart_evaluator,
++                                                      logger_);
++  }
++  k_way_fm_refiner->SetParallel(!kway_request_mode_);
+ 
+   // (4) k-way pair-wise FM
+   auto k_way_pm_refiner = std::make_shared<KWayPMRefine>(num_parts_,
+@@ -1970,6 +2084,7 @@ void TritonPart::MultiLevelPartition()
+                                                          total_corking_passes_,
+                                                          tritonpart_evaluator,
+                                                          logger_);
++  k_way_pm_refiner->SetParallel(!kway_request_mode_);
+ 
+   // create the multi-level class
+   auto tritonpart_mlevel_partitioner
+@@ -1989,6 +2104,7 @@ void TritonPart::MultiLevelPartition()
+                                                 ilp_refiner,
+                                                 tritonpart_evaluator,
+                                                 logger_);
++  tritonpart_mlevel_partitioner->SetCutOverlay(!kway_request_mode_);
+ 
+   if (timing_aware_flag_) {
+     // Initialize the timing on original_hypergraph_
+@@ -2005,35 +2121,51 @@ void TritonPart::MultiLevelPartition()
+   // the original_hypergraph_ will be modified by the Group Vertices command
+   // We will store the mapping relationship of vertices between
+   // original_hypergraph_ and hypergraph_
+-  tritonpart_coarsener->SetThrCoarsenHyperedgeSizeSkip(global_net_threshold_);
+-  hypergraph_
+-      = tritonpart_coarsener->GroupVertices(original_hypergraph_, group_attr_);
+-  tritonpart_coarsener->SetThrCoarsenHyperedgeSizeSkip(
+-      thr_coarsen_hyperedge_size_skip_);
+-
+-  // partition on the processed hypergraph
+-  std::vector<int> solution = tritonpart_mlevel_partitioner->Partition(
+-      hypergraph_, upper_block_balance, lower_block_balance);
+-
+-  // Translate the solution of hypergraph to original_hypergraph_
+-  // solution to solution_
+-  solution_.clear();
+-  solution_.resize(original_hypergraph_->GetNumVertices());
+-  std::ranges::fill(solution_, -1);
+-  for (int cluster_id = 0; cluster_id < hypergraph_->GetNumVertices();
+-       cluster_id++) {
+-    const int part_id = solution[cluster_id];
+-    for (const auto& v : hypergraph_->GetVertexCAttr(cluster_id)) {
+-      solution_[v] = part_id;
++  if (!initial_solution_.empty()) {
++    // PartitionKWay with an initial solution: skip the multilevel
++    // partitioning and only run the refinement below from it.
++    solution_ = initial_solution_;
++  } else {
++    tritonpart_coarsener->SetThrCoarsenHyperedgeSizeSkip(global_net_threshold_);
++    hypergraph_ = tritonpart_coarsener->GroupVertices(original_hypergraph_,
++                                                      group_attr_);
++    tritonpart_coarsener->SetThrCoarsenHyperedgeSizeSkip(
++        thr_coarsen_hyperedge_size_skip_);
++
++    // partition on the processed hypergraph
++    std::vector<int> solution = tritonpart_mlevel_partitioner->Partition(
++        hypergraph_, upper_block_balance, lower_block_balance);
++
++    // Translate the solution of hypergraph to original_hypergraph_
++    // solution to solution_
++    solution_.clear();
++    solution_.resize(original_hypergraph_->GetNumVertices());
++    std::ranges::fill(solution_, -1);
++    for (int cluster_id = 0; cluster_id < hypergraph_->GetNumVertices();
++         cluster_id++) {
++      const int part_id = solution[cluster_id];
++      for (const auto& v : hypergraph_->GetVertexCAttr(cluster_id)) {
++        solution_[v] = part_id;
++      }
+     }
+   }
+ 
+   // Perform the last-minute refinement
+   tritonpart_coarsener->SetThrCoarsenHyperedgeSizeSkip(global_net_threshold_);
+-  tritonpart_mlevel_partitioner->VcycleRefinement(original_hypergraph_,
+-                                                  upper_block_balance,
+-                                                  lower_block_balance,
+-                                                  solution_);
++  if (!flat_refine_flag_) {
++    tritonpart_mlevel_partitioner->VcycleRefinement(original_hypergraph_,
++                                                    upper_block_balance,
++                                                    lower_block_balance,
++                                                    solution_);
++  } else {
++    // Flat mode (no coarsening hierarchy): the multilevel refinement did
++    // not run, so refine the initial solution with k-way FM on the input
++    // hypergraph.  This is the "FM" baseline engine of the placer.
++    k_way_fm_refiner->Refine(original_hypergraph_,
++                             upper_block_balance,
++                             lower_block_balance,
++                             solution_);
++  }
+ 
+   // evaluate on the original hypergraph
+   // tritonpart_evaluator->CutEvaluator(original_hypergraph_, solution_, true);
+@@ -2042,7 +2174,7 @@ void TritonPart::MultiLevelPartition()
+                                                   ub_factor_,
+                                                   base_balance_,
+                                                   group_attr_,
+-                                                  true);
++                                                  !quiet_);
+ 
+   // generate the timing report
+   if (timing_aware_flag_) {
+diff --git a/src/par/src/TritonPart.h b/src/par/src/TritonPart.h
+index 387106ab9c..cf3f46179f 100644
+--- a/src/par/src/TritonPart.h
++++ b/src/par/src/TritonPart.h
+@@ -11,6 +11,7 @@
+ #include "db_sta/dbReadVerilog.hh"
+ #include "db_sta/dbSta.hh"
+ #include "odb/db.h"
++#include "par/PartitionMgr.h"
+ #include "utl/Logger.h"
+ 
+ namespace par {
+@@ -134,6 +135,10 @@ class TritonPart
+       const std::vector<float>& vertex_weights,
+       const std::vector<float>& hyperedge_weights);
+ 
++  // k-way partitioning with fixed vertices and explicit per-part balance
++  // bounds (see par::KWayRequest).
++  std::vector<int> PartitionKWay(const KWayRequest& request);
++
+   // Main APIs
+   void SetTimingParams(float net_timing_factor,
+                        float path_timing_factor,
+@@ -397,6 +402,23 @@ class TritonPart
+   // Final solution
+   std::vector<int> solution_;  // store the part_id for each vertex
+ 
++  // PartitionKWay: explicit balance bounds override ub_factor_ /
++  // base_balance_; flat_refine_flag_ runs k-way FM on the input
++  // hypergraph when there is no coarsening hierarchy; quiet_ suppresses
++  // the final report.
++  bool explicit_balance_flag_ = false;
++  std::vector<float> explicit_upper_balance_;
++  std::vector<float> explicit_lower_balance_;
++  bool flat_refine_flag_ = false;
++  bool quiet_ = false;
++  // PartitionKWay: solution to refine instead of partitioning from
++  // scratch (empty: partition).
++  std::vector<int> initial_solution_;
++  // Set by PartitionKWay: k-way FM without per-move threads and no
++  // cut-overlay clustering, so that many small calls are cheap and the
++  // explicit balance bounds are respected.
++  bool kway_request_mode_ = false;
++
+   // logger
+   utl::Logger* logger_ = nullptr;
+ };
+diff --git a/src/par/test/CMakeLists.txt b/src/par/test/CMakeLists.txt
+index 85d926d682..1939eee65e 100644
+--- a/src/par/test/CMakeLists.txt
++++ b/src/par/test/CMakeLists.txt
+@@ -6,3 +6,7 @@ or_integration_tests(
+     write_artnet
+ )
+ 
++if(ENABLE_TESTS)
++  add_subdirectory(cpp)
++endif()
++
+diff --git a/src/par/test/cpp/CMakeLists.txt b/src/par/test/cpp/CMakeLists.txt
+new file mode 100644
+index 0000000000..aa90012456
+--- /dev/null
++++ b/src/par/test/cpp/CMakeLists.txt
+@@ -0,0 +1,12 @@
++include(openroad)
++
++add_executable(TestNetVectorRefine TestNetVectorRefine.cpp)
++target_link_libraries(TestNetVectorRefine
++        par_lib
++        utl_lib
++        GTest::gtest
++        GTest::gtest_main
++)
++gtest_discover_tests(TestNetVectorRefine
++    WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}
++)
+diff --git a/src/par/test/cpp/TestNetVectorRefine.cpp b/src/par/test/cpp/TestNetVectorRefine.cpp
+new file mode 100644
+index 0000000000..664cc543a0
+--- /dev/null
++++ b/src/par/test/cpp/TestNetVectorRefine.cpp
+@@ -0,0 +1,234 @@
++// SPDX-License-Identifier: BSD-3-Clause
++// Copyright (c) 2022-2025, The OpenROAD Authors
++
++// NetVectorRefine: the gain of every candidate move equals the brute-force
++// cost difference, a refinement pass never increases the vector cost and
++// never leaves the balance bounds, and coarsening preserves the cost.
++
++#include <memory>
++#include <random>
++#include <vector>
++
++#include "../../src/Coarsener.h"
++#include "../../src/Evaluator.h"
++#include "../../src/Hypergraph.h"
++#include "../../src/NetVectorRefine.h"
++#include "gtest/gtest.h"
++#include "par/NetVectors.h"
++#include "utl/Logger.h"
++
++namespace par {
++namespace {
++
++struct Instance
++{
++  HGraphPtr hgraph;
++  std::shared_ptr<NetVectors> vectors;
++  std::vector<int> solution;
++  Matrix<float> upper;
++  Matrix<float> lower;
++};
++
++Instance makeInstance(int num_vertices,
++                      int num_hyperedges,
++                      int k,
++                      unsigned seed,
++                      utl::Logger* logger)
++{
++  std::mt19937 rng(seed);
++  std::uniform_int_distribution<int> vertex_dist(0, num_vertices - 1);
++  std::uniform_int_distribution<int> degree_dist(2, 5);
++  std::uniform_real_distribution<float> cost_dist(0.0f, 10.0f);
++  std::uniform_int_distribution<int> part_dist(0, k - 1);
++
++  std::vector<std::vector<int>> hyperedges;
++  for (int e = 0; e < num_hyperedges; ++e) {
++    std::vector<int> edge;
++    const int degree = degree_dist(rng);
++    for (int j = 0; j < degree; ++j) {
++      const int v = vertex_dist(rng);
++      if (std::find(edge.begin(), edge.end(), v) == edge.end()) {
++        edge.push_back(v);
++      }
++    }
++    if (edge.size() < 2) {
++      edge.push_back((edge[0] + 1) % num_vertices);
++    }
++    hyperedges.push_back(edge);
++  }
++  std::vector<std::vector<float>> vertex_weights(num_vertices, {1.0f});
++  std::vector<std::vector<float>> hyperedge_weights(num_hyperedges, {1.0f});
++
++  Instance inst;
++  inst.hgraph = std::make_shared<Hypergraph>(1,
++                                             1,
++                                             0,
++                                             hyperedges,
++                                             vertex_weights,
++                                             hyperedge_weights,
++                                             std::vector<int>{},
++                                             std::vector<int>{},
++                                             Matrix<float>{},
++                                             logger);
++  inst.vectors = std::make_shared<NetVectors>();
++  inst.vectors->num_parts = k;
++  inst.vectors->num_masks = 1 << k;
++  inst.vectors->net.resize(num_hyperedges * (1 << k));
++  for (float& value : inst.vectors->net) {
++    value = cost_dist(rng);
++  }
++  inst.vectors->vertex.resize(num_vertices * k);
++  for (float& value : inst.vectors->vertex) {
++    value = cost_dist(rng);
++  }
++  inst.hgraph->SetNetVectors(inst.vectors);
++
++  inst.solution.resize(num_vertices);
++  for (int& p : inst.solution) {
++    p = part_dist(rng);
++  }
++  const float share = static_cast<float>(num_vertices) / k;
++  inst.upper.assign(k, {share * 1.3f + 1});
++  inst.lower.assign(k, {std::max(0.0f, share * 0.7f - 1)});
++  return inst;
++}
++
++EvaluatorPtr makeEvaluator(int k, utl::Logger* logger)
++{
++  return std::make_shared<GoldenEvaluator>(k,
++                                           std::vector<float>{1.0f},
++                                           std::vector<float>{1.0f},
++                                           std::vector<float>{},
++                                           0.0f,
++                                           0.0f,
++                                           0.0f,
++                                           0.0f,
++                                           0.0f,
++                                           nullptr,
++                                           logger);
++}
++
++class TestRefiner : public NetVectorRefine
++{
++ public:
++  TestRefiner(int k, EvaluatorPtr evaluator, utl::Logger* logger)
++      : NetVectorRefine(k, 1, 1000, 25, std::move(evaluator), logger)
++  {
++  }
++  float Gain(int v,
++             int from,
++             int to,
++             const HGraphPtr& hgraph,
++             const std::vector<int>& solution) const
++  {
++    const Matrix<int> net_degs = evaluator_->GetNetDegrees(hgraph, solution);
++    return CalculateVertexGain(
++               v, from, to, hgraph, solution, std::vector<float>{}, net_degs)
++        ->GetGain();
++  }
++};
++
++TEST(NetVectorRefine, GainMatchesBruteForce)
++{
++  utl::Logger logger;
++  for (int k : {2, 4}) {
++    Instance inst = makeInstance(40, 80, k, 7 + k, &logger);
++    auto evaluator = makeEvaluator(k, &logger);
++    TestRefiner refiner(k, evaluator, &logger);
++    const float base
++        = evaluator->CalculateNetVectorCost(inst.hgraph, inst.solution);
++    for (int v = 0; v < inst.hgraph->GetNumVertices(); ++v) {
++      for (int to = 0; to < k; ++to) {
++        const int from = inst.solution[v];
++        if (to == from) {
++          continue;
++        }
++        std::vector<int> moved = inst.solution;
++        moved[v] = to;
++        const float expected
++            = base - evaluator->CalculateNetVectorCost(inst.hgraph, moved);
++        const float gain
++            = refiner.Gain(v, from, to, inst.hgraph, inst.solution);
++        EXPECT_NEAR(gain, expected, 1e-3f) << "v=" << v << " to=" << to;
++      }
++    }
++  }
++}
++
++TEST(NetVectorRefine, PassImprovesAndRespectsBounds)
++{
++  utl::Logger logger;
++  for (int k : {2, 4}) {
++    Instance inst = makeInstance(200, 500, k, 11 + k, &logger);
++    auto evaluator = makeEvaluator(k, &logger);
++    TestRefiner refiner(k, evaluator, &logger);
++    const float before
++        = evaluator->CalculateNetVectorCost(inst.hgraph, inst.solution);
++    refiner.Refine(inst.hgraph, inst.upper, inst.lower, inst.solution);
++    const float after
++        = evaluator->CalculateNetVectorCost(inst.hgraph, inst.solution);
++    // A random initial solution on a random instance always leaves gain
++    // on the table; a pass that changes nothing would indicate a broken
++    // candidate selection or gain computation.
++    EXPECT_LT(after, before);
++    const Matrix<float> balance
++        = evaluator->GetBlockBalance(inst.hgraph, inst.solution);
++    for (int q = 0; q < k; ++q) {
++      EXPECT_LE(balance[q][0], inst.upper[q][0]);
++      EXPECT_GE(balance[q][0], inst.lower[q][0]);
++    }
++  }
++}
++
++TEST(NetVectorRefine, CoarseningPreservesCost)
++{
++  utl::Logger logger;
++  const int k = 4;
++  Instance inst = makeInstance(120, 300, k, 23, &logger);
++  auto evaluator = makeEvaluator(k, &logger);
++  // Hyperedges above the size threshold are dropped by the coarsener, so
++  // keep every hyperedge (degree <= 5 here).
++  Coarsener coarsener(k,
++                      /* thr_coarsen_hyperedge_size_skip */ 100,
++                      /* thr_coarsen_vertices */ 20,
++                      /* thr_coarsen_hyperedges */ 20,
++                      /* coarsening_ratio */ 1.5f,
++                      /* max_coarsen_iters */ 3,
++                      /* adj_diff_ratio */ 0.0001f,
++                      std::vector<float>{1000.0f},
++                      /* seed */ 1,
++                      CoarsenOrder::kRandom,
++                      evaluator,
++                      &logger);
++  const auto hierarchy = coarsener.LazyFirstChoice(inst.hgraph);
++  ASSERT_GE(hierarchy.size(), 2u);
++  const HGraphPtr& coarse = hierarchy.back();
++  ASSERT_TRUE(coarse->HasNetVectors());
++  // Solution of the fine hypergraph induced by a solution of the coarse one.
++  std::vector<int> coarse_solution(coarse->GetNumVertices());
++  for (int c = 0; c < coarse->GetNumVertices(); ++c) {
++    coarse_solution[c] = c % k;
++  }
++  std::vector<int> fine_solution(inst.hgraph->GetNumVertices(), -1);
++  // GetVertexCAttr maps clusters of the coarsest graph back through every
++  // level, so project level by level.
++  std::vector<int> level_solution = coarse_solution;
++  for (int level = static_cast<int>(hierarchy.size()) - 1; level >= 1;
++       --level) {
++    const HGraphPtr& hg = hierarchy[level];
++    std::vector<int> finer(hierarchy[level - 1]->GetNumVertices(), -1);
++    for (int c = 0; c < hg->GetNumVertices(); ++c) {
++      for (const int v : hg->GetVertexCAttr(c)) {
++        finer[v] = level_solution[c];
++      }
++    }
++    level_solution = finer;
++  }
++  fine_solution = level_solution;
++  EXPECT_NEAR(evaluator->CalculateNetVectorCost(coarse, coarse_solution),
++              evaluator->CalculateNetVectorCost(inst.hgraph, fine_solution),
++              1e-2f);
++}
++
++}  // namespace
++}  // namespace par
+diff --git a/src/rsz/test/CMakeLists.txt b/src/rsz/test/CMakeLists.txt
+index bf203c3539..a83674788f 100644
+--- a/src/rsz/test/CMakeLists.txt
++++ b/src/rsz/test/CMakeLists.txt
+@@ -264,4 +264,6 @@ or_integration_tests(
+     cpp_tests
+ )
+ 
+-add_subdirectory(cpp)
++if(ENABLE_TESTS)
++  add_subdirectory(cpp)
++endif()
+diff --git a/src/stt/test/CMakeLists.txt b/src/stt/test/CMakeLists.txt
+index 7e0e9f1d52..90ef4ec603 100644
+--- a/src/stt/test/CMakeLists.txt
++++ b/src/stt/test/CMakeLists.txt
+@@ -10,4 +10,6 @@ or_integration_tests(
+     pd_gcd
+ )
+ 
+-add_subdirectory(cpp)
++if(ENABLE_TESTS)
++  add_subdirectory(cpp)
++endif()
+diff --git a/src/utl/include/utl/Logger.h b/src/utl/include/utl/Logger.h
+index 316e9794bd..156ffaae4f 100644
+--- a/src/utl/include/utl/Logger.h
++++ b/src/utl/include/utl/Logger.h
+@@ -63,6 +63,7 @@ class Progress;
+   X(GRT)                \
+   X(GUI)                \
+   X(IFP)                \
++  X(MCP)                \
+   X(MPL)                \
+   X(ODB)                \
+   X(ORD)                \
+diff --git a/src/utl/test/CMakeLists.txt b/src/utl/test/CMakeLists.txt
+index 735c6e97e4..64a3341536 100644
+--- a/src/utl/test/CMakeLists.txt
++++ b/src/utl/test/CMakeLists.txt
+@@ -16,4 +16,6 @@ or_integration_tests(
+ 
+ #test_error_exception
+ 
+-add_subdirectory(cpp)
++if(ENABLE_TESTS)
++  add_subdirectory(cpp)
++endif()
+diff --git a/src/web/test/CMakeLists.txt b/src/web/test/CMakeLists.txt
+index f2a3b850a9..bfd17aed89 100644
+--- a/src/web/test/CMakeLists.txt
++++ b/src/web/test/CMakeLists.txt
+@@ -7,4 +7,6 @@ or_integration_tests(
+     cpp_tests
+ )
+ 
+-add_subdirectory(cpp)
++if(ENABLE_TESTS)
++  add_subdirectory(cpp)
++endif()
+diff --git a/src/wmk/test/CMakeLists.txt b/src/wmk/test/CMakeLists.txt
+index 8d2a23ea3f..27fb0b0278 100644
+--- a/src/wmk/test/CMakeLists.txt
++++ b/src/wmk/test/CMakeLists.txt
+@@ -55,4 +55,6 @@ or_integration_tests(
+     three_stages
+ )
+ 
+-add_subdirectory(cpp)
++if(ENABLE_TESTS)
++  add_subdirectory(cpp)
++endif()

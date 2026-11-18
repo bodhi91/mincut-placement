@@ -1,0 +1,10 @@
+design,platform,variant,n,cells,hpwl_mean,hpwl_halfrange,hpwl_dpl_mean,hpwl_dpl_halfrange,hpwl_global_mean,hpwl_global_halfrange,grt_wl_mean,grt_wl_halfrange,t_place_mean,t_place_halfrange,t_grt_mean,t_grt_halfrange,mem_peak_mb_mean,mem_peak_mb_halfrange
+aes_nangate45,nangate45,mcp_gpl,3,14850,460752,69,,,456245,28.2,759326,92.5,66.4267,0.72,5.16,0.105,752.033,9.15
+aes_nangate45,nangate45,mcp_incr,3,14850,627683,5.81e+03,,,627669,5.81e+03,956560,7.46e+03,56.2367,0.425,7.04333,0.21,808.033,46.7
+aes_nangate45,nangate45,mcp_only,3,14850,627683,5.81e+03,,,627669,5.81e+03,956560,7.46e+03,56.9633,0.65,7.24667,0.46,801.933,42
+gcd_nangate45,nangate45,mcp_gpl,3,347,4076.77,14.2,,,3905.47,2.7,7410.33,71.5,1.7,0.06,0.116667,0.035,270.067,0.2
+gcd_nangate45,nangate45,mcp_incr,3,347,6118.3,163,,,6118.3,163,9893,275,1.47667,0.035,0.153333,0.015,270.033,0.5
+gcd_nangate45,nangate45,mcp_only,3,347,6118.3,163,,,6118.3,163,9893,275,1.42333,0.025,0.133333,0.01,270.2,0.35
+ibex_sky130hd,sky130hd,mcp_gpl,3,14394,594343,1.16e+03,,,558406,722,1.19594e+06,3.04e+03,41.0433,0.27,4.18333,0.185,485.033,45.3
+ibex_sky130hd,sky130hd,mcp_incr,3,14394,849130,2.52e+04,,,845480,2.54e+04,1.57308e+06,4.06e+04,40.3733,0.555,5.49667,0.39,465,2
+ibex_sky130hd,sky130hd,mcp_only,3,14394,849130,2.52e+04,,,845480,2.54e+04,1.57308e+06,4.06e+04,39.6733,0.325,5.28667,0.275,466.633,3.45

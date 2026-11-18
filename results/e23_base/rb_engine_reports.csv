@@ -1,0 +1,81 @@
+design,variant,engine,regions,fallback_regions,root_failed,verdict,cause,root_cut,total_cut,nets
+aes_ar1_asap7,tp,TP,1197,0,0,ok,"",159,43069,10286
+aes_ar1_asap7,hm,HM,1197,0,0,ok,"",155,42974,10286
+aes_ar1_asap7,mk,MK,1199,0,0,ok,"",154,43476,10286
+aes_ar1_asap7,fp,FP,1208,0,0,ok,"",144,43213,10286
+aes_ar1_nangate45,tp,TP,1526,0,0,ok,"",239,50637,13060
+aes_ar1_nangate45,hm,HM,1514,0,0,ok,"",249,50218,13060
+aes_ar1_nangate45,mk,MK,1526,1,0,kept,"Mt-KaHyPar SIGFPE on isolated small regions",228,51487,13060
+aes_ar1_nangate45,fp,FP,1527,0,0,ok,"",216,50806,13060
+cva6_ar1_asap7,tp,TP,11347,0,0,ok,"",858,501236,98956
+cva6_ar1_asap7,hm,HM,11218,0,0,ok,"",774,484413,98956
+cva6_ar1_asap7,mk,MK,11147,1,0,kept,"Mt-KaHyPar SIGFPE on isolated small regions",887,473587,98956
+cva6_ar1_asap7,fp,FP,11300,0,0,ok,"",769,462208,98956
+cva6_ar1_nangate45,tp,TP,10069,0,0,ok,"",558,400797,88906
+cva6_ar1_nangate45,hm,HM,10004,0,0,ok,"",599,377245,88906
+cva6_ar1_nangate45,mk,MK,10116,0,0,ok,"",737,391051,88906
+cva6_ar1_nangate45,fp,FP,10135,0,0,ok,"",554,381535,88906
+gcd_ar1_asap7,tp,TP,31,0,0,ok,"",22,480,297
+gcd_ar1_asap7,hm,HM,29,0,0,ok,"",22,453,297
+gcd_ar1_asap7,mk,MK,30,0,0,ok,"",22,466,297
+gcd_ar1_asap7,fp,FP,30,0,0,ok,"",22,458,297
+gcd_ar1_nangate45,tp,TP,55,0,0,ok,"",44,915,550
+gcd_ar1_nangate45,hm,HM,56,0,0,ok,"",44,946,550
+gcd_ar1_nangate45,mk,MK,57,0,0,ok,"",46,1026,550
+gcd_ar1_nangate45,fp,FP,58,0,0,ok,"",44,941,550
+ibex_ar1_asap7,tp,TP,2059,0,0,ok,"",315,68711,17807
+ibex_ar1_asap7,hm,HM,1965,0,0,ok,"",438,66370,17807
+ibex_ar1_asap7,mk,MK,2044,0,0,ok,"",319,68954,17807
+ibex_ar1_asap7,fp,FP,2078,0,0,ok,"",256,67100,17807
+ibex_ar1_nangate45,tp,TP,1565,0,0,ok,"",270,49742,14209
+ibex_ar1_nangate45,hm,HM,1589,0,0,ok,"",205,49191,14209
+ibex_ar1_nangate45,mk,MK,1611,0,0,ok,"",241,50185,14209
+ibex_ar1_nangate45,fp,FP,1595,0,0,ok,"",201,49293,14209
+jpeg_ar1_asap7,tp,TP,5256,0,0,ok,"",227,111335,45618
+jpeg_ar1_asap7,hm,HM,5245,0,0,ok,"",216,106474,45618
+jpeg_ar1_asap7,mk,MK,5331,0,0,ok,"",252,111083,45618
+jpeg_ar1_asap7,fp,FP,5181,0,0,ok,"",228,106970,45618
+jpeg_ar1_nangate45,tp,TP,6295,0,0,ok,"",300,133235,61721
+jpeg_ar1_nangate45,hm,HM,6310,0,0,ok,"",329,130502,61721
+jpeg_ar1_nangate45,mk,MK,6291,0,0,ok,"",403,133755,61721
+jpeg_ar1_nangate45,fp,FP,6226,0,0,ok,"",298,129569,61721
+megaboom_ar1_asap7,tp,TP,282675,0,0,ok,"",747,9452530,2422697
+megaboom_ar1_asap7,hm,HM,284513,0,0,ok,"",682,9078595,2422697
+megaboom_ar1_asap7,mk,MK,281191,19,0,kept,"Mt-KaHyPar SIGFPE on isolated small regions",708,8925584,2422697
+megaboom_ar1_asap7,fp,FP,276555,214224,1,fail,"FastPart worker processes died at start-up: the Mt-KaHyPar Python module had been built on the local disk, which a server reboot wiped (BrokenPipeError on every request)",135512,33368875,2422697
+megaboom_ar1_nangate45,tp,TP,201605,0,0,ok,"",737,7412440,1751767
+megaboom_ar1_nangate45,hm,HM,201177,0,0,ok,"",645,7104331,1751767
+megaboom_ar1_nangate45,mk,MK,202638,9,0,kept,"Mt-KaHyPar SIGFPE on isolated small regions",624,7282498,1751767
+megaboom_ar1_nangate45,fp,FP,203851,154212,1,fail,"FastPart worker processes died at start-up: the Mt-KaHyPar Python module had been built on the local disk, which a server reboot wiped (BrokenPipeError on every request)",155394,26994808,1751767
+mempool_group_ar1_asap7,tp,TP,349015,0,0,ok,"",9934,13765274,3088275
+mempool_group_ar1_asap7,hm,HM,347182,203,1,fail,"hMETIS 1.5 (32-bit library) segfaults on regions whose collapsed terminal vertex has ~10^4 incident nets; reproduced standalone with and without the fixed-vertex file",390512,56471328,3088275
+mempool_group_ar1_asap7,mk,MK,347828,13,0,kept,"Mt-KaHyPar SIGFPE on isolated small regions",10123,13051668,3088275
+mempool_group_ar1_asap7,fp,FP,,,,fail,no result,,,
+mempool_group_ar1_nangate45,tp,TP,264663,0,0,ok,"",8822,10662179,2392475
+mempool_group_ar1_nangate45,hm,HM,267093,174,1,fail,"hMETIS 1.5 (32-bit library) segfaults on regions whose collapsed terminal vertex has ~10^4 incident nets; reproduced standalone with and without the fixed-vertex file",324670,42558755,2392475
+mempool_group_ar1_nangate45,mk,MK,,,,fail,no result,,,
+mempool_group_ar1_nangate45,fp,FP,,,,fail,no result,,,
+mempool_tile_ar1_asap7,tp,TP,14789,0,0,ok,"",975,643412,125982
+mempool_tile_ar1_asap7,hm,HM,14761,0,0,ok,"",969,633310,125982
+mempool_tile_ar1_asap7,mk,MK,14677,1,0,kept,"Mt-KaHyPar SIGFPE on isolated small regions",1014,615020,125982
+mempool_tile_ar1_asap7,fp,FP,14860,0,0,ok,"",967,616664,125982
+mempool_tile_ar1_nangate45,tp,TP,15095,0,0,ok,"",1304,507896,133370
+mempool_tile_ar1_nangate45,hm,HM,14887,0,0,ok,"",1289,483954,133370
+mempool_tile_ar1_nangate45,mk,MK,14910,0,0,ok,"",1444,499800,133370
+mempool_tile_ar1_nangate45,fp,FP,15143,0,0,ok,"",1296,492537,133370
+swerv_wrapper_ar1_asap7,tp,TP,9434,0,0,ok,"",1510,441510,79716
+swerv_wrapper_ar1_asap7,hm,HM,9269,0,0,ok,"",1754,420477,79716
+swerv_wrapper_ar1_asap7,mk,MK,9311,0,0,ok,"",1665,426646,79716
+swerv_wrapper_ar1_asap7,fp,FP,9358,0,0,ok,"",1547,416324,79716
+swerv_wrapper_ar1_nangate45,tp,TP,9640,0,0,ok,"",982,444737,84455
+swerv_wrapper_ar1_nangate45,hm,HM,9602,0,0,ok,"",946,423102,84455
+swerv_wrapper_ar1_nangate45,mk,MK,9682,1,0,kept,"Mt-KaHyPar SIGFPE on isolated small regions",1542,438831,84455
+swerv_wrapper_ar1_nangate45,fp,FP,9677,0,0,ok,"",1010,433780,84455
+xiangshan_ar1_asap7,tp,TP,49074,0,0,ok,"",2556,2055562,428976
+xiangshan_ar1_asap7,hm,HM,48772,0,0,ok,"",2496,1990705,428976
+xiangshan_ar1_asap7,mk,MK,49736,1,0,kept,"Mt-KaHyPar SIGFPE on isolated small regions",2496,1975657,428976
+xiangshan_ar1_asap7,fp,FP,48890,3,0,kept,"Mt-KaHyPar SIGFPE on isolated small regions",2392,1991514,428976
+xiangshan_ar1_nangate45,tp,TP,35754,0,0,ok,"",2361,1447835,308288
+xiangshan_ar1_nangate45,hm,HM,35386,0,0,ok,"",2570,1392204,308288
+xiangshan_ar1_nangate45,mk,MK,35710,1,0,kept,"Mt-KaHyPar SIGFPE on isolated small regions",2210,1365442,308288
+xiangshan_ar1_nangate45,fp,FP,35802,27049,1,fail,"FastPart worker processes died at start-up: the Mt-KaHyPar Python module had been built on the local disk, which a server reboot wiped (BrokenPipeError on every request)",13892,3265490,308288
